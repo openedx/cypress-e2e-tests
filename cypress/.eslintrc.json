@@ -1,0 +1,14 @@
+{
+    "plugins": [
+      "cypress"
+    ],
+    "extends": [
+      "plugin:cypress/recommended"
+    ],
+    "env": {
+      "cypress/globals": true
+    },
+    "rules": {
+      "semi": ["error", "never"]
+    }
+  }

@@ -1,0 +1,10 @@
+.DS_Store
+.eslintcache
+.idea
+.vscode
+node_modules
+npm-debug.log
+coverage
+cypress/videos
+cypress/screenshots
+cypress/logs

@@ -1,0 +1,11 @@
+#docker-compose.yml
+version: '2'
+services:
+ cypress:
+    container_name: cypress_tests
+    env_file:
+      - env_vars.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c 'npm run cy:run'
