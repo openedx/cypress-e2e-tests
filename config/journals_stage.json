@@ -3,6 +3,7 @@
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,
   "pageLoadTimeout": 80000,
+  "chromeWebSecurity": false,
   "blacklistHosts": [
     "*.cdn.*",
     "cdn.*",
@@ -15,8 +16,10 @@
   "env": {
     "ENVIRONMENT": "journals_stage",
     "journal_title": "E2E Tests Journal",
-    "journal_price": 167,
+    "journal_price": "$167.00",
     "lms_login_url": "https://courses.stage.edx.org/login",
-    "lms_login_api_url": "https://courses.stage.edx.org/user_api/v1/account/login_session/"
+    "lms_login_api_url": "https://courses.stage.edx.org/user_api/v1/account/login_session/",
+    "lms_registration_url": "https://courses.stage.edx.org/register",
+    "lms_registration_api_url": "https://courses.stage.edx.org/user_api/v1/account/registration/"
   }
 }
