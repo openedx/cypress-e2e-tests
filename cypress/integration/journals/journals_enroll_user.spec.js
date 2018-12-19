@@ -1,12 +1,5 @@
-import {
-  expandTocItem,
-  verifyTocItemName,
-  verifyPageTitle,
-  goToPage,
-} from '../../support/utils'
-
-describe('Verify Journal Navigation', () => {
-  // Login to edX stage using request and get user session
+describe('Verify User Enrollment', () => {
+  // Login to LMS using request and get user session
   before(() => {
     cy.register_using_api()
   })
@@ -18,7 +11,7 @@ describe('Verify Journal Navigation', () => {
     cy.get('.header-actions > .btn').contains('Login').click()
   })
 
-  it('opens journal', () => {
+  it('enrols new user in journal', () => {
     // Click on the Journal card
     cy.contains(Cypress.env('journal_title')).click()
     cy.contains('Purchase Access').click()

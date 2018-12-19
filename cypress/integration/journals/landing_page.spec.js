@@ -3,13 +3,14 @@ import {
 } from '../../support/utils'
 
 describe('Landing Page Configurations', () => {
+  const logo = new RegExp(Cypress.env('site_logo'))
   beforeEach(() => {
     cy.visit('/')
   })
 
   it('Verfies the correct header components', () => {
     // Check for presence of valid site logo in Footer, also check alt text and logo name
-    verifyLogo('.site-header', 'site logo', /edx-logo/)
+    verifyLogo('.site-header', 'site logo', logo)
     // Check for the presence of Login button
     cy.get('.header-actions')
       .find('.btn')
@@ -19,7 +20,7 @@ describe('Landing Page Configurations', () => {
   it('Verfies the correct footer components', () => {
     const footerTexts = ['FAQ', 'Contact Us']
     // Check for presence of valid site logo in Footer, also check alt text and logo name
-    verifyLogo('.footer-content', 'site logo', /edx-logo/)
+    verifyLogo('.footer-content', 'site logo', logo)
     // Check for the presence of valid links in footer section
     cy.get('.footer-content')
       .find('u').each(($u, index) => {

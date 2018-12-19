@@ -1,15 +1,17 @@
+const uuidv4 = require('uuid/v4')
+
 // Create a command which takes email and password and logs user in using api request
 Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
   // Open the Stage login page to create session
   cy.request({
-    url: Cypress.env('lms_login_url'),
+    url: Cypress.env('login_url'),
     failOnStatusCode: false,
   })
   // Save csrftoken and use it in header to send Login Post request
   cy.getCookie('csrftoken').its('value').then(($token) => {
     cy.request({
       method: 'POST',
-      url: Cypress.env('lms_login_api_url'),
+      url: Cypress.env('login_api_url'),
       form: true,
       body: {
         email: userEmail,
@@ -17,7 +19,7 @@ Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
         remember: false,
       },
       headers: {
-        Referer: Cypress.env('lms_login_url'),
+        Referer: Cypress.env('login_url'),
         'X-CSRFToken': $token,
       },
     })
@@ -25,32 +27,42 @@ Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
 })
 
 Cypress.Commands.add('register_using_api', () => {
-  const uuidv4 = require('uuid/v4');
-  const user_string = uuidv4().substr(-11)
-  const userName = `user_${user_string}`
+  const randomString = uuidv4().substr(-11)
+  const userName = `user_${randomString}`
   const userEmail = `${userName}@example.com`
   const userPassword = 'cypress101'
   // Open the Stage registration page to create session
   cy.request({
-    url: Cypress.env('lms_registration_url'),
+    url: Cypress.env('registration_url'),
     failOnStatusCode: false,
   })
   // Save csrftoken and use it in header to send Registration Post request
   cy.getCookie('csrftoken').its('value').then(($token) => {
     cy.request({
       method: 'POST',
-      url: Cypress.env('lms_registration_api_url'),
+      url: Cypress.env('registration_api_url'),
       form: true,
       body: {
         email: userEmail,
         name: userName,
         username: userName,
         password: userPassword,
-        country: 'PK',
-        honor_code: true
+        level_of_education: Cypress.env('level_of_education'),
+        gender: Cypress.env('gender'),
+        year_of_birth: Cypress.env('year_of_birth'),
+        mailing_address: Cypress.env('mailing_address'),
+        goals: Cypress.env('goals'),
+        first_name: Cypress.env('first_name'),
+        last_name: Cypress.env('last_name'),
+        state: Cypress.env('state'),
+        country: Cypress.env('country'),
+        company: Cypress.env('company'),
+        title: Cypress.env('title'),
+        terms_of_service: Cypress.env('terms_of_service'),
+        honor_code: Cypress.env('honor_code'),
       },
       headers: {
-        Referer: Cypress.env('lms_registration_url'),
+        Referer: Cypress.env('registration_url'),
         'X-CSRFToken': $token,
       },
     })
@@ -68,18 +80,18 @@ Cypress.Commands.add('login_from_ui', (userEmail, userPassword) => {
 
 Cypress.Commands.add('make_payment', () => {
   // Fill billing address
-  cy.get('#id_first_name').type('ecom')
-  cy.get('#id_last_name').type('user')
-  cy.get('#id_address_line1').type('house 1, street 3')
-  cy.get('#id_address_line2').type('lane 2, sector 4')
-  cy.get('#id_city').type('Lahore')
-  cy.get('#id_country').select('PK')
-  cy.get('#id_state').type('Punjab')
-  cy.get('#id_postal_code').type(54000)
+  cy.get('#id_first_name').type(Cypress.env('id_first_name'))
+  cy.get('#id_last_name').type(Cypress.env('id_last_name'))
+  cy.get('#id_address_line1').type(Cypress.env('id_address_line1'))
+  cy.get('#id_address_line2').type(Cypress.env('id_address_line2'))
+  cy.get('#id_city').type(Cypress.env('id_city'))
+  cy.get('#id_country').select(Cypress.env('id_country'))
+  cy.get('#id_state').type(Cypress.env('id_state'))
+  cy.get('#id_postal_code').type(Cypress.env('id_postal_code'))
   // Fill billing info
-  cy.get('#card-number').type(4111111111111111)
-  cy.get('#card-cvn').type(123)
-  cy.get('#card-expiry-month').select('01')
-  cy.get('#card-expiry-year').select('2020')
+  cy.get('#card-number').type(Cypress.env('card-number'))
+  cy.get('#card-cvn').type(Cypress.env('card-cvn'))
+  cy.get('#card-expiry-month').select(Cypress.env('card-expiry-month'))
+  cy.get('#card-expiry-year').select(Cypress.env('card-expiry-year'))
   cy.get('#payment-button').click()
 })

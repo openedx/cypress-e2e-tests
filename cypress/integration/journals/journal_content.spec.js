@@ -60,7 +60,7 @@ describe('Verify Journal Pages content', () => {
     cy.get(`#${docIds[0]}`).within(() => {
       // check document title for one doc
       cy.get('.viewer-title').should('have.text', 'Apollo')
-      // check the ability to go to full screen mode 
+      // check the ability to go to full screen mode
       cy.get('.grow button').click({ force: true })
       cy.get('.fullscreen').should('have.attr', 'style', 'height: 100%; width: 100%;')
     })
