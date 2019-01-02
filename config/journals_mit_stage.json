@@ -17,6 +17,7 @@
     "ENVIRONMENT": "journals_mit_stage",
     "journal_title": "E2E Tests Journal",
     "journal_price": "$167.00",
+    "lms_url": "https://stage.mitxpro.mit.edu/",
     "login_url": "https://stage.mitxpro.mit.edu/login",
     "login_api_url": "https://stage.mitxpro.mit.edu/user_api/v1/account/login_session/",
     "registration_url": "https://stage.mitxpro.mit.edu/register",
