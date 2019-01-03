@@ -39,3 +39,13 @@ export const goToPage = (capterName, pageTitle) => {
   // Check the Title of page and higlighted toc item
   verifyPageTitle(pageTitle)
 }
+
+// Go To Next Page using the Next Button
+export const goToNextPage = () => {
+  cy.get('.nav-btn').contains('Next').click()
+}
+
+// Go To Previous Page using the Next Button
+export const goToPreviousPage = () => {
+  cy.get('.nav-btn').contains('Previous').click()
+}

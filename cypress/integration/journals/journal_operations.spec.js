@@ -3,6 +3,8 @@ import {
   verifyTocItemName,
   verifyPageTitle,
   goToPage,
+  goToNextPage,
+  goToPreviousPage,
 } from '../../support/utils'
 
 describe('Verify Journal Navigation', () => {
@@ -56,13 +58,13 @@ describe('Verify Journal Navigation', () => {
     // Go to a specific page in a specific chapter
     goToPage('Chapter 3', 'First Page')
     // Move to next page and confirm highlighted item and title of page is correct
-    cy.contains('.nav-btn', 'Next').click()
+    goToNextPage()
     verifyPageTitle('Second Page')
     // Move to next page and confirm highlighted item and title of page is correct
-    cy.contains('.nav-btn', 'Next').click()
+    goToNextPage()
     verifyPageTitle('Third Page')
     // Move to previous page and confirm highlighted item and title of page is correct
-    cy.contains('.nav-btn', 'Previous').click()
+    goToPreviousPage()
     verifyPageTitle('Second Page')
   })
 })
