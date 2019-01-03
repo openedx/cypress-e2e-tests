@@ -1,7 +1,7 @@
 import {
   goToPage,
   verifyPageTitle,
-  goToNextPage
+  goToNextPage,
 } from '../../support/utils'
 
 describe('Verify User Enrollment', () => {
@@ -18,7 +18,7 @@ describe('Verify User Enrollment', () => {
   })
 
   it('enrols new user in journal', () => {
-    const journal_url = new RegExp(Cypress.config().baseUrl)
+    const journalUrl = new RegExp(Cypress.config().baseUrl)
     // Click on the Journal card
     cy.contains(Cypress.env('journal_title')).click()
     // Click on the Purchase Access button to go to basket page
@@ -36,7 +36,7 @@ describe('Verify User Enrollment', () => {
     cy.get('#journals-link').click()
     // Verify that newly purchased journal is added
     cy.get('article').should('have.attr', 'aria-labelledby', `journal-title-${Cypress.env('journal_title')}`).within(() => {
-    cy.get('a').invoke('attr', 'href').should('match', journal_url)
+      cy.get('a').invoke('attr', 'href').should('match', journalUrl)
     })
   })
 

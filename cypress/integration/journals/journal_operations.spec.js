@@ -4,7 +4,7 @@ import {
   verifyPageTitle,
   goToPage,
   goToNextPage,
-  goToPreviousPage
+  goToPreviousPage,
 } from '../../support/utils'
 
 describe('Verify Journal Navigation', () => {

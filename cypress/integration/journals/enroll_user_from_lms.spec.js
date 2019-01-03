@@ -1,7 +1,7 @@
 import {
   goToPage,
   verifyPageTitle,
-  goToNextPage
+  goToNextPage,
 } from '../../support/utils'
 
 describe('Verify User Enrollment', () => {
@@ -12,14 +12,14 @@ describe('Verify User Enrollment', () => {
 
   beforeEach(() => {
     // Use the above user session to login
-    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid') 
+    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
   })
 
   it('enrols new user from the lms', () => {
-    const journal_url = new RegExp(Cypress.config().baseUrl)
+    const journalUrl = new RegExp(Cypress.config().baseUrl)
     // Go to LMS courses page
-    const lms_courses_url = `${Cypress.env('lms_url')}courses`
-    cy.visit(lms_courses_url)
+    const lmsCoursesUrl = `${Cypress.env('lms_url')}courses`
+    cy.visit(lmsCoursesUrl)
     // Click on the Journal card
     cy.contains(Cypress.env('journal_title')).click()
     // Click on the Purchase Access button to go to basket page
@@ -37,7 +37,7 @@ describe('Verify User Enrollment', () => {
     cy.get('#journals-link').click()
     // Verify that newly purchased journal is added
     cy.get('article').should('have.attr', 'aria-labelledby', `journal-title-${Cypress.env('journal_title')}`).within(() => {
-    cy.get('a').invoke('attr', 'href').should('match', journal_url)
+      cy.get('a').invoke('attr', 'href').should('match', journalUrl)
     })
   })
 
