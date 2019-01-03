@@ -75,7 +75,11 @@ Cypress.Commands.add('login_from_ui', (userEmail, userPassword) => {
   cy.get('#login-email').type(userEmail)
   cy.get('#login-password').type(userPassword)
   cy.get('.action').should('have.text', 'Sign in').click()
-  cy.get('.account-info').should('exist')
+  cy.get('.header-actions .btn').then(($btn) => {
+    if ($btn.text() === 'Login') {
+      cy.wrap($btn).click()
+    }
+  })
 })
 
 Cypress.Commands.add('make_payment', () => {
