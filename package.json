@@ -4,13 +4,15 @@
   "description": "Cypress E2E Tests for edX applications",
   "repository": "https://github.com/edx/cypress-e2e-tests",
   "scripts": {
-    "cy:open": "cypress open --env configFile=journals_mit_stage",
-    "cy:run": "cypress run --env configFile=journals_mit_stage",
+    "cy:open_admin_portal": "cypress open --env configFile=admin_portal_stage",
+    "cy:run_admin_portal": "cypress run --env configFile=admin_portal_stage",
+    "cy:open_journals": "cypress open --env configFile=journals_mit_stage",
+    "cy:run_journals": "cypress run --env configFile=journals_mit_stage",
     "lint": "eslint --ext .js --ext .jsx .",
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "cypress": "^3.1.3",
+    "cypress": "^3.1.5",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
