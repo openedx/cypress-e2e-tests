@@ -1,6 +1,6 @@
 import {
   verifyLogo,
-} from '../../support/utils'
+} from '../helpers/utils'
 
 describe('Landing Page Configurations', () => {
   const logo = new RegExp(Cypress.env('site_logo'))

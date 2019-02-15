@@ -2,7 +2,7 @@ import {
   goToPage,
   verifyPageTitle,
   goToNextPage,
-} from '../../support/utils'
+} from '../helpers/utils'
 
 describe('Verify User Enrollment', () => {
   // Login to LMS using request and get user session
@@ -11,15 +11,14 @@ describe('Verify User Enrollment', () => {
   })
 
   beforeEach(() => {
-    // Use the above user session to login
+    // Use the above user session to login to Journals
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
+    cy.visit('/')
+    cy.get('.header-actions > .btn').contains('Login').click()
   })
 
-  it('enrols new user from the lms', () => {
+  it('enrols new user in journal', () => {
     const journalUrl = new RegExp(Cypress.config().baseUrl)
-    // Go to LMS courses page
-    const lmsCoursesUrl = `${Cypress.env('lms_url')}courses`
-    cy.visit(lmsCoursesUrl)
     // Click on the Journal card
     cy.contains(Cypress.env('journal_title')).click()
     // Click on the Purchase Access button to go to basket page
@@ -33,8 +32,6 @@ describe('Verify User Enrollment', () => {
     cy.get('.order-line-data > .price').should('have.text', Cypress.env('journal_price'))
     // Got to dashboard
     cy.get('.dashboard-link').click()
-    // Open the Journals tab on dashboard
-    cy.get('#journals-link').click()
     // Verify that newly purchased journal is added
     cy.get('article').should('have.attr', 'aria-labelledby', `journal-title-${Cypress.env('journal_title')}`).within(() => {
       cy.get('a').invoke('attr', 'href').should('match', journalUrl)
@@ -46,9 +43,6 @@ describe('Verify User Enrollment', () => {
     const altTexts = ['Apple Sauce', 'Quote']
     const docIds = ['pdf-70efdf2ec9b086079795c442636b55fb', 'pdf-a87ff679a2f3e71d9181a67b7542122c']
     const vidIds = ['xblock_video-e2a2dcc36a08a345332c751b2f2e476c', 'xblock_video-31839b036f63806cba3f47b93af8ccb5']
-    // Go to Journals Site
-    cy.visit('/')
-    cy.get('.header-actions > .btn').contains('Login').click()
     // Click on the Journal card
     cy.contains(Cypress.env('journal_title')).click()
     // Go to Text Page and verify content

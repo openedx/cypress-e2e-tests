@@ -1,4 +1,4 @@
-import JournalCms from '../../support/journal_creation'
+import JournalCms from '../helpers/journal_creation'
 
 describe('Verify User Enrollment', () => {
   beforeEach(() => {

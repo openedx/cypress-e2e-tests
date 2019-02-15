@@ -1,11 +1,7 @@
-class LandingPage {
+class Dashboard {
   // Check for logo presence in parent container and verify logo attributes
-  verifyLogo(parentCss, logoAltText, logoName) {
-    cy.get(parentCss)
-      .find('a>img')
-      .should('have.attr', 'alt', logoAltText)
-      .and('have.attr', 'src')
-      .and('match', logoName)
+  getLogo(parentCss) {
+    return cy.get(parentCss).find('a>img')
   }
 
   verifyFooterInfo(footerLinkText, footerLink) {
@@ -14,6 +10,14 @@ class LandingPage {
       .and('have.attr', 'href')
       .and('include', footerLink)
   }
+
+  enterpriseListContainer() {
+    return cy.get('.enterprise-list')
+  }
+
+  enterpriseList() {
+    return cy.get('.enterprise-list td a')
+  }
 }
 
-export default LandingPage
+export default Dashboard

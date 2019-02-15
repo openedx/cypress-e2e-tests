@@ -1,6 +1,6 @@
 {
   "baseUrl": "https://portal.stage.edx.org",
-  "integrationFolder": "cypress/integration/admin_portal",
+  "integrationFolder": "cypress/integration/admin_portal/tests",
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,
   "pageLoadTimeout": 80000,
