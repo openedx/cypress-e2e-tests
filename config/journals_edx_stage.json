@@ -1,5 +1,6 @@
 {
   "baseUrl": "https://journals.stage.edx.org",
+  "integrationFolder": "cypress/integration/journals/tests",
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,
   "pageLoadTimeout": 80000,

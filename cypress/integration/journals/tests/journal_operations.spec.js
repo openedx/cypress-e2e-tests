@@ -5,7 +5,7 @@ import {
   goToPage,
   goToNextPage,
   goToPreviousPage,
-} from '../../support/utils'
+} from '../helpers/utils'
 
 describe('Verify Journal Navigation', () => {
   // Login to edX stage using request and get user session

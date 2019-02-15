@@ -8,4 +8,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c 'npm run cy:run'
+    command: bash -c 'npm run cy:run_journals'
+    command: bash -c 'npm run cy:run_admin_portal'

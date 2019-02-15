@@ -1,6 +1,6 @@
 import {
   goToPage,
-} from '../../support/utils'
+} from '../helpers/utils'
 
 
 describe('Verify Journal Pages content', () => {

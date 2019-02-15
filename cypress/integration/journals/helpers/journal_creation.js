@@ -1,7 +1,7 @@
 Cypress.Cookies.debug(true)
 class JournalCms {
   loginAsStaff() {
-    cy.login_using_api(Cypress.env('JOURNAL_USER_EMAIL'), Cypress.env('JOURNAL_USER_PASSWORD')).then((resp) => {
+    cy.login_using_api(Cypress.env('JOURNAL_STAFF_EMAIL'), Cypress.env('JOURNAL_STAFF_PASSWORD')).then((resp) => {
       cy.clearCookies()
       resp.headers['set-cookie'].forEach((element) => {
         cy.log(element)
