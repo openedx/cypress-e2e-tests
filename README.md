@@ -42,7 +42,7 @@ Journals Staff user (any staff on stage)
 
 *CYPRESS_JOURNAL_STAFF_EMAIL*
 
-8CYPRESS_JOURNAL_STAFF_PASSWORD*
+*CYPRESS_JOURNAL_STAFF_PASSWORD*
 
 Admin portal user
 
