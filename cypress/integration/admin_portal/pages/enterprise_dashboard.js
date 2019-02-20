@@ -20,6 +20,14 @@ class EnterpriseDashboard {
   cardDetailedBreakdown(cardSequenceNumber) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
   }
+
+  tableHeaders() {
+    return cy.get('.enrollments .table thead .btn-header>span')
+  }
+
+  specificTableHeader(columnNumber) {
+    return cy.get(`.enrollments .table thead th:nth-child(${columnNumber}) .btn-header>span`)
+  }
 }
 
 export default EnterpriseDashboard
