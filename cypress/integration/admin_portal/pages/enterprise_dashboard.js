@@ -9,25 +9,47 @@ class EnterpriseDashboard {
     return cy.get('footer .nav-item .nav-link')
   }
 
-  cardText(cardSequenceNumber) {
+  getCardText(cardSequenceNumber) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-text`)
   }
 
-  cardTitle(cardSequenceNumber) {
+  getCardTitle(cardSequenceNumber) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-title>span:nth-child(1)`)
   }
 
-  cardDetailedBreakdown(cardSequenceNumber) {
+  getCardDetailedBreakdown(cardSequenceNumber) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
   }
 
-  tableHeaders() {
-    return cy.get('.enrollments .table thead .btn-header>span')
+  getTableTitle() {
+    return cy.get('.table-title')
   }
 
-  specificTableHeader(columnNumber) {
-    return cy.get(`.enrollments .table thead th:nth-child(${columnNumber}) .btn-header>span`)
+  getTableHeaders(tableName) {
+    return cy.get(`.${tableName} .table thead .btn-header>span`)
   }
+
+  getSpecificTableHeader(tableName, columnNumber) {
+    return cy.get(`.${tableName} .table thead th:nth-child(${columnNumber}) .btn-header>span`)
+  }
+
+  openCardDetailedBreakdownArea(cardSequenceNumber) {
+    cy.get(`:nth-child(${cardSequenceNumber})>.number-card .footer-title>.toggle-collapse`)
+      .should('have.attr', 'aria-expanded', 'false')
+      .click()
+      .should('have.attr', 'aria-expanded', 'true')
+  }
+
+  clickCardDetailedBreakdownQuestion(cardSequenceNumber, questionText) {
+    return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
+      .contains(questionText)
+      .click()
+  }
+
+  resetTable() {
+    cy.get('.reset.btn').click()
+  }
+
 }
 
 export default EnterpriseDashboard
