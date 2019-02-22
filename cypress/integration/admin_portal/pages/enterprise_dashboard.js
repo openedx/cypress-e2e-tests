@@ -49,7 +49,6 @@ class EnterpriseDashboard {
   resetTable() {
     cy.get('.reset.btn').click()
   }
-
 }
 
 export default EnterpriseDashboard
