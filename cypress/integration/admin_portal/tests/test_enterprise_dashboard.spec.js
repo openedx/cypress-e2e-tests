@@ -121,26 +121,34 @@ describe('Enterprise cards and table verification', () => {
       .should('have.text', 'Course Price sort ascending ')
   })
 
-  it('checks registered unenrolled learners table headers', () => {
-    const tableTitle = 'Registered Learners Not Yet Enrolled in a Course'
-    const tableHeaders = [
-      'Email sort ascending',
-      'Account Created click to sort',
-    ]
+  it.only('checks filtered tables details', () => {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(enterpriseName)
     // Select the target table by opening the card detail view and clicking the target question
-    dashboard.openCardDetailedBreakdownArea(1)
-    dashboard.clickCardDetailedBreakdownQuestion(1, cardDetailedBreakdown[1][0])
-    // Get and verify Table Title
-    dashboard.getTableTitle().should('have.text', tableTitle)
-    // Get and verify table headers
-    dashboard.getTableHeaders('registered-unenrolled-learners').then((elems) => {
-      const ActualTableHeaders = [...elems].map(el => el.textContent.trim())
-      expect(ActualTableHeaders).to.deep.equal(tableHeaders)
+    cy.fixture('tables_info').then((tables) => {
+      tables.forEach((table) => {
+        // Expand card footer and click on question
+        dashboard.openCardDetailedBreakdownArea(table.card_number)
+        dashboard.clickCardDetailedBreakdownQuestion(table.card_number, table.question_text)
+        // Get and verify Table Title
+        dashboard.getTableTitle().should('have.text', table.table_title)
+        // Get Tables data
+        dashboard.getTableData(table.request_url_part, table.table_name).then((response) => {
+          // If table data exists verify table headers
+          if (response.body.count > 0) {
+            dashboard.getTableHeaders(table.table_name).then((elems) => {
+              const ActualTableHeaders = [...elems].map(el => el.textContent.trim())
+              expect(ActualTableHeaders).to.deep.equal(table.table_headers)
+            })
+          // Else check the proper message for no results
+          } else {
+            dashboard.getEmptyTableWarning().should('have.text', 'There are no results.')
+          }
+        })
+        // Reset to default table
+        dashboard.resetTable()
+        dashboard.getTableTitle().should('have.text', fullTableTitle)
+      })
     })
-    // Reset to default table
-    dashboard.resetTable()
-    dashboard.getTableTitle().should('have.text', fullTableTitle)
   })
 })
