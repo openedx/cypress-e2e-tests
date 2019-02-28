@@ -29,8 +29,22 @@ class EnterpriseDashboard {
     return cy.get(`.${tableName} .table thead .btn-header>span`)
   }
 
+  getEmptyTableWarning() {
+    return cy.get('.alert-warning .message')
+  }
+
   getSpecificTableHeader(tableName, columnNumber) {
     return cy.get(`.${tableName} .table thead th:nth-child(${columnNumber}) .btn-header>span`)
+  }
+
+  getTableData(reqUrlPart, reqRefererPart) {
+    return cy.request({
+      method: 'GET',
+      url: `https://analyticsapi.stage.edx.org/enterprise/api/v0/enterprise/beafadc5-69cc-48ce-a9a1-532067d9af0f/${reqUrlPart}`,
+      headers: {
+        Referer: `https://portal.stage.edx.org/successfactors/admin/learners/${reqRefererPart}`,
+      },
+    })
   }
 
   openCardDetailedBreakdownArea(cardSequenceNumber) {
