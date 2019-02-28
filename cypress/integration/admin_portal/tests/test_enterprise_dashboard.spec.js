@@ -121,7 +121,7 @@ describe('Enterprise cards and table verification', () => {
       .should('have.text', 'Course Price sort ascending ')
   })
 
-  it.only('checks filtered tables details', () => {
+  it('checks filtered tables details', () => {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(enterpriseName)
     // Select the target table by opening the card detail view and clicking the target question
