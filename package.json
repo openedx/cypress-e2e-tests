@@ -9,6 +9,7 @@
     "cy:open_journals": "cypress open --env configFile=journals_mit_stage",
     "cy:run_journals": "cypress run --env configFile=journals_mit_stage",
     "lint": "eslint --ext .js --ext .jsx .",
+    "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
