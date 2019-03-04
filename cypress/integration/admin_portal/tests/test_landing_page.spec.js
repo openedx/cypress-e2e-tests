@@ -62,4 +62,16 @@ describe('landing page tests', () => {
       helpers.verifyLinksAndText(elems, ExpectedEnterprises)
     })
   })
+
+  it('checks the search functionality', () => {
+    // It searches the enterprises using different search literals and verify the results
+    cy.fixture('search_data').then((searchItems) => {
+      searchItems.forEach((searchItem) => {
+        landingPage.searchEnterprise(searchItem.search_literal)
+        landingPage.getEnterpriseList().then((elems) => {
+          helpers.verifyLinksAndText(elems, searchItem.expected_search_results)
+        })
+      })
+    })
+  })
 })

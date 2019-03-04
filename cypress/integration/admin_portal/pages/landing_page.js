@@ -17,6 +17,13 @@ class LandingPage {
     return cy.get('.enterprise-list td a')
   }
 
+  searchEnterprise(enterpriseName) {
+    cy.server()
+    cy.route(`**search=${enterpriseName}**`).as('results')
+    cy.get('input[type="search"]').clear().type(`${enterpriseName}{enter}`)
+    cy.wait('@results')
+  }
+
   goToEnterprise(enterpriseName) {
     // Open target enterprise page
     cy.get('.enterprise-list td>a').contains(enterpriseName).click()
