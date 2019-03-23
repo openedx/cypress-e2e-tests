@@ -1,6 +1,7 @@
 {
   "baseUrl": "https://digitalresources-stage.mitxpro.mit.edu",
   "integrationFolder": "cypress/integration/journals/tests",
+  "fixturesFolder": "cypress/fixtures/journals",
   "ignoreTestFiles": "new_journal.spec.js",
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,

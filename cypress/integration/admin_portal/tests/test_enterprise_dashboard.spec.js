@@ -6,8 +6,7 @@ describe('Enterprise Logos and nav links verification', () => {
   const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
-  const enterpriseName = 'Success Factors'
-  const trimmedEnterpriseName = enterpriseName.toLowerCase().replace(/ /g, '')
+  const trimmedEnterpriseName = Cypress.env('enterprise_name').toLowerCase().replace(/ /g, '')
 
   beforeEach(() => {
     cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
@@ -17,11 +16,11 @@ describe('Enterprise Logos and nav links verification', () => {
 
   it('checks logo information', () => {
     const edxLogoName = 'edX logo'
-    const enterpriseLogoName = `${enterpriseName} logo`
+    const enterpriseLogoName = `${Cypress.env('enterprise_name')} logo`
     const edxLogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
     const enterpriseLogoLink = new RegExp('/enterprise/branding/5/5_logo.png')
     // Open the target enterprise dashboard
-    landingPage.goToEnterprise(enterpriseName)
+    landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Check for logo alt text and logo link in header
     dashboard.getLogoAltAttributes('header', 'alt').should('eq', enterpriseLogoName)
     dashboard.getLogoAltAttributes('header', 'src').should('match', enterpriseLogoLink)
@@ -40,7 +39,7 @@ describe('Enterprise Logos and nav links verification', () => {
       Support: `/${trimmedEnterpriseName}/support`,
     }
     // Open the target enterprise dashboard
-    landingPage.goToEnterprise(enterpriseName)
+    landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Check for the presence of valid text and links in footer section
     dashboard.getFooterNavItems().then((elems) => {
       helpers.verifyLinksAndText(elems, footerNavLinks)
@@ -51,19 +50,6 @@ describe('Enterprise Logos and nav links verification', () => {
 describe('Enterprise cards and table verification', () => {
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
-  const enterpriseName = 'Success Factors'
-  const cardInfo = {
-    1: { 'total number of learners registered': '88' },
-    2: { 'learners enrolled in at least one course': '23' },
-    3: { 'active learners in the past week': '0' },
-    4: { 'course completions': '1' },
-  }
-  const cardDetailedBreakdown = {
-    1: ['Which learners are registered but not yet enrolled in any courses?'],
-    2: ['How many courses are learners enrolled in?', 'Who is no longer enrolled in a current course?'],
-    3: ['Who are my top active learners?', 'Who has not been active for over a week?', 'Who has not been active for over a month?'],
-    4: ['How many courses have been completed by learners?', 'Who completed a course in the past week?'],
-  }
   const fullTableTitle = 'Full Report'
 
   beforeEach(() => {
@@ -72,20 +58,18 @@ describe('Enterprise cards and table verification', () => {
     cy.visit('/')
   })
 
-
   it('checks cards details', () => {
     // Open the target enterprise dashboard
-    landingPage.goToEnterprise(enterpriseName)
+    landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Go through cards and verify card main text and value against the text
-    Object.keys(cardInfo).forEach((key) => {
-      dashboard.getCardText(key).should('have.text', Object.keys(cardInfo[key])[0])
-      dashboard.getCardTitle(key).should('have.text', Object.values(cardInfo[key])[0])
-    })
-    // Go through cards and verify detailed breakdown questions in card footers
-    Object.keys(cardDetailedBreakdown).forEach((key) => {
-      dashboard.getCardDetailedBreakdown(key).then((elems) => {
-        const actualCardDetailedBreajdown = [...elems].map(el => el.textContent.trim())
-        expect(actualCardDetailedBreajdown).to.deep.equal(cardDetailedBreakdown[key])
+    cy.fixture('card_info').then((cards) => {
+      cards.forEach((card) => {
+        // Go through cards and verify card text
+        dashboard.getCardText(card.number).should('have.text', card.text)
+        // Go through cards and verify detailed breakdown questions in card footers
+        dashboard.getCardQuestions(card.number).then((cardQuestions) => {
+          expect([...cardQuestions].map(el => el.textContent.trim())).to.deep.equal(card.questions)
+        })
       })
     })
   })
@@ -102,7 +86,7 @@ describe('Enterprise cards and table verification', () => {
       'Last Activity Date click to sort',
     ]
     // Open the target enterprise dashboard
-    landingPage.goToEnterprise(enterpriseName)
+    landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Get and verify Table Title
     dashboard.getTableTitle().should('have.text', fullTableTitle)
     // Get and verify table headers
@@ -123,7 +107,7 @@ describe('Enterprise cards and table verification', () => {
 
   it('checks filtered tables details', () => {
     // Open the target enterprise dashboard
-    landingPage.goToEnterprise(enterpriseName)
+    landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Select the target table by opening the card detail view and clicking the target question
     cy.fixture('tables_info').then((tables) => {
       tables.forEach((table) => {

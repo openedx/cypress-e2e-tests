@@ -9,6 +9,10 @@ class LandingPage {
     return cy.get('footer .nav-item .nav-link')
   }
 
+  getUserEmail() {
+    return cy.get('header .navbar .dropdown-menu').invoke('attr', 'aria-label')
+  }
+
   enterpriseListContainer() {
     return cy.get('.enterprise-list')
   }
@@ -29,6 +33,16 @@ class LandingPage {
     cy.get('.enterprise-list td>a').contains(enterpriseName).click()
     // Wait for page to load properly by verifying that dashboard cards are visible
     cy.get('.card').should('be.visible')
+  }
+
+  logoutUser() {
+    cy.get('header .navbar .dropdown-toggle')
+    .should('have.attr', 'aria-expanded', 'false')
+      .click()
+      .should('have.attr', 'aria-expanded', 'true')
+    cy.get('header .navbar .dropdown-item')
+      .contains('Logout')
+      .click()
   }
 }
 

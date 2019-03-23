@@ -1,6 +1,7 @@
 [
   {
     "card_number": 1,
+    "card_text": "total number of learners registered",
     "question_text": "Which learners are registered but not yet enrolled in any courses?",
     "table_title": "Registered Learners Not Yet Enrolled in a Course",
     "table_name": "registered-unenrolled-learners",
@@ -12,6 +13,7 @@
   },
   {
     "card_number": 2,
+    "card_text": "learners enrolled in at least one course",
     "question_text": "How many courses are learners enrolled in?",
     "table_title": "Number of Courses Enrolled by Learners",
     "table_name": "enrolled-learners",
@@ -24,6 +26,7 @@
   },
   {
     "card_number": 2,
+    "card_text": "learners enrolled in at least one course",
     "question_text": "Who is no longer enrolled in a current course?",
     "table_title": "Learners Not Enrolled in an Active Course",
     "table_name": "enrolled-learners-inactive-courses",
@@ -36,6 +39,7 @@
   },
   {
     "card_number": 3,
+    "card_text": "active learners in the past week",
     "question_text": "Who are my top active learners?",
     "table_title": "Learners Enrolled in a Course",
     "table_name": "learners-active-week",
@@ -48,6 +52,7 @@
   },
   {
     "card_number": 3,
+    "card_text": "active learners in the past week",
     "question_text": "Who has not been active for over a week?",
     "table_title": "Learners Enrolled in a Course",
     "table_name": "learners-inactive-week",
@@ -60,6 +65,7 @@
   },
   {
     "card_number": 3,
+    "card_text": "active learners in the past week",
     "question_text": "Who has not been active for over a month?",
     "table_title": "Learners Enrolled in a Course",
     "table_name": "learners-inactive-month",
@@ -72,6 +78,7 @@
   },
   {
     "card_number": 4,
+    "card_text": "course completions",
     "question_text": "How many courses have been completed by learners?",
     "table_title": "Number of Courses Completed by Learner",
     "table_name": "completed-learners",
@@ -83,6 +90,7 @@
   },
   {
     "card_number": 4,
+    "card_text": "course completions",
     "question_text": "Who completed a course in the past week?",
     "table_title": "Number of Courses Completed by Learner",
     "table_name": "completed-learners-week",

@@ -11,6 +11,15 @@ describe('landing page tests', () => {
     cy.visit('/')
   })
 
+  it('checks user menu content and actions', () => {
+    // Check user email in profile drop down
+    landingPage.getUserEmail().should('eq', Cypress.env('ADMIN_PORTAL_USER_EMAIL'))
+    // Logout the user from application
+    // landingPage.logoutUser()
+    // // Check that enterprise list container is not present
+    // landingPage.enterpriseListContainer().should('not.exist')
+  })
+
   it('checks logo information', () => {
     const edXlogoName = 'edX logo'
     const edXlogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
