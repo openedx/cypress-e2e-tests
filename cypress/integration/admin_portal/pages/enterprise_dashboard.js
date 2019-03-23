@@ -17,7 +17,7 @@ class EnterpriseDashboard {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-title>span:nth-child(1)`)
   }
 
-  getCardDetailedBreakdown(cardSequenceNumber) {
+  getCardQuestions(cardSequenceNumber) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
   }
 
