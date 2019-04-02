@@ -36,17 +36,7 @@ class EnterpriseDashboard {
   getSpecificTableHeader(tableName, columnNumber) {
     return cy.get(`.${tableName} .table thead th:nth-child(${columnNumber}) .btn-header>span`)
   }
-
-  getTableData(reqUrlPart, reqRefererPart) {
-    return cy.request({
-      method: 'GET',
-      url: `https://analyticsapi.stage.edx.org/enterprise/api/v0/enterprise/beafadc5-69cc-48ce-a9a1-532067d9af0f/${reqUrlPart}`,
-      headers: {
-        Referer: `https://portal.stage.edx.org/successfactors/admin/learners/${reqRefererPart}`,
-      },
-    })
-  }
-
+  
   openCardDetailedBreakdownArea(cardSequenceNumber) {
     cy.get(`:nth-child(${cardSequenceNumber})>.number-card .footer-title>.toggle-collapse`)
       .should('have.attr', 'aria-expanded', 'false')
