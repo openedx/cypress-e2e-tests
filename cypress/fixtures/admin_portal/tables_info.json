@@ -86,7 +86,7 @@
       "Email sort ascending",
       "Total Course Completed Count click to sort"
     ],
-    "request_url_part": "learner_completed_courses"
+    "request_url_part": "learner_completed_courses/"
   },
   {
     "card_number": 4,
@@ -98,6 +98,6 @@
       "Email sort ascending",
       "Total Course Completed Count click to sort"
     ],
-    "request_url_part": "enrollments/?passed_date=last_week"
+    "request_url_part": "enrollments/?page=1&page_size=50&passed_date=last_week"
   }
 ]

@@ -106,20 +106,26 @@ describe('Enterprise cards and table verification', () => {
   })
 
   it('checks filtered tables details', () => {
+    cy.server()
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Select the target table by opening the card detail view and clicking the target question
     cy.fixture('tables_info').then((tables) => {
       tables.forEach((table) => {
+        // Define a route for all tables XHR requests
+        cy.route({
+          method: 'GET',
+          url: `**/enterprise/api/v0/enterprise/*/${table.request_url_part}**`,
+        }).as('tableData')
         // Expand card footer and click on question
         dashboard.openCardDetailedBreakdownArea(table.card_number)
         dashboard.clickCardDetailedBreakdownQuestion(table.card_number, table.question_text)
         // Get and verify Table Title
         dashboard.getTableTitle().should('have.text', table.table_title)
-        // Get Tables data
-        dashboard.getTableData(table.request_url_part, table.table_name).then((response) => {
+        // Wait for Tables XHR requests
+        cy.wait('@tableData').then((xhr) => {
           // If table data exists verify table headers
-          if (response.body.count > 0) {
+          if (xhr.responseBody.count > 0) {
             dashboard.getTableHeaders(table.table_name).then((elems) => {
               const ActualTableHeaders = [...elems].map(el => el.textContent.trim())
               expect(ActualTableHeaders).to.deep.equal(table.table_headers)
