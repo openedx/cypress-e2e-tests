@@ -1,10 +1,14 @@
 {
-  "extends": "eslint-config-edx",
+  "plugins": [
+    "cypress"
+  ],
+  "extends": [
+    "plugin:cypress/recommended"
+  ],
+  "env": {
+    "cypress/globals": true
+  },
   "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": [ "to" ]
-    }]
+    "semi": ["error", "never"]
   }
 }

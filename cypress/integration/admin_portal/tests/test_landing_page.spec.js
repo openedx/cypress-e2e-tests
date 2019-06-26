@@ -1,17 +1,17 @@
 import HelperFunctions from '../helpers/helper_functions'
 import LandingPage from '../pages/landing_page'
 
-describe('landing page tests', function() {
+describe('landing page tests', function () {
   const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
 
-  beforeEach(function() {
+  beforeEach(function () {
     cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })
 
-  it('checks user menu content and actions', function() {
+  it('checks user menu content and actions', function () {
     // Check user email in profile drop down
     landingPage.getUserEmail().should('eq', Cypress.env('ADMIN_PORTAL_USER_EMAIL'))
     // Logout the user from application
@@ -20,7 +20,7 @@ describe('landing page tests', function() {
     // landingPage.enterpriseListContainer().should('not.exist')
   })
 
-  it('checks logo information', function() {
+  it('checks logo information', function () {
     const edXlogoName = 'edX logo'
     const edXlogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
     // Check for log alt text and logo link in header
@@ -31,7 +31,7 @@ describe('landing page tests', function() {
     landingPage.getLogoAltAttributes('footer', 'src').should('match', edXlogoLink)
   })
 
-  it('checks nav links in footer', function() {
+  it('checks nav links in footer', function () {
     const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
@@ -43,7 +43,7 @@ describe('landing page tests', function() {
     })
   })
 
-  it('checks enterprise list', function(){
+  it('checks enterprise list', function () {
     cy.fixture('enterprise_list.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
@@ -51,7 +51,7 @@ describe('landing page tests', function() {
     })
   })
 
-  it('checks the search functionality', function() {
+  it('checks the search functionality', function () {
     // It searches the enterprises using different search literals and verify the results
     cy.fixture('search_data').then((searchItems) => {
       searchItems.forEach((searchItem) => {

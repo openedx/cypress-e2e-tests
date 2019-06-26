@@ -2,7 +2,7 @@ import HelperFunctions from '../helpers/helper_functions'
 import LandingPage from '../pages/landing_page'
 import EnterpriseDashboard from '../pages/enterprise_dashboard'
 
-describe('Enterprise Logos and nav links verification', function() {
+describe('Enterprise Logos and nav links verification', function () {
   const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
@@ -14,7 +14,7 @@ describe('Enterprise Logos and nav links verification', function() {
     cy.visit('/')
   })
 
-  it('checks logo information', function() {
+  it('checks logo information', function () {
     const edxLogoName = 'edX logo'
     const enterpriseLogoName = `${Cypress.env('enterprise_name')} logo`
     const edxLogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
@@ -32,7 +32,7 @@ describe('Enterprise Logos and nav links verification', function() {
     dashboard.getLogoAltAttributes('footer', 'src', `/${trimmedEnterpriseName}`).should('match', enterpriseLogoLink)
   })
 
-  it('checks nav links in footer', function() {
+  it('checks nav links in footer', function () {
     const footerNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
@@ -47,18 +47,18 @@ describe('Enterprise Logos and nav links verification', function() {
   })
 })
 
-describe('Enterprise cards and table verification', function() {
+describe('Enterprise cards and table verification', function () {
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
   const fullTableTitle = 'Full Report'
 
-  beforeEach(function() {
+  beforeEach(function () {
     cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })
 
-  it('checks cards details', function() {
+  it('checks cards details', function () {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Go through cards and verify card main text and value against the text
@@ -74,7 +74,7 @@ describe('Enterprise cards and table verification', function() {
     })
   })
 
-  it('checks default table headers', function() {
+  it('checks default table headers', function () {
     const fullTableHeaders = [
       'Email sort ascending',
       'Course Title click to sort',
@@ -105,7 +105,7 @@ describe('Enterprise cards and table verification', function() {
       .should('have.text', 'Course Price sort ascending ')
   })
 
-  it('checks filtered tables details', function() {
+  it('checks filtered tables details', function () {
     cy.server()
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
