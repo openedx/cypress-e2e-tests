@@ -3,22 +3,12 @@ Cypress E2E Tests for edX applications
 
 ---
 
-These Tests cover Two projects
+These Tests cover following projects
 
-
-**Journals**
 
 **Enterprise Admin Portal**
 
 ----
-
-Run Journals tests in interactive mode
-
-`npm run cy:open_journals`
-
-Run Journals tests in normal mode
-
-`npm run cy:run_journals`
 
 Run admin portal tests in interactive mode
 
@@ -32,17 +22,11 @@ Run admin portal tests in normal mode
 
 Following Environment Vars should be set before running the tests
 
-Normal Journals user (any stage user)
+Normal edX user (any stage user)
 
-*CYPRESS_JOURNAL_USER_EMAIL*
+*CYPRESS_EDX_NORMAL_USER_EMAIL*
 
-*CYPRESS_JOURNAL_USER_PASSWORD*
-
-Journals Staff user (any staff on stage)
-
-*CYPRESS_JOURNAL_STAFF_EMAIL*
-
-*CYPRESS_JOURNAL_STAFF_PASSWORD*
+*CYPRESS_EDX_NORMAL_USER_PASSWORD*
 
 Admin portal user
 
