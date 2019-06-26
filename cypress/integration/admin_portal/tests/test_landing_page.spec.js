@@ -1,17 +1,17 @@
 import HelperFunctions from '../helpers/helper_functions'
 import LandingPage from '../pages/landing_page'
 
-describe('landing page tests', () => {
+describe('landing page tests', function () {
   const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })
 
-  it('checks user menu content and actions', () => {
+  it('checks user menu content and actions', function () {
     // Check user email in profile drop down
     landingPage.getUserEmail().should('eq', Cypress.env('ADMIN_PORTAL_USER_EMAIL'))
     // Logout the user from application
@@ -20,7 +20,7 @@ describe('landing page tests', () => {
     // landingPage.enterpriseListContainer().should('not.exist')
   })
 
-  it('checks logo information', () => {
+  it('checks logo information', function () {
     const edXlogoName = 'edX logo'
     const edXlogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
     // Check for log alt text and logo link in header
@@ -31,7 +31,7 @@ describe('landing page tests', () => {
     landingPage.getLogoAltAttributes('footer', 'src').should('match', edXlogoLink)
   })
 
-  it('checks nav links in footer', () => {
+  it('checks nav links in footer', function () {
     const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
@@ -43,36 +43,15 @@ describe('landing page tests', () => {
     })
   })
 
-  it('checks enterprise list', () => {
-    const ExpectedEnterprises = {
-      ArbiSoft: '/arbisoft/admin/learners',
-      'Bessie Test Inc': '/bessie-test-inc/admin/learners',
-      Boeing: '/boeing/admin/learners',
-      'Degreed Company': '/degreed-company/admin/learners',
-      'Demo 1': '/demo-1/admin/learners',
-      'Success Factors': '/successfactors/admin/learners',
-      'MA Corp': '/macorp/admin/learners',
-      MattWLTest: '/mattwltest/admin/learners',
-      Microsoft: '/microsoft/admin/learners',
-      'OpenCraft Australia': '/opencraft-australia/admin/learners',
-      'Owl Enterprise': '/owl-enterprise/admin/learners',
-      'Pied Piper': '/pied-piper/admin/learners',
-      'QA Company': '/successfactors-qa-company/admin/learners',
-      'Test Ent': '/test-ent/admin/learners',
-      'Test New Enterprise': '/test-new-enterprise/admin/learners',
-      TestDemoEnterpriseTest: '/testdemoenterprisetest/admin/learners',
-      'Vandelay Industries (Direct Integration Test Company)': '/vandelay-industries-direct-int/admin/learners',
-      'WhirlPool (edx)': '/whirlpooledx/admin/learners',
-      Whirlpool: '/whirlpool/admin/learners',
-      'test gdpr enterprise customer': '/test-gdpr-enterprise-customer/admin/learners',
-    }
+  it('checks enterprise list', function () {
+    cy.fixture('enterprise_list.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
-      helpers.verifyLinksAndText(elems, ExpectedEnterprises)
+      helpers.verifyLinksAndText(elems, this.enterpriseData)
     })
   })
 
-  it('checks the search functionality', () => {
+  it('checks the search functionality', function () {
     // It searches the enterprises using different search literals and verify the results
     cy.fixture('search_data').then((searchItems) => {
       searchItems.forEach((searchItem) => {

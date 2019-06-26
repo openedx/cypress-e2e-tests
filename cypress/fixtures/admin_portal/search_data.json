@@ -17,9 +17,11 @@
       "Bessie Test Inc": "/bessie-test-inc/admin/learners",
       "MattWLTest": "/mattwltest/admin/learners",
       "Test Ent": "/test-ent/admin/learners",
+      "Test Kyoto University": "/kyoto-university/admin/learners",
       "Test New Enterprise": "/test-new-enterprise/admin/learners",
       "TestDemoEnterpriseTest": "/testdemoenterprisetest/admin/learners",
       "Vandelay Industries (Direct Integration Test Company)": "/vandelay-industries-direct-int/admin/learners",
+      "WL DSC Test Corp": "/wl-dsc-test-corp/admin/learners",
       "test gdpr enterprise customer": "/test-gdpr-enterprise-customer/admin/learners"
     }
   }

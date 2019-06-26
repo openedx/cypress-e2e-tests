@@ -36,7 +36,7 @@ class EnterpriseDashboard {
   getSpecificTableHeader(tableName, columnNumber) {
     return cy.get(`.${tableName} .table thead th:nth-child(${columnNumber}) .btn-header>span`)
   }
-  
+
   openCardDetailedBreakdownArea(cardSequenceNumber) {
     cy.get(`:nth-child(${cardSequenceNumber})>.number-card .footer-title>.toggle-collapse`)
       .should('have.attr', 'aria-expanded', 'false')

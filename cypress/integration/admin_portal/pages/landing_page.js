@@ -37,7 +37,7 @@ class LandingPage {
 
   logoutUser() {
     cy.get('header .navbar .dropdown-toggle')
-    .should('have.attr', 'aria-expanded', 'false')
+      .should('have.attr', 'aria-expanded', 'false')
       .click()
       .should('have.attr', 'aria-expanded', 'true')
     cy.get('header .navbar .dropdown-item')
