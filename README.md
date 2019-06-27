@@ -38,8 +38,7 @@ With time we will add more projects in the repo
 
 ## Protocols for Test Design
 
-We don't yet have well defined protocols for writing Cypress tests for edX application, so this work was mostly experimental.
-
+We don't yet have well defined protocols for writing Cypress tests for edX application, so this work was mostly experimental
 
 The first project was MIT Journals, in this project following protocols were followed
 
@@ -51,36 +50,32 @@ The first project was MIT Journals, in this project following protocols were fol
 
 The tests for Journals and helper files are present in following path
 
-https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/journals
+<https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/journals>
 
 ---
 
 In the second project a slightly different approach is used
 
-* Page Object model is used inspite of what Cypress site says, it increases redability of code and is much easier to manage 
+* Page Object model is used inspite of what Cypress site says, it increases redability of code and is much easier to manage
 
 * Instead of using arrow functions traditional named functions are used, this is done to to be able to use **this**, which is not working with arrow functions
 
 * Cypress commands and helper functions are still utilized
 
-
 The tests for Enterprise Admin Portal are present in following path
 
-https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/admin_portal
-
+<https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/admin_portal>
 
 To manage multiple projects customized config files are used so user is able to run any project without making any change in the code
 
 Config files for both these projects are placed here
 
-https://github.com/edx/cypress-e2e-tests/tree/master/config
+<https://github.com/edx/cypress-e2e-tests/tree/master/config>
 
 ---
 ---
 
 ## Test Setup
-
----
 
 ### Installations
 
