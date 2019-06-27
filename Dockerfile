@@ -8,4 +8,3 @@ COPY config ./config
 COPY cypress ./cypress
 # install software
 RUN npm install
-# ENTRYPOINT [ "tail", "-f", "/dev/null"]

@@ -1,0 +1,17 @@
+#docker-compose extension to open tests in interactive mode
+version: '2'
+services:
+  cypress:
+    environment:
+      # get the IP address of the host machine and allow X11 to accept
+      # incoming connections from that IP address
+      #   IP=$(ipconfig getifaddr en0)
+      #   /usr/X11/bin/xhost + $IP
+      # then pass the environment variable DISPLAY to show Cypress GUI on the host system
+      #   DISPLAY=$IP:0
+      - DISPLAY
+    volumes:
+      # for Cypress to communicate with the X11 server pass this socket file
+      # in addition to any other mapped volumes
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    command: bash -c 'npm run cy:open_admin_portal'

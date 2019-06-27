@@ -127,11 +127,42 @@ ESLint is also setup in the repo, you can use it by typing following command in 
 
 ---
 
-### Running Tests in Docker
+## Docker Setup
 
 Docker setup is also available for those who want to run the tests without doing any installations
 
 To run the tests in Docker
 
 * Provide the values for environment variables in the env_vars.env
-* Type `docker-compose up` in terminal
+* Use following command in terminal
+        `docker-compose -f docker-compose.yml -f cy-run.yml up`
+
+---
+
+## Running Tests in Interactive Mode using Docker
+
+You can also execute tests in interactive mode directly from Docker, for that you would need to do
+some extra steps
+
+As a pre-requisite you need to install XQuartz using following command
+
+`brew cask install xquartz`
+
+or install it directly from <https://www.xquartz.org/>
+
+### To configure Xquartz
+
+* open XQuartz using following command in terminal
+  * `open -a XQuartz`
+* In the XQuartz preferences, go to the “Security” tab and make sure you’ve got “Allow connections from network clients” ticked
+
+### To run the tests
+
+* Provide the values for environment variables in the env_vars.env
+* Grab the IP of the host machine and add it to the allowed X11 hosts by running these commands
+  * `IP=$(ipconfig getifaddr en0)`
+  * `/usr/X11/bin/xhost + $IP`
+* Pass the environment variable DISPLAY to show Cypress GUI on the host system
+  * `DISPLAY=$IP:0`
+* Use following command in terminal
+  * `docker-compose -f docker-compose.yml -f cy-open.yml up`
