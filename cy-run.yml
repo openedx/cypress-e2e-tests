@@ -1,0 +1,5 @@
+#docker-compose extension to run cypress tests
+version: '2'
+services:
+ cypress:
+    command: bash -c 'npm run cy:run_admin_portal'
