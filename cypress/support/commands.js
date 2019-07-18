@@ -101,7 +101,7 @@ Cypress.Commands.add('make_payment', () => {
 })
 
 Cypress.Commands.add('assert_current_url', (url) => {
-  // Fill billing address
+  // Asserts the current URL
   cy.location().should((location) => {
       expect(location.href).to.eq(url)
     })
