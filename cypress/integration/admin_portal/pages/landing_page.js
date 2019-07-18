@@ -59,7 +59,6 @@ class LandingPage {
 
   openCodeManagement(){
     cy.get('.rounded-0:nth-of-type(2) .text-secondary.rounded-0').trigger('mouseover').click()
-    // cy.get('#sidebar').setAttribute("aria-expanded", "false");
   }
 
   requestMoreCodes(){
