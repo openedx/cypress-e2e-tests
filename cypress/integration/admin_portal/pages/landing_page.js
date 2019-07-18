@@ -21,6 +21,18 @@ class LandingPage {
     return cy.get('.enterprise-list td a')
   }
 
+  getRequestCodesButton(){
+    return cy.get('[class="btn btn-primary"]')
+  }
+
+  getCancelButton(){
+    return cy.get('[class="btn btn-link ml-3 form-cancel-btn"]')
+  }
+
+  getInvalidFeedback(){
+    return cy.get('[name="emailAddress"]~.invalid-feedback')
+  }
+
   searchEnterprise(enterpriseName) {
     cy.server()
     cy.route(`**search=${enterpriseName}**`).as('results')
@@ -43,6 +55,27 @@ class LandingPage {
     cy.get('header .navbar .dropdown-item')
       .contains('Logout')
       .click()
+  }
+
+  openCodeManagement(){
+    cy.get('.rounded-0:nth-of-type(2) .text-secondary.rounded-0').trigger('mouseover').click()
+    // cy.get('#sidebar').setAttribute("aria-expanded", "false");
+  }
+
+  requestMoreCodes(){
+    cy.get('[class="request-codes-btn btn btn-primary"]').click()
+  }
+
+  getFormField(field_name) {
+    var css = (`[name="${field_name}"]`);
+    return cy.get(css)
+  }
+
+  getLabels(label_name) {
+    var labels = {'Email': 1, 'Company': 2, 'Number of Codes':3};
+    var label_index = labels[label_name]
+    var css = (`.form-group:nth-of-type(${label_index}) label`);
+    return cy.get(css)
   }
 }
 

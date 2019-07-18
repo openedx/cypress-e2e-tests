@@ -99,3 +99,10 @@ Cypress.Commands.add('make_payment', () => {
   cy.get('#card-expiry-year').select(Cypress.env('card-expiry-year'))
   cy.get('#payment-button').click()
 })
+
+Cypress.Commands.add('assert_current_url', (url) => {
+  // Fill billing address
+  cy.location().should((location) => {
+      expect(location.href).to.eq(url)
+    })
+})
