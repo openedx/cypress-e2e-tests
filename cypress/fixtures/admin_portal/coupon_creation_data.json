@@ -1,0 +1,371 @@
+{
+    "discount_single_course_single_use_percentage": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Single use",
+        "benefit_type": "Percentage",  
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_single_use_absolute": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Single use",
+        "benefit_type": "Absolute",       
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_once_per_customer_percentage": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "3",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Once per customer",
+        "benefit_type": "Percentage",     
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_once_per_customer_absolute": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "3",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Once per customer",
+        "benefit_type": "Absolute",      
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_multi_use_percentage": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "10",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Multi-use",
+        "benefit_type": "Percentage",       
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_multi_use_absolute": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Multi-use",
+        "benefit_type": "Absolute",   
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_multi_use_per_customer_percentage": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Multi-use-per-Customer",
+        "benefit_type": "Percentage",     
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "discount_single_course_multi_use_per_customer_absolute": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Discount code",
+        "voucher_type": "Multi-use-per-Customer",
+        "benefit_type": "Absolute",    
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "70",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "enrollment_single_course_single_use": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Enrollment code",
+        "voucher_type": "Single use",
+        "benefit_type": "Percentage",    
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "1",
+        "benefit_value": "100",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "enrollment_single_course_once_per_customer": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "3",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Enrollment code",
+        "voucher_type": "Once per customer",
+        "benefit_type": "Percentage",    
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "benefit_value": "100",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "enrollment_single_course_multi_use": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Enrollment code",
+        "voucher_type": "Multi-use",
+        "benefit_type": "Percentage",    
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "100",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    },
+    "enrollment_single_course_multi_use_per_customer": {
+        "category": {
+            "id": "3", 
+            "name": "Affiliate Promotion"
+        },
+        "code": "",
+        "id": null,
+        "price": "0",
+        "quantity": "1",
+        "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
+        "coupon_type": "Enrollment code",
+        "voucher_type": "Multi-use-per-Customer",
+        "benefit_type": "Percentage",    
+        "invoice_discount_type": "Percentage",
+        "invoice_type": "Not-Applicable",
+        "tax_deduction": "",
+        "title": "",
+        "enterprise_customer": {
+            "id": "", 
+            "name": ""
+        },
+        "enterprise_customer_catalog": "",
+        "max_uses": "10",
+        "benefit_value": "100",
+        "invoice_number": "",
+        "invoice_payment_date": null,
+        "invoice_discount_value": null,
+        "tax_deducted_source": null,
+        "start_datetime": "",
+        "end_datetime": ""
+    }
+}
