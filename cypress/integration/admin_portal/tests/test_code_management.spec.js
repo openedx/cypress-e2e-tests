@@ -13,45 +13,47 @@ describe('landing page tests', function () {
     cy.visit('/')
   })
 
-  // it('checks the request codes form contents', function () {
-  //   var request_codes_url = 'https://portal.stage.edx.org/successfactors/admin/coupons/request'
-  //   landingPage.goToEnterprise('SuccessFactors')
-  //   landingPage.openCodeManagement()
-  //   cy.get('.enterprise-app #sidebar').invoke('attr', 'aria-expanded', 'false')
+  it('checks the request codes form contents', function () {
+    var request_codes_url = 'https://portal.stage.edx.org/successfactors/admin/coupons/request'
+    landingPage.goToEnterprise('SuccessFactors')
+    landingPage.openCodeManagement()
+    cy.get('.enterprise-app #sidebar').invoke('attr', 'aria-expanded', 'false')
 
-  //   landingPage.requestMoreCodes()
-  //   cy.assert_current_url(request_codes_url)
-  //   landingPage.getFormField('emailAddress').should('have.attr', 'value', 'zrana@edx.org')
-  //   landingPage.getFormField('enterpriseName').should('have.attr', 'value', 'SuccessFactors')
-  //   landingPage.getLabels('Company').should('have.text', 'Company*').children().should('have.class', 'required')
-  //   landingPage.getLabels('Email').should('have.text', 'Email Address*').children().should('have.class', 'required')
-  //   landingPage.getLabels('Number of Codes').should('have.text', 'Number of Codes')
-  //   landingPage.getRequestCodesButton().should('have.attr', 'type', 'submit').should('have.text', 'Request Codes')
-  //   landingPage.getCancelButton().should('have.attr', 'href', '/successfactors/admin/coupons').should('have.text', 'Cancel')
-  //   landingPage.getFormField('emailAddress').clear().prev().click()
-  //   landingPage.getInvalidFeedback().should('have.text', 'This field is required.')
-  //   landingPage.getFormField('emailAddress').type('zrana@')
-  //   landingPage.getInvalidFeedback().should('have.text', 'Must be a valid email address.')
-  //   landingPage.getRequestCodesButton().should('have.attr', 'disabled')
-  //   landingPage.getCancelButton().click()
-  //   cy.assert_current_url('https://portal.stage.edx.org/successfactors/admin/coupons')
-  //   landingPage.requestMoreCodes()
-  //   cy.assert_current_url(request_codes_url)
-  //   landingPage.getFormField('numberOfCodes').type('5')
-  //   landingPage.getRequestCodesButton().click()
-  //   cy.assert_current_url('https://portal.stage.edx.org/successfactors/admin/coupons')
-  //   cy.get('.alert-dialog .message .title').should('have.text', 'Request for more codes received').next().should('have.text', 'The edX Customer Success team will contact you soon.')
-  // })
+    landingPage.requestMoreCodes()
+    cy.assert_current_url(request_codes_url)
+    landingPage.getFormField('emailAddress').should('have.attr', 'value', 'zrana@edx.org')
+    landingPage.getFormField('enterpriseName').should('have.attr', 'value', 'SuccessFactors')
+    landingPage.getLabels('Company').should('have.text', 'Company*').children().should('have.class', 'required')
+    landingPage.getLabels('Email').should('have.text', 'Email Address*').children().should('have.class', 'required')
+    landingPage.getLabels('Number of Codes').should('have.text', 'Number of Codes')
+    landingPage.getRequestCodesButton().should('have.attr', 'type', 'submit').should('have.text', 'Request Codes')
+    landingPage.getCancelButton().should('have.attr', 'href', '/successfactors/admin/coupons').should('have.text', 'Cancel')
+    landingPage.getFormField('emailAddress').clear().prev().click()
+    landingPage.getInvalidFeedback().should('have.text', 'This field is required.')
+    landingPage.getFormField('emailAddress').type('zrana@')
+    landingPage.getInvalidFeedback().should('have.text', 'Must be a valid email address.')
+    landingPage.getRequestCodesButton().should('have.attr', 'disabled')
+    landingPage.getCancelButton().click()
+    cy.assert_current_url('https://portal.stage.edx.org/successfactors/admin/coupons')
+    landingPage.requestMoreCodes()
+    cy.assert_current_url(request_codes_url)
+    landingPage.getFormField('numberOfCodes').type('5')
+    landingPage.getRequestCodesButton().click()
+    cy.assert_current_url('https://portal.stage.edx.org/successfactors/admin/coupons')
+    cy.get('.alert-dialog .message .title').should('have.text', 'Request for more codes received').next().should('have.text', 'The edX Customer Success team will contact you soon.')
+  })
 
   it('checks filter options and table headers', function () {
     landingPage.goToEnterprise('SuccessFactors')
     landingPage.openCodeManagement()
     codeManagementDashboard.getTableRow().click()
     codeManagementDashboard.getCouponDetailsRow().should('have.css', 'background-color', 'rgb(9, 86, 134)' )
+    // Checks for the headers of the table and the options in filters
     cy.check_labels('small.text-light', ["Coupon Name", "Valid From", "Valid To", "Assignments Remaining", "Enrollments Redeemed"])
     cy.check_labels('select[name="table-view"] option', ["Unassigned", "Unredeemed", "Partially Redeemed", "Enrollments Redeemed"])
     cy.check_labels('select[name="bulk-action"] option', ["Assign", "Remind", "Revoke"])
     codeManagementDashboard.getAssignActionButton().click()
+    // Checks for the labels and requried fields on the modal
     codeManagementDashboard.getModalWindow().then(function($win) {
       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Assign Code').next().should('have.text', 'Close')
       cy.wrap($win).find('h3').then((headings)=>{
@@ -67,51 +69,44 @@ describe('landing page tests', function () {
   })
 })
 
-//   it('checks the request codes form contents', function () {
-//     const request_codes_url = 'https://portal.stage.edx.org/successfactors/admin/coupons/request'
-//     let remainingRedemptions 
-//     cy.server()
+  it('checks for the assignment and revoking of the coupons', function () {
+    const request_codes_url = 'https://portal.stage.edx.org/successfactors/admin/coupons/request'
+    let remainingRedemptions 
+    cy.server()
 
-//     cy.route('GET','**/47059/codes/?code_filter=unassigned**').as('results')
-//     landingPage.goToEnterprise('SuccessFactors')
-//     landingPage.openCodeManagement()
-//     codeManagementDashboard.getTableRow().click()
-//     cy.wait("@results")
+    cy.route('GET','**/47059/codes/?code_filter=unassigned**').as('results')
+    landingPage.goToEnterprise('SuccessFactors')
+    landingPage.openCodeManagement()
+    codeManagementDashboard.getTableRow().click()
+    cy.wait("@results")
 
-  
-//     cy.check_labels('small.text-light', ["Coupon Name", "Valid From", "Valid To", "Assignments Remaining", "Enrollments Redeemed"])
-//     cy.check_labels('select[name="table-view"] option', ["Unassigned", "Unredeemed", "Partially Redeemed", "Enrollments Redeemed"])
-//     cy.check_labels('select[name="bulk-action"] option', ["Assign", "Remind", "Revoke"])
+    // Asserts the redemption count of coupons before assignment
+    cy.get('@results').then((xhr)=>{
+      const responseBody = xhr.responseBody
+      this.remainingRedemptions = (responseBody['results'][0]['redemptions']['total'])
+      codeManagementDashboard.getRemainingAssignments().should('have.text', this.remainingRedemptions.toString())
+    })    
+    codeManagementDashboard.getAssignActionButton().click()
     
-    
-//     cy.get('@results').then((xhr)=>{
-//       const responseBody = xhr.responseBody
-//       this.remainingRedemptions = (responseBody['results'][0]['redemptions']['total'])
-//       codeManagementDashboard.getRemainingAssignments().should('have.text', this.remainingRedemptions.toString())
-//     })    
-//     codeManagementDashboard.getAssignActionButton().click()
-    
-//     codeManagementDashboard.getModalWindow().then(function($win) {
-//       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Assign Code').next().should('have.text', 'Close')
-//       cy.wrap($win).find('input[name="email-address"]').type('zrana@edx.org')
-//       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').click()
-//     })
-//     codeManagementDashboard.getCodeAssignmentSuccessMessage().should('have.text', 'Successfully assigned code(s)')
+    // Assigns the code by submitting the email
+    codeManagementDashboard.getModalWindow().then(function($win) {
+      cy.wrap($win).find('input[name="email-address"]').type('zrana@edx.org')
+      cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').click()
+    })
+    codeManagementDashboard.getCodeAssignmentSuccessMessage().should('have.text', 'Successfully assigned code(s)')
   
-//     codeManagementDashboard.getRemainingAssignments().then((elem)=>{
-//       const text = elem.text()
-//       expect((this.remainingRedemptions-1).toString()).to.eq(text)
-//     })
+    // Asserts the redemption count of coupons after the assignment
+    codeManagementDashboard.getRemainingAssignments().then((elem)=>{
+      const text = elem.text()
+      expect((this.remainingRedemptions-1).toString()).to.eq(text)
+    })
 
-//     codeManagementDashboard.getCodeStatusFilter().select('Unredeemed')
-//     codeManagementDashboard.getRevokeButton().click()
+    codeManagementDashboard.getCodeStatusFilter().select('Unredeemed')
+    codeManagementDashboard.getRevokeButton().click()
 
-//     codeManagementDashboard.getModalWindow().then(function($win) {
-//       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').click()
-//     })
-//     codeManagementDashboard.getRevokeSuccessMessage().should('have.text', 'Successfully revoked code(s)')
-
-
-//   })
-  
+    codeManagementDashboard.getModalWindow().then(function($win) {
+      cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').click()
+    })
+    codeManagementDashboard.getRevokeSuccessMessage().should('have.text', 'Successfully revoked code(s)')
+  })
 })
