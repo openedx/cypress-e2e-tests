@@ -66,14 +66,14 @@ class LandingPage {
   }
 
   getFormField(field_name) {
-    var css = (`[name="${field_name}"]`);
+    var css = (`[name="${field_name}"]`)
     return cy.get(css)
   }
 
   getLabels(label_name) {
-    var labels = {'Email': 1, 'Company': 2, 'Number of Codes':3};
+    var labels = {'Email': 1, 'Company': 2, 'Number of Codes':3}
     var label_index = labels[label_name]
-    var css = (`.form-group:nth-of-type(${label_index}) label`);
+    var css = (`.form-group:nth-of-type(${label_index}) label`)
     return cy.get(css)
   }
 }

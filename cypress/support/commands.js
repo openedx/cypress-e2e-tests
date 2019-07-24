@@ -106,3 +106,15 @@ Cypress.Commands.add('assert_current_url', (url) => {
       expect(location.href).to.eq(url)
     })
 })
+
+Cypress.Commands.add('check_labels', (css, labels_to_check ) => {
+  // Fill billing address
+  cy.get(css).each(($el, index, $list) => {
+    var options = labels_to_check
+    cy.wrap($el[index]).contains((options[index])).should((elem)=>{
+      expect(elem.text()).to.equal(options[index])
+    })
+  })
+})
+
+
