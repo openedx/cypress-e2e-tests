@@ -1,15 +1,15 @@
 import EnterpriseCoupons from '../helpers/enterprise_coupons'
 
 describe('Login tests', function () {
+  let couponId = null
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    let couponId
-    let couponName = 'discount_single_course_single_use_percentage'
+    const couponName = 'discount_single_course_single_use_percentage'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponName).then((couponData) => {
       coupons.createCoupon(couponData[couponName]).then((response) => {
-        this.couponId = response.body.coupon_id
+        couponId = response.body.coupon_id
       })
     })
   })
@@ -19,8 +19,8 @@ describe('Login tests', function () {
   })
 
   it('fetches coupon report', function () {
-    cy.log(this.couponId)
-    coupons.fetchCouponReport(this.couponId).then((response) => {
+    cy.log(couponId)
+    coupons.fetchCouponReport(couponId).then((response) => {
       cy.log(response.body)
     })
   })
@@ -30,6 +30,6 @@ describe('Login tests', function () {
   })
 
   after(function () {
-    coupons.deleteCoupon(this.couponId)
+    coupons.deleteCoupon(couponId)
   })
 })
