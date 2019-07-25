@@ -3,12 +3,20 @@
     "cypress"
   ],
   "extends": [
-    "plugin:cypress/recommended"
+    "plugin:cypress/recommended",
+    "eslint-config-edx"
   ],
+  "parser": "babel-eslint",
   "env": {
     "cypress/globals": true
   },
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to" ]
+    }],
+    "prefer-arrow-callback": 0,
+    "func-names": ["error", "never"]
   }
 }
