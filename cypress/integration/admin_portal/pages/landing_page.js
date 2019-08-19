@@ -45,8 +45,8 @@ class LandingPage {
       .click()
   }
 
-  openCodeManagement(){
-    cy.get('.rounded-0:nth-of-type(2) .text-secondary.rounded-0').trigger('mouseover').click().trigger('mouseout')
+  openCodeManagement() {
+    cy.get('.nav-item:nth-of-type(2) .text-secondary.rounded-0').trigger('mouseover').click().trigger('mouseout')
     cy.get('.d-flex.expanded.has-shadow').should('not.be.visible')
   }
 }
