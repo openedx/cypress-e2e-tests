@@ -117,7 +117,6 @@ async function decodeMessage(message) {
   return emaiBody
 }
 
-
 /**
  * Read Email
  *
@@ -133,4 +132,3 @@ async function readEmail(options = {}) {
 }
 
 module.exports = { readEmail }
-
