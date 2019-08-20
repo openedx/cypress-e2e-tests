@@ -70,7 +70,7 @@ async function getMessageId(auth, searchQuery, searchInterval = 2000, tryLimit =
 }
 
 /**
- * Get the message body on the basis of a message id
+ * Get the message body using message id
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  * @param {String} msgId Message Id against which the text needs to be returned
@@ -82,12 +82,12 @@ async function getMessage(auth, msgId) {
       gmail.users.messages.get({
         userId: 'me',
         id: msgId,
-        format: 'raw',
+        format: 'full',
       }, async function (err, res) {
         if (err) {
           reject(err)
         } else {
-          resolve(Buffer.from(res.data.raw, 'base64').toString('utf8'))
+          resolve(res.data)
         }
       })
     })
@@ -99,6 +99,26 @@ async function getMessage(auth, msgId) {
 }
 
 /**
+ * Decode the message body
+ *
+ * @param {String} message Message that needs to be decoded
+ */
+async function decodeMessage(message) {
+  let emaiBody
+  const { body } = message.payload
+  if (body.size) {
+    emaiBody = Buffer.from(message.payload.body.data, 'base64').toString('utf8')
+  } else {
+    const bodyPart = message.payload.parts.find(p => p.mimeType === 'text/plain')
+    if (bodyPart) {
+      emaiBody = Buffer.from(bodyPart.body.data, 'base64').toString('utf8')
+    }
+  }
+  return emaiBody
+}
+
+
+/**
  * Read Email
  *
  * @param {Array} options Disctionary of options
@@ -107,8 +127,9 @@ async function readEmail(options = {}) {
   const auth = await authorize()
   const queryString = await createSearchQuery(options.from, options.to, options.subject)
   const msgId = await getMessageId(auth, queryString, options.searchInterval, options.tryLimit)
-  const messageBody = await getMessage(auth, msgId)
-  return messageBody
+  const message = await getMessage(auth, msgId)
+  const readableMessage = await decodeMessage(message)
+  return readableMessage
 }
 
 module.exports = { readEmail }
