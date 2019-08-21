@@ -117,7 +117,7 @@ async function decodeMessage(message) {
 /**
  * Read Email
  *
- * @param {Array} options Disctionary of options
+ * @param {Object} options Disctionary of options
  */
 async function readEmail(options = {}) {
   const auth = await authorize()
