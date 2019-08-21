@@ -2,7 +2,6 @@ import HelperFunctions from '../helpers/helper_functions'
 import LandingPage from '../pages/landing_page'
 
 describe('landing page tests', function () {
-  const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
 
   beforeEach(function () {
@@ -39,7 +38,7 @@ describe('landing page tests', function () {
     }
     // Check for the presence of valid text and links in footer section
     landingPage.getFooterNavItems().then((elems) => {
-      helpers.verifyLinksAndText(elems, expectedFooterNavLinks)
+      HelperFunctions.verifyLinksAndText(elems, expectedFooterNavLinks)
     })
   })
 
@@ -47,7 +46,7 @@ describe('landing page tests', function () {
     cy.fixture('enterprise_list.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
-      helpers.verifyLinksAndText(elems, this.enterpriseData)
+      HelperFunctions.verifyLinksAndText(elems, this.enterpriseData)
     })
   })
 
@@ -57,7 +56,7 @@ describe('landing page tests', function () {
       searchItems.forEach((searchItem) => {
         landingPage.searchEnterprise(searchItem.search_literal)
         landingPage.getEnterpriseList().then((elems) => {
-          helpers.verifyLinksAndText(elems, searchItem.expected_search_results)
+          HelperFunctions.verifyLinksAndText(elems, searchItem.expected_search_results)
         })
       })
     })
