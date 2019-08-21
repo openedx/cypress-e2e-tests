@@ -7,13 +7,12 @@ async function authorize() {
   const oAuth2Client = new google.auth.OAuth2({
     clientId: process.env.GMAIL_CLIENT_ID,
     clientSecret: process.env.GMAIL_CLIENT_SECRET,
-    redirectUri: process.env.GMAIL_REDIRECT_URL,
   })
   oAuth2Client.setCredentials({
     access_token: process.env.GMAIL_ACCESS_TOKEM,
     refresh_token: process.env.GMAIL_REFRESH_TOKEN,
   })
-  return (oAuth2Client)
+  return oAuth2Client
 }
 
 /**
@@ -30,12 +29,11 @@ async function createSearchQuery(from, to, subject) {
 /**
  * Get the latest message on the basis of a search criteria
  *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {google.gmail} gamil An authorized gmail client.
  * @param {String} gmailID Gmail Id for the target inbox
  * @param {String} searchQuery Search Query to find a specific email
  */
-async function getMessageId(auth, searchQuery, searchInterval = 2000, tryLimit = 15) {
-  const gmail = google.gmail({ auth, version: 'v1' })
+async function getMessageId(gmail, searchQuery, searchInterval = 2000, tryLimit = 15) {
   try {
     const messages = await new Promise((resolve, reject) => {
       // Use set interval function to check inbox repeatedly for a set time
@@ -72,11 +70,10 @@ async function getMessageId(auth, searchQuery, searchInterval = 2000, tryLimit =
 /**
  * Get the message body using message id
  *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {google.gmail} gmail An authorized gmail client.
  * @param {String} msgId Message Id against which the text needs to be returned
  */
-async function getMessage(auth, msgId) {
-  const gmail = google.gmail({ auth, version: 'v1' })
+async function getMessage(gmail, msgId) {
   try {
     const message = await new Promise((resolve, reject) => {
       gmail.users.messages.get({
@@ -124,9 +121,10 @@ async function decodeMessage(message) {
  */
 async function readEmail(options = {}) {
   const auth = await authorize()
+  const gmail = google.gmail({ auth, version: 'v1' })
   const queryString = await createSearchQuery(options.from, options.to, options.subject)
-  const msgId = await getMessageId(auth, queryString, options.searchInterval, options.tryLimit)
-  const message = await getMessage(auth, msgId)
+  const msgId = await getMessageId(gmail, queryString, options.searchInterval, options.tryLimit)
+  const message = await getMessage(gmail, msgId)
   const readableMessage = await decodeMessage(message)
   return readableMessage
 }
