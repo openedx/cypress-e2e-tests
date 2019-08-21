@@ -105,6 +105,22 @@ _Note_: The above are credentials for a normal edX user who does not have access
 
 _Note_: The above are credentials for a admin portal valid user
 
+Following environment vars would be required for using google api to read gmail inbox
+
+`CYPRESS_GMAIL_ID`
+
+`GMAIL_CLIENT_ID`
+
+`GMAIL_CLIENT_SECRET`
+
+`GMAIL_ACCESS_TOKEN`
+
+`GMAIL_REFRESH_TOKEN`
+
+_Note_: You can use the method descibed in the below link to get these auth tokens for any personal gmail account
+
+<https://developers.google.com/identity/protocols/OAuth2WebServer#creatingcred>
+
 ---
 
 ### Run Tests
