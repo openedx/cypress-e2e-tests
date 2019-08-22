@@ -4,8 +4,7 @@ describe('Email assertion:', () => {
   it('Gets the email on basis of a search query', function () {
     const mailOptions = {
       from: 'activate@edx.org',
-      // to: HelperFunctions.getUniqueEmailAlias(),
-      to: 'kch786+1124@gmail.com',
+      to: HelperFunctions.getUniqueEmailAlias(),
       subject: 'Activate',
     }
     cy.task('mailReader', mailOptions).then((email) => {
