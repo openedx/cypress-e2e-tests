@@ -1,3 +1,5 @@
+import EnterpriseCoupons from '../helpers/enterprise_coupons'
+
 const uuidv4 = require('uuid/v4')
 
 class HelperFunctions {
@@ -34,6 +36,17 @@ class HelperFunctions {
     const urlRegex = new RegExp(String.raw`(https?:\/\/[^\s]+${subString}?[^\s]+)`)
     const urls = emailText.match(urlRegex)
     return urls[0]
+  }
+
+  convertDateToShortFormat(value) {
+    const date = new Date(value)
+    return Intl.DateTimeFormat('en-US').format(date)
+  }
+
+  couponData(couponId) {
+    const coupons = new EnterpriseCoupons()
+    return coupons.fetchCouponReport(couponId).then((response) => {
+    })
   }
 }
 
