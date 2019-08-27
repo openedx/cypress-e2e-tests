@@ -21,7 +21,7 @@ async function authorize() {
  * @param {String} to The Receiver of email
  * @param {String} subject Partial or full subject of email
  */
-async function createSearchQuery(from, to, subject) {
+function createSearchQuery(from, to, subject) {
   const queryString = `from:${from} to:${to} subject:${subject}`
   return queryString
 }
@@ -100,7 +100,7 @@ async function getMessage(gmail, msgId) {
  *
  * @param {String} message Message that needs to be decoded
  */
-async function decodeMessage(message) {
+function decodeMessage(message) {
   let emaiBody
   const { body } = message.payload
   if (body.size) {
@@ -125,7 +125,7 @@ async function readEmail(options = {}) {
   const queryString = await createSearchQuery(options.from, options.to, options.subject)
   const msgId = await getMessageId(gmail, queryString, options.searchInterval, options.tryLimit)
   const message = await getMessage(gmail, msgId)
-  const readableMessage = await decodeMessage(message)
+  const readableMessage = decodeMessage(message)
   return readableMessage
 }
 
