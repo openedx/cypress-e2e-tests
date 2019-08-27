@@ -99,3 +99,13 @@ Cypress.Commands.add('make_payment', () => {
   cy.get('#card-expiry-year').select(Cypress.env('card-expiry-year'))
   cy.get('#payment-button').click()
 })
+
+Cypress.Commands.add('check_labels', (css, labelsToCheck) => {
+  // Check labels in a list
+  cy.get(css).each(($el, index) => {
+    const options = labelsToCheck
+    cy.wrap($el[index]).contains((options[index])).should((elem) => {
+      expect(elem.text()).to.equal(options[index])
+    })
+  })
+})
