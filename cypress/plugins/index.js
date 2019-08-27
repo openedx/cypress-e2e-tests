@@ -15,7 +15,7 @@ module.exports = (on, config) => {
   on('task', {
     failed: require('cypress-failed-log/src/failed')(),
   })
-  const file = config.env.configFile || 'journals_mit_stage'
+  const file = config.env.configFile
 
   return getConfigurationByFile(file)
 }
