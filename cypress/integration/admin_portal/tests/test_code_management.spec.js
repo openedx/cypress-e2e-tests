@@ -4,7 +4,6 @@ import EnterpriseCoupons from '../helpers/enterprise_coupons'
 import HelperFunctions from '../helpers/helper_functions'
 
 describe('landing page tests', function () {
-  const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
   const coupons = new EnterpriseCoupons()
@@ -25,7 +24,7 @@ describe('landing page tests', function () {
   })
 
   beforeEach(function () {
-    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
+    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
     cy.visit('/')
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     landingPage.openCodeManagement()
@@ -92,7 +91,7 @@ describe('landing page tests', function () {
       assignCouponHeadings: ['Add User', 'Email Template'],
       assignCouponFieldLabels: ['Email Address*', 'Customize Message*'],
     }
-    helpers.couponData(this.couponId).then((response) => {
+    coupons.fetchCouponReport(this.couponId).then((response) => {
       const couponReport = response.body
       const [couponName] = couponReport.match(/Test_Coupon_\w+/g)
       this.couponName = couponName
@@ -103,10 +102,10 @@ describe('landing page tests', function () {
     codeManagementDashboard.getCouponMeta().then((couponInfo) => {
       // Coupon data from coupon report
       const couponMeta = {
-        validFromDateFromCouponReport: helpers.convertDateToShortFormat(this.dates[1]),
-        validFromDateFromCouponTable: helpers.convertDateToShortFormat(couponInfo.eq(1).text()),
-        validToDateFromCouponReport: helpers.convertDateToShortFormat(this.dates[2]),
-        validToDateFromCouponTable: helpers.convertDateToShortFormat(couponInfo.eq(2).text()),
+        validFromDateFromCouponReport: HelperFunctions.convertDateToShortFormat(this.dates[1]),
+        validFromDateFromCouponTable: HelperFunctions.convertDateToShortFormat(couponInfo.eq(1).text()),
+        validToDateFromCouponReport: HelperFunctions.convertDateToShortFormat(this.dates[2]),
+        validToDateFromCouponTable: HelperFunctions.convertDateToShortFormat(couponInfo.eq(2).text()),
         remainingAssignments: couponInfo.eq(3).text(),
         enrollmentsRedeemed: couponInfo.eq(4).text(),
       }
@@ -144,7 +143,7 @@ describe('landing page tests', function () {
   it('checks for the assignment and revoking of the coupons', function () {
     cy.server()
     cy.route('GET', `**/${this.couponId}/codes/?code_filter=unassigned**`).as('results')
-    helpers.couponData(this.couponId).then((response) => {
+    coupons.fetchCouponReport(this.couponId).then((response) => {
       const couponReport = response.body
       const [couponName] = couponReport.match(/Test_Coupon_\w+/g)
       this.couponName = couponName

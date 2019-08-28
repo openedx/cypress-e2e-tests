@@ -10,7 +10,7 @@ class LandingPage {
   }
 
   getUserEmail() {
-    return cy.get('header .navbar .dropdown-menu').invoke('attr', 'aria-label')
+    return cy.get('header .navbar #pgn__dropdown-trigger-0').invoke('text')
   }
 
   enterpriseListContainer() {

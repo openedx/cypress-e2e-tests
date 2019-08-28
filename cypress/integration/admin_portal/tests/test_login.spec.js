@@ -5,6 +5,10 @@ describe('Login tests', function () {
   const loginPage = new LoginPage()
   const landingPage = new LandingPage()
 
+  before(function () {
+    cy.clearCookies()
+  })
+
   beforeEach(function () {
     cy.visit('/')
   })
