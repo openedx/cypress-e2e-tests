@@ -1,5 +1,3 @@
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-
 const uuidv4 = require('uuid/v4')
 
 class HelperFunctions {
@@ -13,7 +11,7 @@ class HelperFunctions {
     const names = [...elems].map(el => el.textContent.trim())
     const urls = [...elems].map(el => el.getAttribute('href'))
     const actualDict = Object.assign({}, ...names.map((n, index) => ({ [n]: urls[index] })))
-    expect(actualDict).to.deep.equal(expectedDict)
+    expect(actualDict).to.include(expectedDict)
   }
 
   /**
@@ -38,16 +36,14 @@ class HelperFunctions {
     return urls[0]
   }
 
-  convertDateToShortFormat(value) {
-    const date = new Date(value)
+  /**
+  * Helper method to convert date to Short From
+  *
+  * @param {Date} originalDate Date which needs to be converted into short form
+  */
+  static convertDateToShortFormat(originalDate) {
+    const date = new Date(originalDate)
     return Intl.DateTimeFormat('en-US').format(date)
   }
-
-  couponData(couponId) {
-    const coupons = new EnterpriseCoupons()
-    return coupons.fetchCouponReport(couponId).then((response) => {
-    })
-  }
 }
-
 export default HelperFunctions
