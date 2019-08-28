@@ -1,5 +1,3 @@
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-
 const uuidv4 = require('uuid/v4')
 
 class HelperFunctions {

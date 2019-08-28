@@ -102,17 +102,17 @@ describe('landing page tests', function () {
     codeManagementDashboard.getCouponMeta().then((couponInfo) => {
       // Coupon data from coupon report
       const couponMeta = {
-        validFromDateFromCouponReport: HelperFunctions.convertDateToShortFormat(this.dates[1]),
-        validFromDateFromCouponTable: HelperFunctions.convertDateToShortFormat(couponInfo.eq(1).text()),
-        validToDateFromCouponReport: HelperFunctions.convertDateToShortFormat(this.dates[2]),
-        validToDateFromCouponTable: HelperFunctions.convertDateToShortFormat(couponInfo.eq(2).text()),
+        validCouponReportFromDate: HelperFunctions.convertDateToShortFormat(this.dates[1]),
+        validCouponTableFromDate: HelperFunctions.convertDateToShortFormat(couponInfo.eq(1).text()),
+        validCouponReportToDate: HelperFunctions.convertDateToShortFormat(this.dates[2]),
+        validCouponTableToDate: HelperFunctions.convertDateToShortFormat(couponInfo.eq(2).text()),
         remainingAssignments: couponInfo.eq(3).text(),
         enrollmentsRedeemed: couponInfo.eq(4).text(),
       }
-      expect(couponMeta.validFromDateFromCouponReport).to
-        .eql(couponMeta.validFromDateFromCouponTable)
-      expect(couponMeta.validToDateFromCouponReport).to
-        .eql(couponMeta.validToDateFromCouponTable)
+      expect(couponMeta.validCouponReportFromDate).to
+        .eql(couponMeta.validCouponTableFromDate)
+      expect(couponMeta.validCouponReportToDate).to
+        .eql(couponMeta.validCouponTableToDate)
       expect(this.quantity).to.eql(couponMeta.remainingAssignments)
       expect(couponMeta.enrollmentsRedeemed).to.eql(`0 of ${couponMeta.remainingAssignments}(0%)`)
     })
