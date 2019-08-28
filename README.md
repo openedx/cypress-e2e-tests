@@ -7,7 +7,7 @@ This repo contains e2e tests written in Cypress for different edX applications
 
 ## Introduction to Cypress
 
-Cypress is a relatilvely new automated tests tool which is gaining popularity at a very rapid pace
+Cypress is a relatively new automated tests tool which is gaining popularity at a very rapid pace
 
 Here is the home page for Cypress if someone wants to look it up
 
@@ -17,7 +17,7 @@ Cypress has very strong documentation so a new comer could find most of the info
 
 <https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell>
 
-Also as a starting point it would be good to go through thes tutorial videos
+Also as a starting point it would be good to go through these tutorial videos
 
 <https://docs.cypress.io/examples/examples/tutorials.html#Best-Practices>
 
@@ -26,9 +26,8 @@ Also as a starting point it would be good to go through thes tutorial videos
 
 ## E2E Tests Repo
 
-This repo is meant to contain multiple projects, for now there are two projects
+This repo is meant to contain multiple projects, for now there is one project:
 
-MIT Journals (Deprecated)
 Enterprise Admin Portals (Active)
 
 With time we will add more projects in the repo
@@ -40,23 +39,11 @@ With time we will add more projects in the repo
 
 We don't yet have well defined protocols for writing Cypress tests for edX application, so this work was mostly experimental
 
-The first project was MIT Journals, in this project following protocols were followed
+The first project was MIT Journals (which has since been deprecated and removed).
 
-* Page Object model was not used because Cypress site does not recommend.
+In the second project, Enterprise Admin Portal, the following approach was used:
 
-* es6 Arrow functions are used in this project.
-
-* Cypress Commands and customized utility functions are used to minimize code repetition
-
-The tests for Journals and helper files are present in following path
-
-<https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/journals>
-
----
-
-In the second project a slightly different approach is used
-
-* Page Object model is used inspite of what Cypress site says, it increases redability of code and is much easier to manage
+* Page Object model is used in spite of what Cypress site says, it increases readability of code and is much easier to manage
 
 * Instead of using arrow functions traditional named functions are used, this is done to to be able to use **this**, which is not working with arrow functions
 
@@ -68,7 +55,7 @@ The tests for Enterprise Admin Portal are present in following path
 
 To manage multiple projects customized config files are used so user is able to run any project without making any change in the code
 
-Config files for both these projects are placed here
+Config files for projects are placed here
 
 <https://github.com/edx/cypress-e2e-tests/tree/master/config>
 
@@ -89,7 +76,7 @@ which will install Cypress and other supporting tools
 
 ---
 
-### Environment Varaibles
+### Environment Variables
 
 Following Environment Vars should be set before running the tests
 
@@ -103,7 +90,7 @@ _Note_: The above are credentials for a normal edX user who does not have access
 
 `CYPRESS_ADMIN_PORTAL_USER_PASSWORD`
 
-_Note_: The above are credentials for a admin portal valid user
+_Note_: The above are credentials for an admin portal valid user
 
 ---
 
@@ -113,7 +100,7 @@ To run admin portal tests in interactive mode use following command
 
 `npm run cy:open_admin_portal`
 
-T run admin portal tests in normal mode use following command
+To run admin portal tests in normal mode use following command
 
 `npm run cy:run_admin_portal`
 
@@ -150,9 +137,9 @@ As a pre-requisite you need to install XQuartz using following command
 
 or install it directly from <https://www.xquartz.org/>
 
-### To configure Xquartz
+### To configure XQuartz
 
-* open XQuartz using following command in terminal
+* Open XQuartz using following command in terminal
   * `open -a XQuartz`
 * In the XQuartz preferences, go to the “Security” tab and make sure you’ve got “Allow connections from network clients” ticked
 
