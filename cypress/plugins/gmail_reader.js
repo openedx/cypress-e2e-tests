@@ -17,7 +17,7 @@ async function authorize() {
 
 /**
  * Create the query string based on selected options
- * @param {String} from The sender of email
+ * @param {String} from The Sender of email
  * @param {String} to The Receiver of email
  * @param {String} subject Partial or full subject of email
  */
@@ -52,6 +52,7 @@ async function getMessageId(gmail, searchQuery, searchInterval = 2000, tryLimit 
             const [targetMessage] = res.data.messages
             resolve(targetMessage.id)
           } else
+          // Raise an error message if email is not found even after the max tryLimit
           if (counter === tryLimit) {
             clearInterval(timerId)
             const customizedError = new Error('No Message found that matches the search criteria')
