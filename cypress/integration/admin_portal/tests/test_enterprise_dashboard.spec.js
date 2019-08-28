@@ -3,7 +3,6 @@ import LandingPage from '../pages/landing_page'
 import EnterpriseDashboard from '../pages/enterprise_dashboard'
 
 describe('Enterprise Logos and nav links verification', function () {
-  const helpers = new HelperFunctions()
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
   const trimmedEnterpriseName = Cypress.env('enterprise_name').toLowerCase().replace(/ /g, '')
@@ -42,7 +41,7 @@ describe('Enterprise Logos and nav links verification', function () {
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Check for the presence of valid text and links in footer section
     dashboard.getFooterNavItems().then((elems) => {
-      helpers.verifyLinksAndText(elems, footerNavLinks)
+      HelperFunctions.verifyLinksAndText(elems, footerNavLinks)
     })
   })
 })
