@@ -2,16 +2,14 @@ const uuidv4 = require('uuid/v4')
 
 class HelperFunctions {
   /**
-  * Helper method to verify links and text
+  * Helper method to make a dictionary of URls and their labels inside an element
   *
   * @param {Object} elems Elements which contains links
-  * @param {Array} expectedDict Links and Text to be matched
   */
-  static verifyLinksAndText(elems, expectedDict) {
+  static getLabelAndUrlsDict(elems) {
     const names = [...elems].map(el => el.textContent.trim())
     const urls = [...elems].map(el => el.getAttribute('href'))
-    const actualDict = Object.assign({}, ...names.map((n, index) => ({ [n]: urls[index] })))
-    expect(actualDict).to.include(expectedDict)
+    return Object.assign({}, ...names.map((n, index) => ({ [n]: urls[index] })))
   }
 
   /**
