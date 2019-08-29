@@ -38,7 +38,8 @@ describe('landing page tests', function () {
     }
     // Check for the presence of valid text and links in footer section
     landingPage.getFooterNavItems().then((elems) => {
-      HelperFunctions.verifyLinksAndText(elems, expectedFooterNavLinks)
+      const actualFooterNavLinks = HelperFunctions.getLabelAndUrlsDict(elems)
+      expect(actualFooterNavLinks).to.deep.equal(expectedFooterNavLinks)
     })
   })
 
@@ -46,7 +47,8 @@ describe('landing page tests', function () {
     cy.fixture('enterprise_list.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
-      HelperFunctions.verifyLinksAndText(elems, this.enterpriseData)
+      const actualEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
+      expect(actualEnterpriseList).to.include(this.enterpriseData)
     })
   })
 
@@ -56,7 +58,8 @@ describe('landing page tests', function () {
       searchItems.forEach((searchItem) => {
         landingPage.searchEnterprise(searchItem.search_literal)
         landingPage.getEnterpriseList().then((elems) => {
-          HelperFunctions.verifyLinksAndText(elems, searchItem.expected_search_results)
+          const actualSearchedEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
+          expect(actualSearchedEnterpriseList).to.include(searchItem.expected_search_results)
         })
       })
     })

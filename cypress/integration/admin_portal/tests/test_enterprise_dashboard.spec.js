@@ -32,7 +32,7 @@ describe('Enterprise Logos and nav links verification', function () {
   })
 
   it('checks nav links in footer', function () {
-    const footerNavLinks = {
+    const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
       Support: `/${trimmedEnterpriseName}/support`,
@@ -41,7 +41,8 @@ describe('Enterprise Logos and nav links verification', function () {
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Check for the presence of valid text and links in footer section
     dashboard.getFooterNavItems().then((elems) => {
-      HelperFunctions.verifyLinksAndText(elems, footerNavLinks)
+      const actualFooterNavLinks = HelperFunctions.getLabelAndUrlsDict(elems)
+      expect(actualFooterNavLinks).to.deep.equal(expectedFooterNavLinks)
     })
   })
 })
