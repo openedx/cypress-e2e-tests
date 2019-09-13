@@ -45,7 +45,11 @@ class CodeManagementPage {
   }
 
   getBulkActionFilter() {
-    return cy.get('select[name="bulk-action"] option')
+    return cy.get('select[name="bulk-action"]')
+  }
+
+  getBulkActionButton() {
+    return cy.get('.bulk-actions button')
   }
 
   getAssignActionButton() {
@@ -54,6 +58,18 @@ class CodeManagementPage {
 
   getRemainingAssignments() {
     return cy.get('.table tbody tr:nth-of-type(1) td:nth-of-type(4)')
+  }
+
+  getCouponRows() {
+    return cy.get('.table tbody tr')
+  }
+
+  selectCodesForBulkAssignment(rowNumber) {
+    cy.get(`.table tbody tr:nth-of-type(${rowNumber}) .form-check label`).click()
+  }
+
+  selectCodesForBulkRevoke() {
+    cy.get('label[id="label-select-all-codes"]').click()
   }
 
   getModalWindow() {
@@ -65,6 +81,10 @@ class CodeManagementPage {
   }
 
   getRevokeButton() {
+    return cy.get('.revoke-btn')
+  }
+
+  getBulkRevokeButton() {
     return cy.get('.revoke-btn')
   }
 
