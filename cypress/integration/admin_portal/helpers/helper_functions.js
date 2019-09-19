@@ -35,6 +35,23 @@ class HelperFunctions {
   }
 
   /**
+  * Helper method to parse report data from response
+  *
+  * @param {String} responseBody body from which data needs to be split
+  */
+  static parseReportData(responseBody) {
+    const splitDataArr = responseBody.split(/[\n]/)
+    const reportData = splitDataArr[1]
+    const dataArr = reportData.split(',')
+    const mapReportData = {
+      assigned_to: dataArr[0],
+      code: dataArr[1],
+      redeem_url: dataArr[2],
+    }
+    return mapReportData
+  }
+
+  /**
   * Helper method to convert date to Short From
   *
   * @param {Date} originalDate Date which needs to be converted into short form

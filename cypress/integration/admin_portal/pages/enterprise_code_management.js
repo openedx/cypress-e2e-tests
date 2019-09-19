@@ -32,6 +32,14 @@ class CodeManagementPage {
     return cy.get('.coupon')
   }
 
+  downloadCouponReport() {
+    cy.get('.download-btn').click()
+  }
+
+  getCouponCode(columnNumber) {
+    return cy.get(`.coupon-details-table td:nth-child(${columnNumber})`)
+  }
+
   getCouponDetailsRow() {
     return cy.get('.expanded .metadata.row')
   }
