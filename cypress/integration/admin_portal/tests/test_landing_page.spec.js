@@ -5,14 +5,14 @@ describe('landing page tests', function () {
   const landingPage = new LandingPage()
 
   beforeEach(function () {
-    cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })
 
   it('checks user menu content and actions', function () {
     // Check user email in profile drop down
-    landingPage.getUserEmail().should('eq', Cypress.env('ADMIN_PORTAL_USER_EMAIL'))
+    landingPage.getUserEmail().should('eq', Cypress.env('ADMIN_USER_EMAIL'))
     // Logout the user from application
     // landingPage.logoutUser()
     // // Check that enterprise list container is not present

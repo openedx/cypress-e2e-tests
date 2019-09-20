@@ -9,7 +9,7 @@ describe('landing page tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     const couponType = 'discount_single_course_single_use_percentage'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponType).then((couponData) => {
@@ -41,7 +41,7 @@ describe('landing page tests', function () {
       validEmailError: 'Must be a valid email address.',
     }
     codeManagementDashboard.requestMoreCodes()
-    codeManagementDashboard.getFormField('emailAddress').should('have.attr', 'value', Cypress.env('ADMIN_PORTAL_USER_EMAIL'))
+    codeManagementDashboard.getFormField('emailAddress').should('have.attr', 'value', Cypress.env('ADMIN_USER_EMAIL'))
     codeManagementDashboard.getFormField('enterpriseName').should('have.attr', 'value', Cypress.env('enterprise_name'))
     codeManagementDashboard.getLabels('Company').should('have.text', labelsAndText.companyLabel).children().should('have.class', 'required')
     codeManagementDashboard.getLabels('Email').should('have.text', labelsAndText.emailLabel).children().should('have.class', 'required')

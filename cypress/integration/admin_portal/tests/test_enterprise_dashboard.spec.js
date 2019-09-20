@@ -8,7 +8,7 @@ describe('Enterprise Logos and nav links verification', function () {
   const trimmedEnterpriseName = Cypress.env('enterprise_name').toLowerCase().replace(/ /g, '')
 
   beforeEach(function () {
-    cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })
@@ -53,7 +53,7 @@ describe('Enterprise cards and table verification', function () {
   const fullTableTitle = 'Full Report'
 
   beforeEach(function () {
-    cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
     cy.visit('/')
   })

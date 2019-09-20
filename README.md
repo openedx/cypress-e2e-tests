@@ -80,15 +80,15 @@ which will install Cypress and other supporting tools
 
 Following Environment Vars should be set before running the tests
 
-`CYPRESS_EDX_NORMAL_USER_EMAIL`
+`CYPRESS_LMS_USER_EMAIL`
 
-`CYPRESS_EDX_NORMAL_USER_PASSWORD`
+`CYPRESS_LMS_USER_PASSWORD`
 
 _Note_: The above are credentials for a normal edX user who does not have access to admin portal
 
-`CYPRESS_ADMIN_PORTAL_USER_EMAIL`
+`CYPRESS_ADMIN_USER_EMAIL`
 
-`CYPRESS_ADMIN_PORTAL_USER_PASSWORD`
+`CYPRESS_ADMIN_USER_PASSWORD`
 
 _Note_: The above are credentials for an admin portal valid user
 
@@ -96,13 +96,13 @@ Following environment vars would be required for using google api to read gmail 
 
 `CYPRESS_GMAIL_ID`
 
-`GMAIL_CLIENT_ID`
+`CYPRESS_GMAIL_CLIENT_ID`
 
-`GMAIL_CLIENT_SECRET`
+`CYPRESS_GMAIL_CLIENT_SECRET`
 
-`GMAIL_ACCESS_TOKEN`
+`CYPRESS_GMAIL_ACCESS_TOKEN`
 
-`GMAIL_REFRESH_TOKEN`
+`CYPRESS_GMAIL_REFRESH_TOKEN`
 
 _Note_: You can use the method descibed in the below link to get these auth tokens for any personal gmail account
 
