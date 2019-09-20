@@ -5,12 +5,12 @@ const { google } = require('googleapis')
  */
 async function authorize() {
   const oAuth2Client = new google.auth.OAuth2({
-    clientId: process.env.GMAIL_CLIENT_ID,
-    clientSecret: process.env.GMAIL_CLIENT_SECRET,
+    clientId: process.env.CYPRESS_GMAIL_CLIENT_ID,
+    clientSecret: process.env.CYPRESS_GMAIL_CLIENT_SECRET,
   })
   oAuth2Client.setCredentials({
-    access_token: process.env.GMAIL_ACCESS_TOKEM,
-    refresh_token: process.env.GMAIL_REFRESH_TOKEN,
+    access_token: process.env.CYPRESS_GMAIL_ACCESS_TOKEM,
+    refresh_token: process.env.CYPRESS_GMAIL_REFRESH_TOKEN,
   })
   return oAuth2Client
 }

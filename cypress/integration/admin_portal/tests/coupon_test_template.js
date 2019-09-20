@@ -5,13 +5,14 @@ describe('Login tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    const couponName = 'discount_single_course_single_use_percentage'
+    const couponName = 'enrollment_single_course_multi_use_per_customer'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponName).then((couponData) => {
       coupons.createCoupon(couponData[couponName]).then((response) => {
         couponId = response.body.coupon_id
       })
     })
+    coupons.fetchValidCourseSKU()
   })
 
   beforeEach(function () {
@@ -23,10 +24,6 @@ describe('Login tests', function () {
     coupons.fetchCouponReport(couponId).then((response) => {
       cy.log(response.body)
     })
-  })
-
-  it('visits admin portal', function () {
-    cy.visit('/')
   })
 
   after(function () {
