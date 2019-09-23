@@ -142,6 +142,8 @@ describe('landing page tests', function () {
 
   it('checks for the assignment and revoking of the coupons', function () {
     cy.server()
+    const uniqueEmail = HelperFunctions.getUniqueEmailAlias()
+    this.couponCode = null
     cy.route('GET', `**/${this.couponId}/codes/?code_filter=unassigned**`).as('results')
     coupons.fetchCouponReport(this.couponId).then((response) => {
       const couponReport = response.body
@@ -153,12 +155,13 @@ describe('landing page tests', function () {
     cy.wait('@results').then((xhr) => {
       const responseBody = xhr.response.body
       this.remainingRedemptions = (responseBody.results[0].redemptions.total)
+      this.couponCode = (responseBody.results[0].code)
       codeManagementDashboard.getRemainingAssignments().should('have.text', this.remainingRedemptions.toString())
     })
     codeManagementDashboard.getAssignActionButton().click()
     // Assigns the code by submitting the email
     codeManagementDashboard.getModalWindow().then((win) => {
-      cy.wrap(win).find('input[name="email-address"]').type('cypressTestEmail@edx.org')
+      cy.wrap(win).find('input[name="email-address"]').type(uniqueEmail)
       cy.wrap(win).find('.modal-footer .btn:nth-of-type(1)').click()
 
       codeManagementDashboard.getCodeAssignmentSuccessMessage().should(($successMessage) => {
@@ -179,6 +182,16 @@ describe('landing page tests', function () {
           expect((this.remainingRedemptions - 1).toString()).to.eq(couponMeta.eq(3).text())
         })
       })
+    })
+    const mailOptions = {
+      from: 'test@dev.edx.org',
+      to: uniqueEmail,
+      subject: 'New edX course assignment',
+      trylimit: 40,
+      searchInterval: 5000,
+    }
+    cy.task('mailReader', mailOptions).then((email) => {
+      expect(HelperFunctions.extractAccessCodeFromEmail(email)).to.eql(this.couponCode)
     })
     codeManagementDashboard.getCodeStatusFilter().select('Unredeemed')
     codeManagementDashboard.getRevokeButton().click()
