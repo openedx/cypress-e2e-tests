@@ -13,7 +13,8 @@ function getDates() {
 class EnterpriseCoupons {
   constructor() {
     this.token = null
-    this.sku = null
+    this.Coursesku = null
+    this.Coursekey = null
   }
 
   loginToEcommerce() {
@@ -70,14 +71,15 @@ class EnterpriseCoupons {
     })
   }
 
-  findValidCourseSKU() {
+  findValidCatalogCourse() {
     const enterpriseCatalogUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/customer_catalogs/${Cypress.env('enterprise_catalog')}`
     cy.request(enterpriseCatalogUrl).then((response) => {
       const { results } = response.body
       const skuCourse = results.filter(function (result) {
         return result.first_enrollable_paid_seat_sku
       })[0]
-      this.sku = skuCourse.first_enrollable_paid_seat_sku
+      this.courseSku = skuCourse.first_enrollable_paid_seat_sku
+      this.courseKey = skuCourse.key
     })
   }
 

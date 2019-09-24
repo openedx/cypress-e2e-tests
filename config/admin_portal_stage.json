@@ -18,6 +18,7 @@
   ],
   "env": {
     "ENVIRONMENT": "enterprise_admin_portal_stage",
+    "lms_url": "https://courses.stage.edx.org",
     "login_url": "https://courses.stage.edx.org/login",
     "login_api_url": "https://courses.stage.edx.org/user_api/v1/account/login_session/",
     "ecommerce_url": "https://ecommerce.stage.edx.org",

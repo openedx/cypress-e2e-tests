@@ -1,18 +1,19 @@
 import EnterpriseCoupons from '../helpers/enterprise_coupons'
+import HelperFunctions from '../helpers/helper_functions'
 
-describe('Login tests', function () {
+describe('Coupon Tests Template', function () {
   let couponId = null
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    const couponName = 'enrollment_single_course_multi_use_per_customer'
+    const couponName = 'enrollment_multi_use_per_customer'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponName).then((couponData) => {
       coupons.createCoupon(couponData[couponName]).then((response) => {
         couponId = response.body.coupon_id
       })
     })
-    coupons.fetchValidCourseSKU()
+    coupons.findValidCatalogCourse()
   })
 
   beforeEach(function () {
@@ -22,7 +23,9 @@ describe('Login tests', function () {
   it('fetches coupon report', function () {
     cy.log(couponId)
     coupons.fetchCouponReport(couponId).then((response) => {
-      cy.log(response.body)
+      const reportText = response.body
+      cy.log(reportText)
+      cy.log(HelperFunctions.readCouponData(reportText))
     })
   })
 

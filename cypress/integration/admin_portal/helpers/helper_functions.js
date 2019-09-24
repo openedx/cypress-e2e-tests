@@ -60,5 +60,18 @@ class HelperFunctions {
     const date = new Date(originalDate)
     return Intl.DateTimeFormat('en-US').format(date)
   }
+
+  /**
+  * Helper method to get coupon data from coupon report
+  *
+  * @param {String} couponReport Coupon Report from whihc we need specific data
+  */
+  static readCouponData(couponReport) {
+    const data = {
+      couponName: couponReport.match(/Test_Coupon_\w+/g),
+      dates: couponReport.match(/\w+ \d+, \d+/g),
+    }
+    return data
+  }
 }
 export default HelperFunctions
