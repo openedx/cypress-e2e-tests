@@ -9,7 +9,6 @@ describe('landing page tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     const couponType = 'discount_single_course_single_use_percentage'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponType).then((couponData) => {
@@ -187,8 +186,8 @@ describe('landing page tests', function () {
       from: 'test@dev.edx.org',
       to: uniqueEmail,
       subject: 'New edX course assignment',
-      trylimit: 40,
-      searchInterval: 5000,
+      tryLimit: 80,
+      searchInterval: 80000,
     }
     cy.task('mailReader', mailOptions).then((email) => {
       expect(HelperFunctions.extractAccessCodeFromEmail(email)).to.eql(this.couponCode)

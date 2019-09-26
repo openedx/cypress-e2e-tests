@@ -12,17 +12,22 @@ function getDates() {
 
 class EnterpriseCoupons {
   constructor() {
-    this.token = null
     this.sku = null
+    this.defaultHeaders = {
+      Accept: 'application/json, text/javascript, */*; q=0.01',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Accept-Language': 'en-GB,en;q=0.9,en-US;q=0.8,ur;q=0.7',
+      'Content-Type': 'application/json',
+      Referer: `${Cypress.env('ecommerce_url')}/enterprise/coupons/new/`,
+      Origin: Cypress.env('ecommerce_url'),
+      'X-Csrftoken': null,
+      'X-Requested-With': 'XMLHttpRequest',
+    }
   }
 
   loginToEcommerce() {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     cy.request(`${Cypress.env('ecommerce_url')}/coupons/`)
-    cy.getCookie('ecommerce_csrftoken')
-      .should('exist').then((csrfVal) => {
-        this.token = csrfVal
-      })
   }
 
   prepareCouponData(coupon) {
@@ -39,26 +44,17 @@ class EnterpriseCoupons {
     })
   }
 
-  defaultHeaders() {
-    return {
-      Accept: 'application/json, text/javascript, */*; q=0.01',
-      'Accept-Encoding': 'gzip, deflate, br',
-      'Accept-Language': 'en-GB,en;q=0.9,en-US;q=0.8,ur;q=0.7',
-      'Content-Type': 'application/json',
-      Referer: `${Cypress.env('ecommerce_url')}/enterprise/coupons/new/`,
-      Origin: Cypress.env('ecommerce_url'),
-      'X-Csrftoken': this.token.value,
-      'X-Requested-With': 'XMLHttpRequest',
-    }
-  }
-
   createCoupon(requestBody) {
+    cy.getCookie('ecommerce_csrftoken')
+      .should('exist').then((csrfVal) => {
+        this.defaultHeaders['X-Csrftoken'] = csrfVal.value
+      })
     const createCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/`
     return cy.request({
       method: 'POST',
       url: createCouponUrl,
       body: requestBody,
-      headers: this.defaultHeaders(),
+      headers: this.defaultHeaders,
     })
   }
 
@@ -83,6 +79,11 @@ class EnterpriseCoupons {
 
   deleteCoupon(couponId) {
     const fetchCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/${couponId}/`
+    cy.getCookie('ecommerce_csrftoken')
+      .should('exist').then((csrfVal) => {
+        this.defaultHeaders['X-Csrftoken'] = csrfVal.value
+        this.defaultHeaders.Referer = fetchCouponUrl
+      })
     cy.request({
       method: 'DELETE',
       url: fetchCouponUrl,
