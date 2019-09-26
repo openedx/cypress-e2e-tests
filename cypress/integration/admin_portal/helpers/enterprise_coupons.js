@@ -85,6 +85,11 @@ class EnterpriseCoupons {
         this.defaultHeaders['X-Csrftoken'] = csrfVal.value
       })
     const fetchCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/${couponId}/`
+    cy.getCookie('ecommerce_csrftoken')
+      .should('exist').then((csrfVal) => {
+        this.defaultHeaders['X-Csrftoken'] = csrfVal.value
+        this.defaultHeaders.Referer = fetchCouponUrl
+      })
     cy.request({
       method: 'DELETE',
       url: fetchCouponUrl,

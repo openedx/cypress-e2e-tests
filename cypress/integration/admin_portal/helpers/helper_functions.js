@@ -35,6 +35,17 @@ class HelperFunctions {
   }
 
   /**
+  * Helper method to extract access code from email text
+  *
+  * @param {String} emailText Email body from which code needs to be searched
+  */
+  static extractAccessCodeFromEmail(emailText) {
+    const codeRegex = new RegExp(String.raw`(?<=Access Code: )\w+`)
+    const code = emailText.match(codeRegex)
+    return code[0]
+  }
+
+  /**
   * Helper method to parse report data from response
   *
   * @param {String} responseBody body from which data needs to be split
