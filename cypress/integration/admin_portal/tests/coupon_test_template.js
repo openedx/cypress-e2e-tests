@@ -7,7 +7,7 @@ describe('Coupon Tests Template', function () {
 
   before(function () {
     const couponName = 'enrollment_multi_use_per_customer'
-    coupons.loginToEcommerce()
+    coupons.LoginAsAdmin()
     coupons.prepareCouponData(couponName).then((couponData) => {
       coupons.createCoupon(couponData[couponName]).then((response) => {
         couponId = response.body.coupon_id

@@ -9,9 +9,8 @@ describe('landing page tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    cy.login_using_api(Cypress.env('ADMIN_PORTAL_USER_EMAIL'), Cypress.env('ADMIN_PORTAL_USER_PASSWORD'))
     const couponType = 'discount_single_use_absolute'
-    coupons.loginToEcommerce()
+    coupons.LoginAsAdmin()
     coupons.prepareCouponData(couponType).then((couponData) => {
       const requestData = couponData
       requestData[couponType].quantity = '1'

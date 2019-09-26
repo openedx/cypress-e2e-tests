@@ -26,7 +26,7 @@ class EnterpriseCoupons {
     }
   }
 
-  loginToEcommerce() {
+  LoginAsAdmin() {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     cy.request(`${Cypress.env('ecommerce_url')}/coupons/`)
   }

@@ -6,7 +6,7 @@ describe('Login tests', function () {
   const couponApplication = new CouponApplication()
 
   before(function () {
-    coupons.loginToEcommerce()
+    coupons.LoginAsAdmin()
     coupons.findValidCatalogCourse()
   })
 
@@ -15,7 +15,7 @@ describe('Login tests', function () {
   })
 
   it('applies coupon on LMS side', function () {
-    couponApplication.loginToLMS()
+    couponApplication.loginAsStudent()
     couponApplication.enableConsent(coupons.courseKey).then((response) => {
       if (response.body.consent_provided === true) {
         couponApplication.applyCoupon('PXHYIYAR7D56NLA2', coupons.courseSku).then((resp) => {

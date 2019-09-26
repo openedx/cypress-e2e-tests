@@ -10,7 +10,7 @@ describe('landing page tests', function () {
 
   before(function () {
     const couponType = 'discount_single_use_percentage'
-    coupons.loginToEcommerce()
+    coupons.LoginAsAdmin()
     coupons.prepareCouponData(couponType).then((couponData) => {
       coupons.createCoupon(couponData[couponType]).then((response) => {
         this.couponId = response.body.coupon_id
