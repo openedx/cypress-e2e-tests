@@ -21,7 +21,7 @@ class EnterpriseCoupons {
       'Content-Type': 'application/json',
       Referer: `${Cypress.env('ecommerce_url')}/enterprise/coupons/new/`,
       Origin: Cypress.env('ecommerce_url'),
-      'X-Csrftoken': this.token.value,
+      'X-Csrftoken': null,
       'X-Requested-With': 'XMLHttpRequest',
     }
   }
@@ -29,10 +29,6 @@ class EnterpriseCoupons {
   loginToEcommerce() {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     cy.request(`${Cypress.env('ecommerce_url')}/coupons/`)
-    cy.getCookie('ecommerce_csrftoken')
-      .should('exist').then((csrfVal) => {
-        this.token = csrfVal
-      })
   }
 
   prepareCouponData(coupon) {

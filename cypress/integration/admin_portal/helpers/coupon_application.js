@@ -1,7 +1,6 @@
 
 class CouponApplication {
   constructor() {
-    this.userName = null
     this.postHeaders = {
       Accept: 'application/json, text/javascript, */*; q=0.01',
       'Accept-Encoding': 'gzip, deflate, br',
