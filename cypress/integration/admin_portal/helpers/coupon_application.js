@@ -20,7 +20,7 @@ class CouponApplication {
     }
   }
 
-  loginToLMS() {
+  loginAsStudent() {
     cy.clearCookies()
     cy.login_using_api(Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
   }
