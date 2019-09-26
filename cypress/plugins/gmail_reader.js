@@ -33,7 +33,7 @@ function createSearchQuery(from, to, subject) {
  * @param {String} gmailID Gmail Id for the target inbox
  * @param {String} searchQuery Search Query to find a specific email
  */
-async function getMessageId(gmail, searchQuery, searchInterval = 2000, tryLimit = 15) {
+async function getMessageId(gmail, searchQuery, searchInterval = 5000, tryLimit = 10) {
   try {
     const messages = await new Promise((resolve, reject) => {
       // Use set interval function to check inbox repeatedly for a set time
