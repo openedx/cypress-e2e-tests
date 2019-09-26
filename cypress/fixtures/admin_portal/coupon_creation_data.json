@@ -1,5 +1,5 @@
 {
-    "discount_single_course_single_use_percentage": {
+    "discount_single_use_percentage": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -29,7 +29,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_single_use_absolute": {
+    "discount_single_use_absolute": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -59,7 +59,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_once_per_customer_percentage": {
+    "discount_once_per_customer_percentage": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -67,7 +67,7 @@
         "code": "",
         "id": null,
         "price": "0",
-        "quantity": "3",
+        "quantity": "1",
         "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
         "coupon_type": "Discount code",
         "voucher_type": "Once per customer",
@@ -90,7 +90,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_once_per_customer_absolute": {
+    "discount_once_per_customer_absolute": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -98,7 +98,7 @@
         "code": "",
         "id": null,
         "price": "0",
-        "quantity": "3",
+        "quantity": "1",
         "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
         "coupon_type": "Discount code",
         "voucher_type": "Once per customer",
@@ -121,7 +121,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_multi_use_percentage": {
+    "discount_multi_use_percentage": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -129,7 +129,7 @@
         "code": "",
         "id": null,
         "price": "0",
-        "quantity": "10",
+        "quantity": "1",
         "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
         "coupon_type": "Discount code",
         "voucher_type": "Multi-use",
@@ -152,9 +152,9 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_multi_use_absolute": {
+    "discount_multi_use_absolute": {
         "category": {
-            "id": "3", 
+            "id": "1", 
             "name": "Affiliate Promotion"
         },
         "code": "",
@@ -183,7 +183,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_multi_use_per_customer_percentage": {
+    "discount_multi_use_per_customer_percentage": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -214,7 +214,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "discount_single_course_multi_use_per_customer_absolute": {
+    "discount_multi_use_per_customer_absolute": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -245,7 +245,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "enrollment_single_course_single_use": {
+    "enrollment_single_use": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -276,7 +276,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "enrollment_single_course_once_per_customer": {
+    "enrollment_once_per_customer": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -284,7 +284,7 @@
         "code": "",
         "id": null,
         "price": "0",
-        "quantity": "3",
+        "quantity": "1",
         "enterprise_catalog_url": "/api/v2/enterprise/customer_catalogs/",
         "coupon_type": "Enrollment code",
         "voucher_type": "Once per customer",
@@ -306,7 +306,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "enrollment_single_course_multi_use": {
+    "enrollment_multi_use": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"
@@ -337,7 +337,7 @@
         "start_datetime": "",
         "end_datetime": ""
     },
-    "enrollment_single_course_multi_use_per_customer": {
+    "enrollment_multi_use_per_customer": {
         "category": {
             "id": "3", 
             "name": "Affiliate Promotion"

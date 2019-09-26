@@ -9,7 +9,7 @@ describe('landing page tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
-    const couponType = 'discount_single_course_single_use_percentage'
+    const couponType = 'discount_single_use_percentage'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponType).then((couponData) => {
       coupons.createCoupon(couponData[couponType]).then((response) => {
@@ -18,7 +18,7 @@ describe('landing page tests', function () {
     })
     // Coupon quanitity from the fixture
     cy.fixture('coupon_creation_data').then((couponData) => {
-      this.quantity = couponData.discount_single_course_single_use_percentage.quantity
+      this.quantity = couponData.discount_single_use_percentage.quantity
     })
   })
 

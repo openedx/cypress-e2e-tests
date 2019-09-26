@@ -12,7 +12,8 @@ function getDates() {
 
 class EnterpriseCoupons {
   constructor() {
-    this.sku = null
+    this.Coursesku = null
+    this.Coursekey = null
     this.defaultHeaders = {
       Accept: 'application/json, text/javascript, */*; q=0.01',
       'Accept-Encoding': 'gzip, deflate, br',
@@ -66,18 +67,23 @@ class EnterpriseCoupons {
     })
   }
 
-  findValidCourseSKU() {
+  findValidCatalogCourse() {
     const enterpriseCatalogUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/customer_catalogs/${Cypress.env('enterprise_catalog')}`
     cy.request(enterpriseCatalogUrl).then((response) => {
       const { results } = response.body
       const skuCourse = results.filter(function (result) {
         return result.first_enrollable_paid_seat_sku
       })[0]
-      this.sku = skuCourse.first_enrollable_paid_seat_sku
+      this.courseSku = skuCourse.first_enrollable_paid_seat_sku
+      this.courseKey = skuCourse.key
     })
   }
 
   deleteCoupon(couponId) {
+    cy.getCookie('ecommerce_csrftoken')
+      .should('exist').then((csrfVal) => {
+        this.defaultHeaders['X-Csrftoken'] = csrfVal.value
+      })
     const fetchCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/${couponId}/`
     cy.getCookie('ecommerce_csrftoken')
       .should('exist').then((csrfVal) => {

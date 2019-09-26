@@ -9,7 +9,7 @@ describe('landing page tests', function () {
 
   before(function () {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    const couponType = 'discount_single_course_single_use_absolute'
+    const couponType = 'discount_single_use_absolute'
     coupons.loginToEcommerce()
     coupons.prepareCouponData(couponType).then((couponData) => {
       const requestData = couponData

@@ -7,7 +7,7 @@ describe('Login tests', function () {
 
   before(function () {
     coupons.loginToEcommerce()
-    coupons.findValidCourseSKU()
+    coupons.findValidCatalogCourse()
   })
 
   beforeEach(function () {
@@ -15,8 +15,13 @@ describe('Login tests', function () {
   })
 
   it('applies coupon on LMS side', function () {
-    couponApplication.applyCoupon('QECUBI7YS2TPABN7', coupons.sku).then((response) => {
-      cy.log(response.body)
+    couponApplication.loginToLMS()
+    couponApplication.enableConsent(coupons.courseKey).then((response) => {
+      if (response.body.consent_provided === true) {
+        couponApplication.applyCoupon('PXHYIYAR7D56NLA2', coupons.courseSku).then((resp) => {
+          expect(resp.body).to.contain('Your order is complete. If you need a receipt, you can print this page')
+        })
+      }
     })
   })
 })
