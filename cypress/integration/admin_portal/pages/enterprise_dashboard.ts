@@ -1,5 +1,5 @@
-class EnterpriseDashboard {
-  getLogoAltAttributes(logoContainer, attributeName, logoType = '/') {
+export class EnterpriseDashboard {
+  getLogoAltAttributes(logoContainer: string, attributeName: string, logoType: string = '/') {
     // This function takes parent container name, logo type and attribute name
     // as parameter and return attribute value
     return cy.get(logoContainer).find(`a[href="${logoType}"]>img`).invoke('attr', attributeName)
@@ -9,15 +9,15 @@ class EnterpriseDashboard {
     return cy.get('footer .nav-item .nav-link')
   }
 
-  getCardText(cardSequenceNumber) {
+  getCardText(cardSequenceNumber: number) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-text`)
   }
 
-  getCardTitle(cardSequenceNumber) {
+  getCardTitle(cardSequenceNumber: number) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-title>span:nth-child(1)`)
   }
 
-  getCardQuestions(cardSequenceNumber) {
+  getCardQuestions(cardSequenceNumber: number) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
   }
 
@@ -25,7 +25,7 @@ class EnterpriseDashboard {
     return cy.get('.table-title')
   }
 
-  getTableHeaders(tableName) {
+  getTableHeaders(tableName: string) {
     return cy.get(`.${tableName} .table thead .btn-header>span`)
   }
 
@@ -33,18 +33,18 @@ class EnterpriseDashboard {
     return cy.get('.alert-warning .message')
   }
 
-  getSpecificTableHeader(tableName, columnNumber) {
+  getSpecificTableHeader(tableName: string, columnNumber: number) {
     return cy.get(`.${tableName} .table thead th:nth-child(${columnNumber}) .btn-header>span`)
   }
 
-  openCardDetailedBreakdownArea(cardSequenceNumber) {
+  openCardDetailedBreakdownArea(cardSequenceNumber: number) {
     cy.get(`:nth-child(${cardSequenceNumber})>.number-card .footer-title>.toggle-collapse`)
       .should('have.attr', 'aria-expanded', 'false')
       .click()
       .should('have.attr', 'aria-expanded', 'true')
   }
 
-  clickCardDetailedBreakdownQuestion(cardSequenceNumber, questionText) {
+  clickCardDetailedBreakdownQuestion(cardSequenceNumber: number, questionText: string | number | RegExp) {
     return cy.get(`:nth-child(${cardSequenceNumber})>.number-card .card-footer .d-flex .label`)
       .contains(questionText)
       .click()
@@ -55,4 +55,4 @@ class EnterpriseDashboard {
   }
 }
 
-export default EnterpriseDashboard
+// export default EnterpriseDashboard

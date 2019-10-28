@@ -1,19 +1,26 @@
 const uuidv4 = require('uuid/v4')
 
 function getDates() {
-  const dates = {}
-  const targetDate = new Date()
-  targetDate.setDate(targetDate.getDate() - 3)
-  dates.start_date = targetDate.toISOString()
-  targetDate.setDate(targetDate.getDate() + 20)
-  dates.end_date = targetDate.toISOString()
-  return dates
+  // const dates = {};
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() - 3);
+  // dates.start_date = targetDate.toISOString();
+  targetDate.setDate(targetDate.getDate() + 20);
+  // dates.end_date = targetDate.toISOString();
+  const dates = {
+    start_date: targetDate.toISOString(),
+    end_date : targetDate.toISOString()
+  }
+  return dates;
 }
 
-class EnterpriseCoupons {
+export class EnterpriseCoupons {
+  coursesku: null;
+  coursekey: null;
+  defaultHeaders: { Accept: string; 'Accept-Encoding': string; 'Accept-Language': string; 'Content-Type': string; Referer: string; Origin: any; 'X-Csrftoken': null; 'X-Requested-With': string; };
   constructor() {
-    this.Coursesku = null
-    this.Coursekey = null
+    this.coursesku = null
+    this.coursekey = null
     this.defaultHeaders = {
       Accept: 'application/json, text/javascript, */*; q=0.01',
       'Accept-Encoding': 'gzip, deflate, br',
@@ -31,7 +38,7 @@ class EnterpriseCoupons {
     cy.request(`${Cypress.env('ecommerce_url')}/coupons/`)
   }
 
-  prepareCouponData(coupon) {
+  prepareCouponData(coupon: string | number) {
     const randomString = uuidv4().substr(-11)
     const couponTitle = `Test_Coupon_${randomString}`
     return cy.fixture('coupon_creation_data').then((couponData) => {
@@ -45,9 +52,9 @@ class EnterpriseCoupons {
     })
   }
 
-  createCoupon(requestBody) {
+  createCoupon(requestBody: string | object | undefined) {
     cy.getCookie('ecommerce_csrftoken')
-      .should('exist').then((csrfVal) => {
+      .should('exist').then((csrfVal: any) => {
         this.defaultHeaders['X-Csrftoken'] = csrfVal.value
       })
     const createCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/`
@@ -59,7 +66,7 @@ class EnterpriseCoupons {
     })
   }
 
-  fetchCouponReport(couponId) {
+  fetchCouponReport(couponId: any) {
     const fetchCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/coupons/coupon_reports/${couponId}/`
     return cy.request({
       method: 'GET',
@@ -71,22 +78,22 @@ class EnterpriseCoupons {
     const enterpriseCatalogUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/customer_catalogs/${Cypress.env('enterprise_catalog')}`
     cy.request(enterpriseCatalogUrl).then((response) => {
       const { results } = response.body
-      const skuCourse = results.filter(function (result) {
+      const skuCourse = results.filter(function (result: { first_enrollable_paid_seat_sku: any; }) {
         return result.first_enrollable_paid_seat_sku
       })[0]
-      this.courseSku = skuCourse.first_enrollable_paid_seat_sku
-      this.courseKey = skuCourse.key
+      this.coursesku = skuCourse.first_enrollable_paid_seat_sku
+      this.coursekey = skuCourse.key
     })
   }
 
-  deleteCoupon(couponId) {
+  deleteCoupon(couponId: any) {
     cy.getCookie('ecommerce_csrftoken')
-      .should('exist').then((csrfVal) => {
+      .should('exist').then((csrfVal: any) => {
         this.defaultHeaders['X-Csrftoken'] = csrfVal.value
       })
     const fetchCouponUrl = `${Cypress.env('ecommerce_url')}/api/v2/enterprise/coupons/${couponId}/`
     cy.getCookie('ecommerce_csrftoken')
-      .should('exist').then((csrfVal) => {
+      .should('exist').then((csrfVal: any) => {
         this.defaultHeaders['X-Csrftoken'] = csrfVal.value
         this.defaultHeaders.Referer = fetchCouponUrl
       })
@@ -98,4 +105,4 @@ class EnterpriseCoupons {
   }
 }
 
-export default EnterpriseCoupons
+// export default EnterpriseCoupons

@@ -1,12 +1,12 @@
-import LandingPage from '../pages/landing_page'
-import CodeManagementPage from '../pages/enterprise_code_management'
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import HelperFunctions from '../helpers/helper_functions'
+import {CodeManagementPage} from '../pages/enterprise_code_management';
+import {EnterpriseCoupons} from '../helpers/enterprise_coupons';
+import {HelperFunctions} from '../helpers/helper_functions';
+import {LandingPage} from '../pages/landing_page';
 
 describe('landing page tests', function () {
-  const landingPage = new LandingPage()
-  const codeManagementDashboard = new CodeManagementPage()
-  const coupons = new EnterpriseCoupons()
+  const landingPage: LandingPage = new LandingPage()
+  const codeManagementDashboard: CodeManagementPage = new CodeManagementPage()
+  const coupons: EnterpriseCoupons = new EnterpriseCoupons()
 
   before(function () {
     const couponType = 'discount_single_use_percentage'
@@ -126,14 +126,14 @@ describe('landing page tests', function () {
     codeManagementDashboard.getModalWindow().then(function ($win) {
       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Assign Code').next()
         .should('have.text', 'Close')
-      cy.wrap($win).find('h3').then((headings) => {
+      cy.wrap($win).find('h3').then((headings: any) => {
         cy.check_labels(headings, labels.assignCouponHeadings)
       })
 
-      cy.wrap($win).find('.form-group [for]').then((fieldLabels) => {
-        cy.check_labels(fieldLabels, labels.assignCouponFieldLabels)
+      cy.wrap($win).find('.form-group [for]').then((fieldLabels: any) => {
+        cy .check_labels(fieldLabels, labels.assignCouponFieldLabels)
       })
-      cy.wrap($win).find('.form-group [for] span').each(($el) => {
+      cy.wrap($win).find('.form-group [for] span').each(($el: any) => {
         cy.get($el).should('have.class', 'required')
       })
     })
@@ -152,7 +152,7 @@ describe('landing page tests', function () {
     })
     // Asserts the redemption count of coupons before assignment
     cy.wait('@results').then((xhr) => {
-      const responseBody = xhr.response.body
+      const responseBody: any = xhr.response.body
       this.remainingRedemptions = (responseBody.results[0].redemptions.total)
       this.couponCode = (responseBody.results[0].code)
       codeManagementDashboard.getRemainingAssignments().should('have.text', this.remainingRedemptions.toString())
@@ -189,7 +189,7 @@ describe('landing page tests', function () {
       tryLimit: 80,
       searchInterval: 80000,
     }
-    cy.task('mailReader', mailOptions).then((email) => {
+    cy.task('mailReader', mailOptions).then((email: any) => {
       expect(HelperFunctions.extractAccessCodeFromEmail(email)).to.eql(this.couponCode)
     })
     codeManagementDashboard.getCodeStatusFilter().select('Unredeemed')

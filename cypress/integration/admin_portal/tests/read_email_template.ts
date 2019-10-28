@@ -1,4 +1,4 @@
-import HelperFunctions from '../helpers/helper_functions'
+import {HelperFunctions} from '../helpers/helper_functions';
 
 describe('Email assertion:', () => {
   // Just a template to show how email reading will work
@@ -8,7 +8,7 @@ describe('Email assertion:', () => {
       to: HelperFunctions.getUniqueEmailAlias(),
       subject: 'Activate',
     }
-    cy.task('mailReader', mailOptions).then((email) => {
+    cy.task('mailReader', mailOptions).then((email: any) => {
       cy.log(HelperFunctions.extractUrlFromEmail(email, 'activate'))
     })
   })

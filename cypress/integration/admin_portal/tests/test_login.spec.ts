@@ -1,9 +1,9 @@
-import LoginPage from '../pages/login_page'
-import LandingPage from '../pages/landing_page'
+import {LoginPage} from '../pages/login_page'
+import {LandingPage} from '../pages/landing_page'
 
 describe('Login tests', function () {
-  const loginPage = new LoginPage()
-  const landingPage = new LandingPage()
+  const loginPage: LoginPage = new LoginPage()
+  const landingPage: LandingPage = new LandingPage()
 
   before(function () {
     cy.clearCookies()

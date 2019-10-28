@@ -1,11 +1,18 @@
-class CodeManagementPage {
-  getFormField(fieldName) {
+export class CodeManagementPage {
+  getFormField(fieldName: string) {
     return cy.get(`[name="${fieldName}"]`)
   }
 
-  getLabels(labelName) {
-    const labels = { Email: 1, Company: 2, Codes: 3 }
-    return cy.get(`.form-group:nth-of-type(${labels[labelName]}) label`)
+  getLabels(labelName: string) {
+    interface Labels {
+      [key:string]: number
+      Email: number;
+      Company: number;
+      Codes: number;
+    }
+    const labels :Labels = { Email: 1, Company: 2, Codes: 3 }
+    const targetLabel = labels[labelName]
+    return cy.get(`.form-group:nth-of-type(${targetLabel}) label`)
   }
 
   getRequestCodesButton() {
@@ -36,7 +43,7 @@ class CodeManagementPage {
     cy.get('.download-btn').click()
   }
 
-  getCouponCode(columnNumber) {
+  getCouponCode(columnNumber: any) {
     return cy.get(`.coupon-details-table td:nth-child(${columnNumber})`)
   }
 
@@ -72,7 +79,7 @@ class CodeManagementPage {
     return cy.get('.table tbody tr')
   }
 
-  selectCodesForBulkAssignment(rowNumber) {
+  selectCodesForBulkAssignment(rowNumber: number) {
     cy.get(`.table tbody tr:nth-of-type(${rowNumber}) .form-check label`).click()
   }
 
@@ -109,4 +116,3 @@ class CodeManagementPage {
   }
 }
 
-export default CodeManagementPage

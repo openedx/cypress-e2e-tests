@@ -1,15 +1,14 @@
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import HelperFunctions from '../helpers/helper_functions'
+import {EnterpriseCoupons} from '../helpers/enterprise_coupons';
 
 describe('Coupon Tests Template', function () {
-  let couponId = null
-  const coupons = new EnterpriseCoupons()
+  let couponId: any = null
+  const coupons: EnterpriseCoupons = new EnterpriseCoupons()
 
   before(function () {
     const couponName = 'enrollment_multi_use_per_customer'
     coupons.LoginAsAdmin()
-    coupons.prepareCouponData(couponName).then((couponData) => {
-      coupons.createCoupon(couponData[couponName]).then((response) => {
+    coupons.prepareCouponData(couponName).then((couponData: { [x: string]: any; }) => {
+      coupons.createCoupon(couponData[couponName]).then((response: { body: { coupon_id: any; }; }) => {
         couponId = response.body.coupon_id
       })
     })
@@ -22,10 +21,10 @@ describe('Coupon Tests Template', function () {
 
   it('fetches coupon report', function () {
     cy.log(couponId)
-    coupons.fetchCouponReport(couponId).then((response) => {
+    coupons.fetchCouponReport(couponId).then((response: any) => {
       const reportText = response.body
       cy.log(reportText)
-      cy.log(HelperFunctions.readCouponData(reportText))
+      // cy.log(HelperFunctions.readCouponData(reportText))
     })
   })
 

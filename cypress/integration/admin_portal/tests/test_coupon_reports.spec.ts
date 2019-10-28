@@ -1,20 +1,20 @@
-import LandingPage from '../pages/landing_page'
-import CodeManagementPage from '../pages/enterprise_code_management'
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import HelperFunctions from '../helpers/helper_functions'
+import {CodeManagementPage} from '../pages/enterprise_code_management';
+import {EnterpriseCoupons} from '../helpers/enterprise_coupons';
+import {HelperFunctions} from '../helpers/helper_functions';
+import {LandingPage} from '../pages/landing_page';
 
 describe('landing page tests', function () {
   const landingPage = new LandingPage()
-  const codeManagementDashboard = new CodeManagementPage()
-  const coupons = new EnterpriseCoupons()
+  const codeManagementDashboard: CodeManagementPage = new CodeManagementPage()
+  const coupons: EnterpriseCoupons = new EnterpriseCoupons()
 
   before(function () {
     const couponType = 'discount_single_use_absolute'
     coupons.LoginAsAdmin()
-    coupons.prepareCouponData(couponType).then((couponData) => {
+    coupons.prepareCouponData(couponType).then((couponData: { [x: string]: any; }) => {
       const requestData = couponData
       requestData[couponType].quantity = '1'
-      coupons.createCoupon(couponData[couponType]).then((response) => {
+      coupons.createCoupon(couponData[couponType]).then((response: { body: { coupon_id: any; }; }) => {
         this.couponId = response.body.coupon_id
       })
     })
@@ -31,7 +31,7 @@ describe('landing page tests', function () {
     cy.server()
     cy.route('GET', `**/api/v2/enterprise/coupons/${this.couponId}/codes.csv/?code_filter=unassigned**`).as('unassignedresults')
     cy.route('GET', `**/api/v2/enterprise/coupons/${this.couponId}/codes.csv/?code_filter=unredeemed**`).as('assignedresults')
-    coupons.fetchCouponReport(this.couponId).then((response) => {
+    coupons.fetchCouponReport(this.couponId).then((response: { body: any; }) => {
       const couponReport = response.body
       const [couponName] = couponReport.match(/Test_Coupon_\w+/g)
       this.couponName = couponName
@@ -41,14 +41,14 @@ describe('landing page tests', function () {
     })
     // Check CSV data before assignment
     cy.wait('@unassignedresults').then((xhr) => {
-      const responseBody = xhr.response.body
+      const responseBody: any = xhr.response.body
       const reportData = HelperFunctions.parseReportData(responseBody)
       expect(reportData.assigned_to).to.eql('')
       codeManagementDashboard.getCouponCode(3).should('have.text', reportData.code)
     })
     codeManagementDashboard.getAssignActionButton().click()
     // Assigns the code by submitting the email
-    codeManagementDashboard.getModalWindow().then((win) => {
+    codeManagementDashboard.getModalWindow().then((win: any) => {
       cy.wrap(win).find('input[name="email-address"]').type('cypressTestEmail@edx.org')
       cy.wrap(win).find('.modal-footer .btn:nth-of-type(1)').click()
     })
@@ -56,7 +56,7 @@ describe('landing page tests', function () {
     codeManagementDashboard.downloadCouponReport()
     // Check CSV data after assignment
     cy.wait('@assignedresults').then((xhr) => {
-      const responseBody = xhr.response.body
+      const responseBody: any = xhr.response.body
       const reportData = HelperFunctions.parseReportData(responseBody)
       expect(reportData.assigned_to).to.eql('cypressTestEmail@edx.org')
       codeManagementDashboard.getCouponCode(4).should('have.text', reportData.code)
