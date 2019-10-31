@@ -1,14 +1,15 @@
+
 const uuidv4 = require('uuid/v4')
 
 // Create a command which takes email and password and logs user in using api request
-Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
+function login_using_api(userEmail: string, userPassword: string):void {
   // Open the Stage login page to create session
   cy.request({
     url: Cypress.env('login_url'),
     failOnStatusCode: false,
   })
   // Save csrftoken and use it in header to send Login Post request
-  cy.getCookie('csrftoken').its('value').then(($token) => {
+  cy.getCookie('csrftoken').then((token: any) => {
     cy.request({
       method: 'POST',
       url: Cypress.env('login_api_url'),
@@ -20,13 +21,13 @@ Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
       },
       headers: {
         Referer: Cypress.env('login_url'),
-        'X-CSRFToken': $token,
+        'X-CSRFToken': token.value,
       },
     })
   })
-})
+}
 
-Cypress.Commands.add('register_using_api', () => {
+function register_using_api():void {
   const randomString = uuidv4().substr(-11)
   const userName = `user_${randomString}`
   const userEmail = `${userName}@example.com`
@@ -37,7 +38,7 @@ Cypress.Commands.add('register_using_api', () => {
     failOnStatusCode: false,
   })
   // Save csrftoken and use it in header to send Registration Post request
-  cy.getCookie('csrftoken').its('value').then(($token) => {
+  cy.getCookie('csrftoken').then((token: any) => {
     cy.request({
       method: 'POST',
       url: Cypress.env('registration_api_url'),
@@ -63,13 +64,13 @@ Cypress.Commands.add('register_using_api', () => {
       },
       headers: {
         Referer: Cypress.env('registration_url'),
-        'X-CSRFToken': $token,
+        'X-CSRFToken': token.value,
       },
     })
   })
-})
+}
 
-Cypress.Commands.add('login_from_ui', (userEmail, userPassword) => {
+function login_from_ui(userEmail: string, userPassword: string):void {
   // Click on the login button and provide email and password to log in
   cy.get('.header-actions > .btn').contains('Login').click()
   cy.get('#login-email').type(userEmail)
@@ -80,9 +81,9 @@ Cypress.Commands.add('login_from_ui', (userEmail, userPassword) => {
       cy.wrap($btn).click()
     }
   })
-})
+}
 
-Cypress.Commands.add('make_payment', () => {
+function make_payment():void {
   // Fill billing address
   cy.get('#id_first_name').type(Cypress.env('id_first_name'))
   cy.get('#id_last_name').type(Cypress.env('id_last_name'))
@@ -98,9 +99,9 @@ Cypress.Commands.add('make_payment', () => {
   cy.get('#card-expiry-month').select(Cypress.env('card-expiry-month'))
   cy.get('#card-expiry-year').select(Cypress.env('card-expiry-year'))
   cy.get('#payment-button').click()
-})
+}
 
-Cypress.Commands.add('check_labels', (css, labelsToCheck) => {
+function check_labels(css: string, labelsToCheck: any):void {
   // Check labels in a list
   cy.get(css).each(($el, index) => {
     const options = labelsToCheck
@@ -108,13 +109,12 @@ Cypress.Commands.add('check_labels', (css, labelsToCheck) => {
       expect(elem.text()).to.equal(options[index])
     })
   })
-})
-
-Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) =>
+}
+function upload_file(fileName: any, fileType: any = ' ', selector: any): any {
   cy.get(selector).then((subject) => {
     cy.fixture(fileName, 'base64')
       .then(Cypress.Blob.base64StringToBlob)
-      .then((blob) => {
+      .then((blob: any) => {
         const el = subject[0]
         const testFile = new File([blob], fileName, {
           type: fileType,
@@ -123,4 +123,12 @@ Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) =>
         dataTransfer.items.add(testFile)
         el.files = dataTransfer.files
       })
-  }))
+  })
+}
+
+Cypress.Commands.add("login_using_api", login_using_api)
+Cypress.Commands.add("register_using_api", register_using_api)
+Cypress.Commands.add("login_from_ui", login_from_ui)
+Cypress.Commands.add("make_payment", make_payment)
+Cypress.Commands.add("check_labels", check_labels)
+Cypress.Commands.add("upload_file", check_labels)

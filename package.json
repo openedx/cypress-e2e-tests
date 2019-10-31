@@ -12,13 +12,15 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "cypress": "^3.4.1",
+    "@bahmutov/add-typescript-to-cypress": "^2.1.2",
+    "@cypress/webpack-preprocessor": "4.1.0",
+    "@types/node": "^12.12.3",
+    "cypress": "^3.5.0",
     "cypress-failed-log": "^2.5.0",
+    "fs-extra": "^8.1.0",
     "googleapis": "42.0.0",
     "uuid": "^3.3.2",
-    "webpack": "4.36.0",
-    "@bahmutov/add-typescript-to-cypress": "^2.1.2",
-    "@cypress/webpack-preprocessor": "4.1.0"
+    "webpack": "4.36.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",

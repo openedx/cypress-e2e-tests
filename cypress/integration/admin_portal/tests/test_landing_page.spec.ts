@@ -4,9 +4,13 @@ import {LandingPage} from '../pages/landing_page';
 describe('landing page tests', function () {
   const landingPage: LandingPage = new LandingPage()
 
-  beforeEach(function () {
+  before(function () {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
+  })
+
+  beforeEach(function () {
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
+    debugger
     cy.visit('/')
   })
 
