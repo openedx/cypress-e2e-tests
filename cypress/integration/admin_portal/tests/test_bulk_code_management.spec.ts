@@ -1,11 +1,11 @@
-import LandingPage from '../pages/landing_page'
-import CodeManagementPage from '../pages/enterprise_code_management'
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
+import {CodeManagementPage} from '../pages/enterprise_code_management';
+import {EnterpriseCoupons} from '../helpers/enterprise_coupons';
+import {LandingPage} from '../pages/landing_page';
 
 describe('landing page tests', function () {
-  const landingPage = new LandingPage()
-  const codeManagementDashboard = new CodeManagementPage()
-  const coupons = new EnterpriseCoupons()
+  const landingPage: LandingPage = new LandingPage()
+  const codeManagementDashboard: CodeManagementPage = new CodeManagementPage()
+  const coupons: EnterpriseCoupons = new EnterpriseCoupons()
 
   before(function () {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
@@ -38,7 +38,7 @@ describe('landing page tests', function () {
     })
     // Asserts the redemption count of coupons before assignment
     cy.wait('@results').then((xhr) => {
-      const responseBody = xhr.response.body
+      const responseBody: any = xhr.response.body
       this.remainingRedemptions = (responseBody.count)
       codeManagementDashboard.getCouponRows().should('have.length', this.remainingRedemptions.toString())
       // Check checkoxes for bulk assignment

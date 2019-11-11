@@ -1,12 +1,16 @@
-import HelperFunctions from '../helpers/helper_functions'
-import LandingPage from '../pages/landing_page'
+import {HelperFunctions} from '../helpers/helper_functions';
+import {LandingPage} from '../pages/landing_page';
 
 describe('landing page tests', function () {
-  const landingPage = new LandingPage()
+  const landingPage: LandingPage = new LandingPage()
+
+  before(function () {
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
+  })
 
   beforeEach(function () {
-    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
+    debugger
     cy.visit('/')
   })
 
@@ -38,7 +42,7 @@ describe('landing page tests', function () {
     }
     // Check for the presence of valid text and links in footer section
     landingPage.getFooterNavItems().then((elems) => {
-      const actualFooterNavLinks = HelperFunctions.getLabelAndUrlsDict(elems)
+      const actualFooterNavLinks: any = HelperFunctions.getLabelAndUrlsDict(elems)
       expect(actualFooterNavLinks).to.deep.equal(expectedFooterNavLinks)
     })
   })
@@ -47,7 +51,7 @@ describe('landing page tests', function () {
     cy.fixture('enterprise_list.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
-      const actualEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
+      const actualEnterpriseList: any = HelperFunctions.getLabelAndUrlsDict(elems)
       expect(actualEnterpriseList).to.include(this.enterpriseData)
     })
   })
@@ -55,10 +59,10 @@ describe('landing page tests', function () {
   it('checks the search functionality', function () {
     // It searches the enterprises using different search literals and verify the results
     cy.fixture('search_data').then((searchItems) => {
-      searchItems.forEach((searchItem) => {
+      searchItems.forEach((searchItem: any) => {
         landingPage.searchEnterprise(searchItem.search_literal)
         landingPage.getEnterpriseList().then((elems) => {
-          const actualSearchedEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
+          const actualSearchedEnterpriseList: any = HelperFunctions.getLabelAndUrlsDict(elems)
           expect(actualSearchedEnterpriseList).to.include(searchItem.expected_search_results)
         })
       })

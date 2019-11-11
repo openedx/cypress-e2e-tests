@@ -1,10 +1,10 @@
-import HelperFunctions from '../helpers/helper_functions'
-import LandingPage from '../pages/landing_page'
-import EnterpriseDashboard from '../pages/enterprise_dashboard'
+import {HelperFunctions} from '../helpers/helper_functions';
+import {LandingPage} from '../pages/landing_page';
+import {EnterpriseDashboard} from '../pages/enterprise_dashboard'
 
 describe('Enterprise Logos and nav links verification', function () {
-  const landingPage = new LandingPage()
-  const dashboard = new EnterpriseDashboard()
+  const landingPage: LandingPage = new LandingPage()
+  const dashboard: EnterpriseDashboard = new EnterpriseDashboard()
   const trimmedEnterpriseName = Cypress.env('enterprise_name').toLowerCase().replace(/ /g, '')
 
   beforeEach(function () {
@@ -40,7 +40,7 @@ describe('Enterprise Logos and nav links verification', function () {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Check for the presence of valid text and links in footer section
-    dashboard.getFooterNavItems().then((elems) => {
+    dashboard.getFooterNavItems().then((elems: any) => {
       const actualFooterNavLinks = HelperFunctions.getLabelAndUrlsDict(elems)
       expect(actualFooterNavLinks).to.deep.equal(expectedFooterNavLinks)
     })
@@ -63,11 +63,11 @@ describe('Enterprise cards and table verification', function () {
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Go through cards and verify card main text and value against the text
     cy.fixture('card_info').then((cards) => {
-      cards.forEach((card) => {
+      cards.forEach((card: { number: any; text: any; questions: any; }) => {
         // Go through cards and verify card text
         dashboard.getCardText(card.number).should('have.text', card.text)
         // Go through cards and verify detailed breakdown questions in card footers
-        dashboard.getCardQuestions(card.number).then((cardQuestions) => {
+        dashboard.getCardQuestions(card.number).then((cardQuestions: any) => {
           expect([...cardQuestions].map(el => el.textContent.trim())).to.deep.equal(card.questions)
         })
       })
@@ -90,7 +90,7 @@ describe('Enterprise cards and table verification', function () {
     // Get and verify Table Title
     dashboard.getTableTitle().should('have.text', fullTableTitle)
     // Get and verify table headers
-    dashboard.getTableHeaders('enrollments').then((elems) => {
+    dashboard.getTableHeaders('enrollments').then((elems: any) => {
       const ActualTableHeaders = [...elems].map(el => el.textContent.trim())
       expect(ActualTableHeaders).to.deep.equal(fullTableHeaders)
     })
@@ -111,7 +111,7 @@ describe('Enterprise cards and table verification', function () {
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Select the target table by opening the card detail view and clicking the target question
     cy.fixture('tables_info').then((tables) => {
-      tables.forEach((table) => {
+      tables.forEach((table: { request_url_part: any; card_number: any; question_text: any; table_title: any; table_name: any; table_headers: any; }) => {
         // Define a route for all tables XHR requests
         cy.route({
           method: 'GET',
@@ -123,10 +123,10 @@ describe('Enterprise cards and table verification', function () {
         // Get and verify Table Title
         dashboard.getTableTitle().should('have.text', table.table_title)
         // Wait for Tables XHR requests
-        cy.wait('@tableData').then((xhr) => {
+        cy.wait('@tableData').then((xhr: any) => {
           // If table data exists verify table headers
           if (xhr.responseBody.count > 0) {
-            dashboard.getTableHeaders(table.table_name).then((elems) => {
+            dashboard.getTableHeaders(table.table_name).then((elems: any) => {
               const ActualTableHeaders = [...elems].map(el => el.textContent.trim())
               expect(ActualTableHeaders).to.deep.equal(table.table_headers)
             })

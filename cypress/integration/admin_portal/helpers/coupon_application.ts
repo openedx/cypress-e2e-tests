@@ -1,5 +1,7 @@
 
-class CouponApplication {
+export class CouponApplication {
+  postHeaders: { Accept: string; 'Accept-Encoding': string; 'Accept-Language': string; 'Content-Type': string; Referer: string; 'X-Csrftoken': null; 'X-Requested-With': string; };
+  getHeaders: { Accept: string; 'Accept-Encoding': string; 'Accept-Language': string; 'sec-fetch-mode': string; 'sec-fetch-site': string; 'sec-fetch-user': string; };
   constructor() {
     this.postHeaders = {
       Accept: 'application/json, text/javascript, */*; q=0.01',
@@ -25,11 +27,11 @@ class CouponApplication {
     cy.login_using_api(Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
   }
 
-  enableConsent(courseKey) {
+  enableConsent(courseKey: any) {
     cy.request(`${Cypress.env('lms_url')}/courses/`)
     cy.log(`${Cypress.env('lms_url')}/courses/`)
     cy.getCookie('csrftoken')
-      .should('exist').then((csrfVal) => {
+      .should('exist').then((csrfVal: any) => {
         this.postHeaders['X-Csrftoken'] = csrfVal.value
       })
     return cy.request(`${Cypress.env('lms_url')}/api/user/v1/accounts`).then((response) => {
@@ -47,7 +49,7 @@ class CouponApplication {
     })
   }
 
-  applyCoupon(couponId, courseSku) {
+  applyCoupon(couponId: any, courseSku: any) {
     const applyCouponUrl = `${Cypress.env('ecommerce_url')}/coupons/redeem/?code=${couponId}&sku=${courseSku}`
     return cy.request({
       method: 'GET',
@@ -57,4 +59,4 @@ class CouponApplication {
   }
 }
 
-export default CouponApplication
+// export default CouponApplication

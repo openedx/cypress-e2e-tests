@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "strict": true,
     "baseUrl": "../node_modules",
-    "types": [
-      "cypress"
-    ]
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "types": ["cypress", "node"]
   },
   "include": [
-    "**/*.*"
+    "node_modules/cypress",
+    "**/*.ts", "plugins/index.js", "support/index.js"
   ]
 }

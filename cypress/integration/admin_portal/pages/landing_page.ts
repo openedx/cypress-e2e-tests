@@ -1,5 +1,5 @@
-class LandingPage {
-  getLogoAltAttributes(logoContainer, attributeName, logoType = '/') {
+export class LandingPage {
+  getLogoAltAttributes(logoContainer: string, attributeName: string, logoType: string = '/') {
     // This function takes parent container name, logo type and attribute name
     // as parameter and return attribute value
     return cy.get(logoContainer).find(`a[href="${logoType}"]>img`).invoke('attr', attributeName)
@@ -21,14 +21,14 @@ class LandingPage {
     return cy.get('.enterprise-list td a')
   }
 
-  searchEnterprise(enterpriseName) {
+  searchEnterprise(enterpriseName: string) {
     cy.server()
     cy.route(`**search=${enterpriseName}**`).as('results')
     cy.get('input[type="search"]').clear().type(`${enterpriseName}{enter}`)
     cy.wait('@results')
   }
 
-  goToEnterprise(enterpriseName) {
+  goToEnterprise(enterpriseName: string | number | RegExp) {
     // Open target enterprise page
     cy.get('.enterprise-list td>a').contains(enterpriseName).click()
     // Wait for page to load properly by verifying that dashboard cards are visible
@@ -51,4 +51,4 @@ class LandingPage {
   }
 }
 
-export default LandingPage
+// export default LandingPage
