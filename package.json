@@ -12,25 +12,31 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-typescript": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@babel/register": "^7.6.2",
     "@bahmutov/add-typescript-to-cypress": "^2.1.2",
     "@cypress/webpack-preprocessor": "4.1.0",
-    "@types/node": "^12.12.3",
     "cypress": "^3.5.0",
     "cypress-failed-log": "^2.5.0",
     "fs-extra": "^8.1.0",
     "googleapis": "42.0.0",
+    "ts-node": "^8.4.1",
     "uuid": "^3.3.2",
     "webpack": "4.36.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",
+    "@types/node": "^12.12.3",
     "@types/uuid": "^3.4.5",
-    "ts-loader": "5.4.5",
-    "typescript": "^3.6.4",
     "babel-eslint": "^10.0.2",
     "eslint": "^6.1.0",
     "eslint-config-edx": "^4.0.4",
-    "eslint-plugin-cypress": "^2.6.1"
+    "eslint-plugin-cypress": "^2.6.1",
+    "ts-loader": "5.4.5",
+    "typescript": "^3.6.4"
   },
   "peerDependencies": {
     "typescript": "*"
