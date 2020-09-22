@@ -20,7 +20,7 @@ describe('Login tests', function () {
     landingPage.enterpriseListContainer().should('not.exist')
   })
 
-  it('allows admin user access on application after lopgin', function () {
+  it('allows admin user access on application after login', function () {
     // Login as admin user
     loginPage.loginUser(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     // Check that enterprise list container is present

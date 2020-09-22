@@ -21,8 +21,9 @@ class EnterpriseCoupons {
       'Content-Type': 'application/json',
       Referer: `${Cypress.env('ecommerce_url')}/enterprise/coupons/new/`,
       Origin: Cypress.env('ecommerce_url'),
-      'X-Csrftoken': null,
-      'X-Requested-With': 'XMLHttpRequest',
+      'x-csrftoken': null,
+      'x-requested-with': 'XMLHttpRequest',
+      'x-newrelic-id': 'XA4GVl5ADQYBXFlTAA==',
     }
   }
 
@@ -39,6 +40,8 @@ class EnterpriseCoupons {
       requestBody[coupon].title = couponTitle
       requestBody[coupon].enterprise_customer.id = Cypress.env('enterprise_id')
       requestBody[coupon].enterprise_customer.name = Cypress.env('enterprise_name')
+      requestBody[coupon].stock_record_ids = [3238]
+      requestBody[coupon].contract_discount_type = 'Discount'
       requestBody[coupon].enterprise_customer_catalog = Cypress.env('enterprise_catalog')
       requestBody[coupon].start_datetime = getDates().start_date
       requestBody[coupon].end_datetime = getDates().end_date

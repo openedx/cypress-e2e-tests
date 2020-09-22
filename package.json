@@ -4,6 +4,7 @@
   "description": "Cypress E2E Tests for edX applications",
   "repository": "https://github.com/edx/cypress-e2e-tests",
   "scripts": {
+    "cy:verify": "cypress verify",
     "cy:open_admin_portal": "cypress open --env configFile=admin_portal_stage",
     "cy:run_admin_portal": "cypress run --env configFile=admin_portal_stage",
     "lint": "eslint --ext .js --ext .jsx .",
@@ -11,9 +12,10 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "cypress": "^5.0.0",
     "babel-eslint": "^10.0.2",
-    "cypress": "^3.4.1",
     "cypress-failed-log": "^2.5.0",
+    "cypress-file-upload": "^4.1.1",
     "eslint": "^6.1.0",
     "eslint-config-edx": "^4.0.4",
     "eslint-plugin-cypress": "^2.6.1",

@@ -51,7 +51,7 @@ class EnterpriseDashboard {
   }
 
   resetTable() {
-    cy.get('.reset.btn').click()
+    cy.get('.btn-sm.btn-outline-primary ').click()
   }
 }
 

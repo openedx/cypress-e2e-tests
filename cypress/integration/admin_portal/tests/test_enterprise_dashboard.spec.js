@@ -35,7 +35,7 @@ describe('Enterprise Logos and nav links verification', function () {
     const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
-      Support: `/${trimmedEnterpriseName}/support`,
+      Support: `/${trimmedEnterpriseName}/admin/support`,
     }
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
@@ -83,6 +83,7 @@ describe('Enterprise cards and table verification', function () {
       'End Date click to sort',
       'Passed Date click to sort',
       'Current Grade click to sort',
+      'Progress Status click to sort',
       'Last Activity Date click to sort',
     ]
     // Open the target enterprise dashboard

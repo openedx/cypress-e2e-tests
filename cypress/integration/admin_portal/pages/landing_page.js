@@ -24,7 +24,7 @@ class LandingPage {
   searchEnterprise(enterpriseName) {
     cy.server()
     cy.route(`**search=${enterpriseName}**`).as('results')
-    cy.get('input[type="search"]').clear().type(`${enterpriseName}{enter}`)
+    cy.get('input[name="searchfield-input"]').clear().type(`${enterpriseName}{enter}`)
     cy.wait('@results')
   }
 
