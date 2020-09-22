@@ -53,6 +53,7 @@ class CouponApplication {
       method: 'GET',
       url: applyCouponUrl,
       headers: this.getHeaders,
+      followRedirect: true,
     })
   }
 }

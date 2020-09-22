@@ -12,9 +12,10 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "cypress": "^5.0.0",
     "babel-eslint": "^10.0.2",
-    "cypress": "^3.4.1",
     "cypress-failed-log": "^2.5.0",
+    "cypress-file-upload": "^4.1.1",
     "eslint": "^6.1.0",
     "eslint-config-edx": "^4.0.4",
     "eslint-plugin-cypress": "^2.6.1",

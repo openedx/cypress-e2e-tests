@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'cypress-file-upload'
+
 const uuidv4 = require('uuid/v4')
 
 // Create a command which takes email and password and logs user in using api request
@@ -110,7 +113,7 @@ Cypress.Commands.add('check_labels', (css, labelsToCheck) => {
   })
 })
 
-Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) =>
+Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) => {
   cy.get(selector).then((subject) => {
     cy.fixture(fileName, 'base64')
       .then(Cypress.Blob.base64StringToBlob)
@@ -123,4 +126,5 @@ Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) =>
         dataTransfer.items.add(testFile)
         el.files = dataTransfer.files
       })
-  }))
+  })
+})

@@ -9,6 +9,7 @@ describe('landing page tests', function () {
   const coupons = new EnterpriseCoupons()
 
   before(function () {
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     const couponType = 'discount_single_use_percentage'
     coupons.LoginAsAdmin()
     coupons.prepareCouponData(couponType).then((couponData) => {
@@ -23,6 +24,7 @@ describe('landing page tests', function () {
   })
 
   beforeEach(function () {
+    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
     cy.visit('/')
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
@@ -88,7 +90,13 @@ describe('landing page tests', function () {
       codeStatusFilter: ['Unassigned', 'Unredeemed', 'Enrollments Redeemed'],
       bulkActionFilter: ['Assign', 'Remind', 'Revoke'],
       assignCouponHeadings: ['Add User', 'Email Template'],
-      assignCouponFieldLabels: ['Email Address*', 'Customize Message*'],
+      assignCouponFieldLabels: [
+        'Email Address*',
+        'Template Name',
+        'Customize Email Subject',
+        'Customize Greeting',
+        'Body',
+        'Customize Closing'],
     }
     coupons.fetchCouponReport(this.couponId).then((response) => {
       const couponReport = response.body
@@ -125,12 +133,14 @@ describe('landing page tests', function () {
     // Checks for the labels and requried fields on the modal
     codeManagementDashboard.getModalWindow().then(function ($win) {
       cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Assign Code').next()
+        .should('have.text', 'Save Template')
+        .next()
         .should('have.text', 'Close')
       cy.wrap($win).find('h3').then((headings) => {
         cy.check_labels(headings, labels.assignCouponHeadings)
       })
 
-      cy.wrap($win).find('.form-group [for]').then((fieldLabels) => {
+      cy.wrap($win).find('.form-group>[for]').then((fieldLabels) => {
         cy.check_labels(fieldLabels, labels.assignCouponFieldLabels)
       })
       cy.wrap($win).find('.form-group [for] span').each(($el) => {
@@ -176,10 +186,6 @@ describe('landing page tests', function () {
       })
       codeManagementDashboard.getNoResultsMessage().then(($message) => {
         expect($message).to.eql('There are no results.')
-        // Asserts the redemption count of coupons after the assignment
-        codeManagementDashboard.getCouponMeta().then((couponMeta) => {
-          expect((this.remainingRedemptions - 1).toString()).to.eq(couponMeta.eq(3).text())
-        })
       })
     })
     const mailOptions = {
