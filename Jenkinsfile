@@ -1,14 +1,18 @@
 pipeline {
   agent any
   tools {nodejs "node"}
-
+  stages {
     stage('build'){
-        steps{
+    steps{
         git 'https://github.com/edx/cypress-e2e-tests.git'
         }
     }
- 
-
+    // Install and verify Cypress
+    stage('installation') {
+      steps {
+        sh 'npm install cypress --save-dev'
+      }
+    }
     stage('run e2e tests') {
       environment {
         CYPRESS_ADMIN_USER_EMAIL = credentials('ADMIN_EMAIL')
@@ -18,16 +22,14 @@ pipeline {
         CYPRESS_GMAIL_ID = credentials('CYPRESS_GMAIL_ID')
         CYPRESS_GMAIL_CLIENT_ID = credentials('CYPRESS_GMAIL_CLIENT_ID')
         CYPRESS_GMAIL_CLIENT_SECRET = credentials('CYPRESS_GMAIL_CLIENT_SECRET')
-        CYPRESS_GMAIL_ACCESS_TOKEN = credentials('CYPRESS_GMAIL_ACCESS_TOKEN')
+        CYPRESS_GMAIL_ACCESS_TOKEN = credentials('CYPRESS_GMAIL_ACCESS_TOKEM')
         CYPRESS_GMAIL_REFRESH_TOKEN = credentials('CYPRESS_GMAIL_REFRESH_TOKEN')
-
       }
       steps {
         sh 'npm run cy:run_admin_portal'
       }
     }
   }
-
   post {
     // Send an email in case of failure
     failure {
