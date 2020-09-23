@@ -1,20 +1,20 @@
 pipeline {
-  
-  stages {
-    // Install and verify Cypress
-    stage('installation') {
-      steps {
-        sh 'npm ci'
-        sh 'npm run cy:verify'
-      }
+  agent any
+  tools {nodejs "node"}
+
+    stage('build'){
+        steps{
+        git 'https://github.com/edx/cypress-e2e-tests.git'
+        }
     }
+ 
 
     stage('run e2e tests') {
       environment {
-        CYPRESS_ADMIN_USER_EMAIL = credentials('CYPRESS_ADMIN_USER_EMAIL')
-        CYPRESS_ADMIN_USER_PASSWORD = credentials('CYPRESS_ADMIN_USER_PASSWORD')
-        CYPRESS_LMS_USER_EMAIL = credentials('CYPRESS_LMS_USER_EMAIL')
-        CYPRESS_LMS_USER_PASSWORD = credentials('CYPRESS_LMS_USER_PASSWORD')
+        CYPRESS_ADMIN_USER_EMAIL = credentials('ADMIN_EMAIL')
+        CYPRESS_ADMIN_USER_PASSWORD = credentials('ADMIN_PASSWORD')
+        CYPRESS_LMS_USER_EMAIL = credentials('LMS_EMAIL')
+        CYPRESS_LMS_USER_PASSWORD = credentials('ADMIN_PASSWORD')
         CYPRESS_GMAIL_ID = credentials('CYPRESS_GMAIL_ID')
         CYPRESS_GMAIL_CLIENT_ID = credentials('CYPRESS_GMAIL_CLIENT_ID')
         CYPRESS_GMAIL_CLIENT_SECRET = credentials('CYPRESS_GMAIL_CLIENT_SECRET')
@@ -23,7 +23,6 @@ pipeline {
 
       }
       steps {
-        // start cypress tests
         sh 'npm run cy:run_admin_portal'
       }
     }
