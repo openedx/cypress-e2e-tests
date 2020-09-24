@@ -9,4 +9,4 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v1
-        -run:  cy:run_admin_portal
+        run:  cy:run_admin_portal
