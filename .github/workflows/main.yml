@@ -10,4 +10,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
-          config-file: config/admin_portal_stage.json
+          config-file: admin_portal_stage.json
