@@ -25,6 +25,7 @@
     "ecommerce_url": "https://ecommerce.stage.edx.org",
     "enterprise_name": "SuccessFactors",
     "enterprise_id": "beafadc5-69cc-48ce-a9a1-532067d9af0f",
-    "enterprise_catalog": "e475c1aa-9ffe-4c8f-87f7-948fc1e5c154"
+    "enterprise_catalog": "e475c1aa-9ffe-4c8f-87f7-948fc1e5c154",
+    // "enterprise_catalog": "e475c1aa-9ffe-4c8f-87f7-948fc1e5c154"
   }
 }
