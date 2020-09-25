@@ -1,0 +1,30 @@
+{
+  "baseUrl": "https://portal.stage.edx.org",
+  "integrationFolder": "cypress/integration/admin_portal/tests",
+  "fixturesFolder": "cypress/fixtures/admin_portal",
+  "defaultCommandTimeout": 10000,
+  "requestTimeout": 10000,
+  "pageLoadTimeout": 80000,
+  "taskTimeout": 300000,
+  "chromeWebSecurity": false,
+  "blockHosts": [
+    "**.cdn.**",
+    "cdn.*",
+    "*.optimizely.**",
+    "www.googletagmanager.com", 
+    "www.google-analytics.com", 
+    "*.qualaroo.**", 
+    "s3.amazonaws.com",
+    "bam.nr-data.net**"
+  ],
+  "env": {
+    "ENVIRONMENT": "enterprise_admin_portal_stage",
+    "lms_url": "https://courses.stage.edx.org",
+    "login_url": "https://courses.stage.edx.org/login",
+    "login_api_url": "https://courses.stage.edx.org/user_api/v1/account/login_session/",
+    "ecommerce_url": "https://ecommerce.stage.edx.org",
+    "enterprise_name": "SuccessFactors",
+    "enterprise_id": "beafadc5-69cc-48ce-a9a1-532067d9af0f",
+    "enterprise_catalog": "e475c1aa-9ffe-4c8f-87f7-948fc1e5c154"
+  }
+}
