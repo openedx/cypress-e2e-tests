@@ -23,6 +23,7 @@ jobs:
           # we have already installed all dependencies above
           install: false
           record: true
+          command: bash -c 'npx cypress run config-file admin_portal_stage.json'
           group: All specs
           ci-build-id: ${{ github.sha }}
           pluginsFile: false
