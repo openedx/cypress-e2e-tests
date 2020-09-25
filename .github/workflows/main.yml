@@ -25,6 +25,7 @@ jobs:
           record: true
           group: All specs
           ci-build-id: ${{ github.sha }}
+          pluginsFile: false
         
       # - name: Run Tests
       #     uses: cypress-io/github-action@v1
