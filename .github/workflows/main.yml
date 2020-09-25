@@ -22,4 +22,5 @@ jobs:
         
       - name: Run Tests
           run: cy:run_admin_portal
-          config-file: admin_portal_stage.json
+          with:
+            config-file: admin_portal_stage.json
