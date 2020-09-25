@@ -7,8 +7,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Cypress install
+      - name: Cypress run
         uses: cypress-io/github-action@v1
-
-      -name: Cypress run
-        run: cy:run_admin_portal
+        with:
+          config-file: admin_portal_stage.json
