@@ -20,5 +20,5 @@ jobs:
           CYPRESS_GMAIL_ACCESS_TOKEM: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEM }}
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }} 
         with:
-          command: bash -c 'ls'
+          command: bash -c 'npm run cy:run_admin_portal'
           config-file: admin_portal_stage.json
