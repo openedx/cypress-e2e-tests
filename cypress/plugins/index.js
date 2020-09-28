@@ -2,7 +2,7 @@
 
 // const fs = require('fs-extra')
 // const path = require('path')
-// const gmail = require("./gmail_reader")
+const gmail = require("./gmail_reader")
 
 // function getConfigurationByFile (file) {
 //   const pathToConfigFile = path.resolve('.', 'config', `${file}.json`)
@@ -26,6 +26,12 @@
 
 
 module.exports = (on, config) => {
+
+  on('task', {
+        failed: require('cypress-failed-log/src/failed')(),
+        mailReader: gmail.readEmail
+      })
+
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 }
