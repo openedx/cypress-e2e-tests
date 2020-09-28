@@ -1,5 +1,6 @@
 name: End-to-end tests
 on: [push]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -20,13 +21,14 @@ jobs:
           CYPRESS_GMAIL_ACCESS_TOKEM: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEM }}
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }} 
         with:
-          # we have already installed all dependencies above
-          install: false
-          record: true
-          command: bash -c 'npx cypress run --config-file admin_portal_stage.json'
-          group: All specs
-          ci-build-id: ${{ github.sha }}
-          # pluginsFile: false
+          start: npm start
+          # # we have already installed all dependencies above
+          # install: false
+          # record: true
+          # command: bash -c 'npx cypress run --config-file admin_portal_stage.json'
+          # group: All specs
+          # ci-build-id: ${{ github.sha }}
+          # # pluginsFile: false
         
       # - name: Run Tests
       #     uses: cypress-io/github-action@v1
