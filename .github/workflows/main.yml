@@ -3,12 +3,19 @@ on: [push]
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    name: every OS
+    strategy:
+      matrix:
+        # run 2 copies of the current job in parallel
+        # and they will load balance all specs
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        machines: [1, 2]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Cypress run
+      - name: Run tests
         uses: cypress-io/github-action@v1
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
@@ -22,20 +29,10 @@ jobs:
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
         with:
           config-file: config/admin_portal_stage.json
-        # with:
-        #   start: npm start
-          # # we have already installed all dependencies above
-          # install: false
-          # record: true
-          # command: bash -c 'npx cypress run --config-file admin_portal_stage.json'
-          # group: All specs
-          # ci-build-id: ${{ github.sha }}
-          # # pluginsFile: false
-        
-      # - name: Run Tests
-      #     uses: cypress-io/github-action@v1
-      #     run: cy:run_admin_portal
-      #     with:
-      #       config-file: admin_portal_stage.json
+          group: Parallel 2x on ${{ matrix.os }}
+          # on Mac and Linux we can use "npm start"
+          start: npm start
+          # but for this particular project on Windows we need a different start command
+          start-windows: npm run start:ci:windows
 
   
