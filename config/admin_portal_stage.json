@@ -7,7 +7,8 @@
   "pageLoadTimeout": 80000,
   "taskTimeout": 300000,
   "chromeWebSecurity": false,
-  "blacklistHosts": [
+  "projectId": "3se7u6",
+  "blockHosts": [
     "**.cdn.**",
     "cdn.*",
     "*.optimizely.**",

@@ -18,7 +18,7 @@ module.exports = (on, config) => {
     failed: require('cypress-failed-log/src/failed')(),
     mailReader: gmail.readEmail
   })
-  const file = config.env.configFile
+  const file = config.env.configFile || 'admin_portal_stage'
 
   return getConfigurationByFile(file)
 
