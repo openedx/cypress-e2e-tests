@@ -5,18 +5,26 @@ jobs:
   cypress-run:
     name: every OS
     strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
       matrix:
-        # run 2 copies of the current job in parallel
-        # and they will load balance all specs
-        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-        machines: [1, 2]
-    runs-on: ${{ matrix.os }}
-    steps:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
+    runs-on: ubuntu-latest
       - name: Checkout
         uses: actions/checkout@v1
 
       - name: Run tests
         uses: cypress-io/github-action@v1
+        with:
+          record: true
+          parallel: true
+          config-file: config/admin_portal_stage.json
+          group: 'Actions example'
+          start: npm start
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
@@ -28,12 +36,6 @@ jobs:
           CYPRESS_GMAIL_ACCESS_TOKEM: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEM }}
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        with:
-          config-file: config/admin_portal_stage.json
-          # group: Parallel 2x on ${{ matrix.os }}
-          # on Mac and Linux we can use "npm start"
-          start: npm start
-          # but for this particular project on Windows we need a different start command
-          start-windows: npm run start:ci:windows
+
 
   
