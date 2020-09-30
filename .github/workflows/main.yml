@@ -2,8 +2,8 @@ name: End-to-end tests
 on: [push]
 
 jobs:
-  cypress-run:
-    name: every OS
+  name: Cypress run
+  runs-on: ubuntu-latest
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -13,7 +13,7 @@ jobs:
       matrix:
         # run 3 copies of the current job in parallel
         containers: [1, 2, 3]
-    runs-on: ubuntu-latest
+    steps:
       - name: Checkout
         uses: actions/checkout@v1
 
