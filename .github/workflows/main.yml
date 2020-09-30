@@ -30,7 +30,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           config-file: config/admin_portal_stage.json
-          group: Parallel 2x on ${{ matrix.os }}
+          # group: Parallel 2x on ${{ matrix.os }}
           # on Mac and Linux we can use "npm start"
           start: npm start
           # but for this particular project on Windows we need a different start command
