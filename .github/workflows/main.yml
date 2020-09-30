@@ -12,7 +12,7 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4]
+        containers: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
