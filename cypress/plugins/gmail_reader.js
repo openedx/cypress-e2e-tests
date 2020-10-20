@@ -9,7 +9,7 @@ async function authorize() {
     clientSecret: process.env.CYPRESS_GMAIL_CLIENT_SECRET,
   })
   oAuth2Client.setCredentials({
-    access_token: process.env.CYPRESS_GMAIL_ACCESS_TOKEM,
+    access_token: process.env.CYPRESS_GMAIL_ACCESS_TOKEN,
     refresh_token: process.env.CYPRESS_GMAIL_REFRESH_TOKEN,
   })
   return oAuth2Client

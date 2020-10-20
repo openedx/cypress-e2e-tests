@@ -132,10 +132,10 @@ describe('landing page tests', function () {
     codeManagementDashboard.getAssignActionButton().click()
     // Checks for the labels and requried fields on the modal
     codeManagementDashboard.getModalWindow().then(function ($win) {
-      cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Assign Code').next()
-        .should('have.text', 'Save Template')
+      cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Close').next()
+        .should('have.text', 'Assign Code')
         .next()
-        .should('have.text', 'Close')
+        .should('have.text', 'Save Template')
       cy.wrap($win).find('h3').then((headings) => {
         cy.check_labels(headings, labels.assignCouponHeadings)
       })
@@ -149,7 +149,7 @@ describe('landing page tests', function () {
     })
   })
 
-  it('checks for the assignment and revoking of the coupons', function () {
+  it.only('checks for the assignment and revoking of the coupons', function () {
     cy.server()
     const uniqueEmail = HelperFunctions.getUniqueEmailAlias()
     this.couponCode = null
@@ -171,7 +171,7 @@ describe('landing page tests', function () {
     // Assigns the code by submitting the email
     codeManagementDashboard.getModalWindow().then((win) => {
       cy.wrap(win).find('input[name="email-address"]').type(uniqueEmail)
-      cy.wrap(win).find('.modal-footer .btn:nth-of-type(1)').click()
+      cy.wrap(win).find('.modal-footer .btn:nth-of-type(2)').click()
 
       codeManagementDashboard.getCodeAssignmentSuccessMessage().should(($successMessage) => {
         const expectedSuccessMessages = {
@@ -202,7 +202,7 @@ describe('landing page tests', function () {
     codeManagementDashboard.getRevokeButton().click()
 
     codeManagementDashboard.getModalWindow().then((win) => {
-      cy.wrap(win).find('.modal-footer .btn:nth-of-type(1)').click()
+      cy.wrap(win).find('.modal-footer .btn:nth-of-type(2)').click()
     })
     codeManagementDashboard.getRevokeSuccessMessage().should('have.text', 'Successfully revoked code(s)')
   })

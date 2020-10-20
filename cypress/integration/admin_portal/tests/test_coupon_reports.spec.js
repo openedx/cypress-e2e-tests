@@ -50,7 +50,7 @@ describe('landing page tests', function () {
     // Assigns the code by submitting the email
     codeManagementDashboard.getModalWindow().then((win) => {
       cy.wrap(win).find('input[name="email-address"]').type('cypressTestEmail@edx.org')
-      cy.wrap(win).find('.modal-footer .btn:nth-of-type(1)').click()
+      cy.wrap(win).find('.modal-footer .btn:nth-of-type(2)').click()
     })
     codeManagementDashboard.getCodeStatusFilter().select('Unredeemed')
     codeManagementDashboard.downloadCouponReport()
