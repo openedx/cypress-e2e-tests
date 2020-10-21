@@ -24,6 +24,7 @@ jobs:
           parallel: true
           config-file: config/admin_portal_stage.json
           group: 'Admin portal e2e tests'
+          # ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
@@ -32,6 +33,6 @@ jobs:
           CYPRESS_GMAIL_ID: ${{ secrets.CYPRESS_GMAIL_ID }}
           CYPRESS_GMAIL_CLIENT_ID: ${{ secrets.CYPRESS_GMAIL_CLIENT_ID }}
           CYPRESS_GMAIL_CLIENT_SECRET: ${{ secrets.CYPRESS_GMAIL_CLIENT_SECRET }}
-          CYPRESS_GMAIL_ACCESS_TOKEM: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEM }}
+          CYPRESS_GMAIL_ACCESS_TOKEN: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEN }}
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
