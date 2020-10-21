@@ -149,7 +149,7 @@ describe('landing page tests', function () {
     })
   })
 
-  it.only('checks for the assignment and revoking of the coupons', function () {
+  it('checks for the assignment and revoking of the coupons', function () {
     cy.server()
     const uniqueEmail = HelperFunctions.getUniqueEmailAlias()
     this.couponCode = null
