@@ -24,6 +24,7 @@ jobs:
           parallel: true
           config-file: config/admin_portal_stage.json
           group: 'Admin portal e2e tests'
+          ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
