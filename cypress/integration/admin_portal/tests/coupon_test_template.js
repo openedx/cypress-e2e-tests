@@ -13,14 +13,14 @@ describe('Coupon Tests Template', function () {
         couponId = response.body.coupon_id
       })
     })
-    coupons.findValidCatalogCourse()
+    // coupons.findValidCatalogCourse()
   })
 
   beforeEach(function () {
     Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
   })
 
-  it('fetches coupon report', function () {
+  it.skip('fetches coupon report', function () {
     cy.log(couponId)
     coupons.fetchCouponReport(couponId).then((response) => {
       const reportText = response.body
