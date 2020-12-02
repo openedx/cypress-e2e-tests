@@ -16,7 +16,6 @@ describe('Enterprise Logos and nav links verification', function () {
   it('checks logo information', function () {
     const edxLogoName = 'edX logo'
     const enterpriseLogoName = `${Cypress.env('enterprise_name')} logo`
-    const edxLogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
     const enterpriseLogoLink = new RegExp('/enterprise/branding/5/5_logo.png')
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
@@ -25,7 +24,6 @@ describe('Enterprise Logos and nav links verification', function () {
     dashboard.getLogoAltAttributes('header', 'src').should('match', enterpriseLogoLink)
     // Check for edX logo alt text and logo link in footer
     dashboard.getLogoAltAttributes('footer', 'alt').should('eq', edxLogoName)
-    dashboard.getLogoAltAttributes('footer', 'src').should('match', edxLogoLink)
     // Check for enterprise logo alt text and logo link in footer
     dashboard.getLogoAltAttributes('footer', 'alt', `/${trimmedEnterpriseName}`).should('eq', enterpriseLogoName)
     dashboard.getLogoAltAttributes('footer', 'src', `/${trimmedEnterpriseName}`).should('match', enterpriseLogoLink)

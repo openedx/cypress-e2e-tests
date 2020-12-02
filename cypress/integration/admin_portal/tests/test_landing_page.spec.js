@@ -21,13 +21,10 @@ describe('landing page tests', function () {
 
   it('checks logo information', function () {
     const edXlogoName = 'edX logo'
-    const edXlogoLink = new RegExp('/ef7b61e5efb512ea4472f1c32fa17907.png')
     // Check for log alt text and logo link in header
     landingPage.getLogoAltAttributes('header', 'alt').should('eq', edXlogoName)
-    landingPage.getLogoAltAttributes('header', 'src').should('match', edXlogoLink)
     // Check for logo alt text and logo link in footer
     landingPage.getLogoAltAttributes('footer', 'alt').should('eq', edXlogoName)
-    landingPage.getLogoAltAttributes('footer', 'src').should('match', edXlogoLink)
   })
 
   it('checks nav links in footer', function () {
