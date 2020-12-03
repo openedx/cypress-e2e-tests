@@ -124,7 +124,6 @@ describe('landing page tests', function () {
       expect(couponMeta.enrollmentsRedeemed).to.eql(`0 of ${couponMeta.remainingAssignments}(0%)`)
     })
     codeManagementDashboard.getCouponDetailsRow()
-    codeManagementDashboard.getCouponDetailsRow().should('have.css', 'background-color', 'rgb(9, 86, 134)')
     // Checks for the headers of the table and the options in filters
     cy.check_labels('small.text-light', labels.couponHeaderLabels)
     cy.check_labels('select[name="table-view"] option', labels.codeStatusFilter)
