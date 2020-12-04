@@ -52,8 +52,7 @@ describe('landing page tests', function () {
     codeManagementDashboard.getModalWindow().within(() => {
       const fileName = 'valid_emails.csv'
       const fileSelector = '.choose-file-btn.btn~input'
-      const modelWindowLabelsAndText = {
-        modelLabel: 'Code Assignment',
+      const modalWindowLabelsAndText = {
         unassignedCodes: 'Unassigned Codes: ',
         selectedCodes: 'Selected Codes: ',
         helpEmailText: 'To add more than one user, enter one email address per line.',
@@ -63,30 +62,29 @@ describe('landing page tests', function () {
         csvMaxEmailError: 'Unable to assign codesYou have 2 codes selected, but your file has 3 emails. Please try again.',
         noEmailError: 'Unable to assign codesNo email addresses provided. Either manually enter email addresses or upload a CSV file.',
       }
-      cy.get('.modal-title>span').should('have.text', this.couponName)
-      cy.get('.modal-title>small').should('have.text', modelWindowLabelsAndText.modelLabel)
-      cy.get('.modal-body>div>p:nth-child(1)').should('have.text', modelWindowLabelsAndText.unassignedCodes + this.remainingRedemptions)
-      cy.get('.modal-body>div>p:nth-child(2)').should('have.text', modelWindowLabelsAndText.selectedCodes + (this.remainingRedemptions - 1))
-      cy.get('#email-addresses-help-text').should('have.text', modelWindowLabelsAndText.helpEmailText)
-      cy.get('.file-input>label').should('have.text', modelWindowLabelsAndText.uploadCSVLabel)
-      cy.get('#csv-email-addresses-help-text').should('have.text', modelWindowLabelsAndText.csvHelpText)
+      cy.get('.modal-title').should('have.text', this.couponName)
+      cy.get('.modal-body>div>p:nth-child(1)').should('have.text', modalWindowLabelsAndText.unassignedCodes + this.remainingRedemptions)
+      cy.get('.modal-body>div>p:nth-child(2)').should('have.text', modalWindowLabelsAndText.selectedCodes + (this.remainingRedemptions - 1))
+      cy.get('#email-addresses-help-text').should('have.text', modalWindowLabelsAndText.helpEmailText)
+      cy.get('.file-input>label').should('have.text', modalWindowLabelsAndText.uploadCSVLabel)
+      cy.get('#csv-email-addresses-help-text').should('have.text', modalWindowLabelsAndText.csvHelpText)
       cy.get('textarea[name="email-addresses"]').type('cypress1@edx.org')
         .type('{enter}')
         .type('cypress2@edx.com')
         .type('{enter}')
         .type('cypress3@edx.org')
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modelWindowLabelsAndText.maxNumbersEmailError)
+      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.maxNumbersEmailError)
       cy.get('textarea[name="email-addresses"]').clear()
       cy.get(fileSelector).attachFile(fileName)
       cy.get('.file-name').should('have.text', 'valid_emails.csv')
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modelWindowLabelsAndText.csvMaxEmailError)
+      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.csvMaxEmailError)
       cy.get('.remove-file-btn').click()
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modelWindowLabelsAndText.noEmailError)
+      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.noEmailError)
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modelWindowLabelsAndText.noEmailError)
+      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.noEmailError)
       cy.get('textarea[name="email-addresses"]').type('{selectall}')
         .type('cypress1@edx.org')
         .type('{enter}')
