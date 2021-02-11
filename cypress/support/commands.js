@@ -7,14 +7,14 @@ const uuidv4 = require('uuid/v4')
 Cypress.Commands.add('login_using_api', (userEmail, userPassword) => {
   // Open the Stage login page to create session
   cy.request({
-    url: Cypress.env('login_url'),
+    url: `${Cypress.env('login_url')}?skip_authn_mfe=true`,
     failOnStatusCode: false,
   })
   // Save csrftoken and use it in header to send Login Post request
   cy.getCookie('csrftoken').its('value').then(($token) => {
     cy.request({
       method: 'POST',
-      url: Cypress.env('login_api_url'),
+      url: `${Cypress.env('login_api_url')}?skip_authn_mfe=true`,
       form: true,
       body: {
         email: userEmail,

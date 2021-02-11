@@ -10,7 +10,7 @@ describe('Login tests', function () {
   })
 
   beforeEach(function () {
-    cy.visit('/')
+    cy.visit(`${Cypress.env('login_url')}?skip_authn_mfe=true&next=${Cypress.config().baseUrl}`)
   })
 
   it('does not allow non admin user access', function () {
