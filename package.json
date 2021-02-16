@@ -5,8 +5,10 @@
   "repository": "https://github.com/edx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
-    "cy:open_admin_portal": "cypress open --env configFile=admin_portal_stage",
-    "cy:run_admin_portal": "cypress run --env configFile=admin_portal_stage",
+    "cy:open_admin_portal": "cypress open --env ENVIRONMENT=admin_portal_stage",
+    "cy:run_admin_portal": "cypress run --env ENVIRONMENT=admin_portal_stage",
+    "cy:open_authn_mfe": "cypress open --env ENVIRONMENT=authn_mfe_stage",
+    "cy:run_authn_mfe": "cypress run --env ENVIRONMENT=authn_mfe_stage",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
