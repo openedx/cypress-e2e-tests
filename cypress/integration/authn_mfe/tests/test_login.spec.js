@@ -14,8 +14,8 @@ describe('Login page tests', function () {
   it('should show empty field error messages', function () {
     loginPage.clickSubmit()
     loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'Please enter your Email.')
-    loginPage.loginFailureError().should('contain.text', 'Please enter your Password.')
+    loginPage.loginFailureError().should('contain.text', 'Please enter your email.')
+    loginPage.loginFailureError().should('contain.text', 'Please enter your password.')
   })
 
   it('should show invalid email or password error message', function () {

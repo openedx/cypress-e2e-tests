@@ -12,7 +12,7 @@ describe('Forgot password page tests', function () {
   it('should show empty field error message', function () {
     forgotPasswordPage.clickSubmit()
     forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Failed to send forgot password email.')
-    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Please enter your Email.')
+    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Please enter your email.')
   })
 
   it('should show invalid format error message', function () {
@@ -25,6 +25,6 @@ describe('Forgot password page tests', function () {
     const emailID = `${(Math.random() * 1e20).toString(36)}@example.com`
     forgotPasswordPage.sendForgotPasswordEmail(emailID)
     loginPage.forgotPasswordSuccessMessage().should('contain.text', emailID)
-    loginPage.forgotPasswordSuccessMessage().should('contain.text', 'Check Your Email')
+    loginPage.forgotPasswordSuccessMessage().should('contain.text', 'Check your email')
   })
 })
