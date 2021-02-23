@@ -11,13 +11,13 @@ describe('Forgot password page tests', function () {
 
   it('should show empty field error message', function () {
     forgotPasswordPage.clickSubmit()
-    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Failed to send forgot password email.')
+    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'We couldn’t send the password recovery email.')
     forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Please enter your email.')
   })
 
   it('should show invalid format error message', function () {
     forgotPasswordPage.sendForgotPasswordEmail('invalid')
-    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'Failed to send forgot password email.')
+    forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'We couldn’t send the password recovery email.')
     forgotPasswordPage.forgotPasswordFailureError().should('contain.text', 'The email address you\'ve provided isn\'t formatted correctly.')
   })
 
