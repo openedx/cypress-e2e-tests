@@ -27,7 +27,7 @@ describe('landing page tests', function () {
     landingPage.openCodeManagement()
   })
 
-  it.only('checks for the bulk assignment and revoking of the coupons', function () {
+  it('checks for the bulk assignment and revoking of the coupons', function () {
     cy.server()
     cy.route('GET', `**/${this.couponId}/codes/?code_filter=unassigned**`).as('results')
     coupons.fetchCouponReport(this.couponId).then((response) => {
@@ -53,8 +53,8 @@ describe('landing page tests', function () {
       const fileName = 'valid_emails.csv'
       const fileSelector = '.choose-file-btn.btn~input'
       const modalWindowLabelsAndText = {
-        unassignedCodes: 'Unassigned Codes: ',
-        selectedCodes: 'Selected Codes: ',
+        unassignedCodes: 'Unassigned codes: ',
+        selectedCodes: 'Selected codes: ',
         helpEmailText: 'To add more than one user, enter one email address per line.',
         uploadCSVLabel: 'Upload Email Addresses',
         csvHelpText: 'The file must be a CSV containing a single column of email addresses.',

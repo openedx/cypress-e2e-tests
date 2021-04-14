@@ -5,7 +5,7 @@ class CodeManagementPage {
 
   getLabels(labelName) {
     const labels = { Email: 1, Company: 2, Codes: 3 }
-    return cy.get(`.form-group:nth-of-type(${labels[labelName]}) label`)
+    return cy.get(`.pgn__form-group:nth-of-type(${labels[labelName]}) label`)
   }
 
   getRequestCodesButton() {
@@ -17,7 +17,7 @@ class CodeManagementPage {
   }
 
   getInvalidFeedback() {
-    return cy.get('[name="emailAddress"]~.invalid-feedback')
+    return cy.get('[name="emailAddress"]~.pgn__form-text-invalid')
   }
 
   getSuccessMessage() {
