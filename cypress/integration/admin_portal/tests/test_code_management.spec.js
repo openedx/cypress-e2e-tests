@@ -3,6 +3,16 @@ import CodeManagementPage from '../pages/enterprise_code_management'
 import EnterpriseCoupons from '../helpers/enterprise_coupons'
 import HelperFunctions from '../helpers/helper_functions'
 
+const requestCodeslabelsAndText = {
+  companyLabel: 'Company*',
+  emailLabel: 'Email Address*',
+  numberOfCodesLabel: 'Number of Codes',
+  requestCodesLabel: 'Request Codes',
+  cancelLabel: 'Cancel',
+  fieldRequiredError: 'This field is required.',
+  validEmailError: 'Must be a valid email address.',
+}
+
 describe('landing page tests', function () {
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
@@ -30,30 +40,34 @@ describe('landing page tests', function () {
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     landingPage.openCodeManagement()
   })
-
-  it('Verifies the validation checks on REQUEST MORE CODES form', function () {
-    const labelsAndText = {
-      companyLabel: 'Company*',
-      emailLabel: 'Email Address*',
-      numberOfCodesLabel: 'Number of Codes',
-      requestCodesLabel: 'Request Codes',
-      cancelLabel: 'Cancel',
-      fieldRequiredError: 'This field is required.',
-      validEmailError: 'Must be a valid email address.',
-    }
+  it('prepopulates email address and enterprise name fields', () => {
     codeManagementDashboard.requestMoreCodes()
     codeManagementDashboard.getFormField('emailAddress').should('have.attr', 'value', Cypress.env('ADMIN_USER_EMAIL'))
     codeManagementDashboard.getFormField('enterpriseName').should('have.attr', 'value', Cypress.env('enterprise_name'))
-    codeManagementDashboard.getLabels('Company').should('have.text', labelsAndText.companyLabel).children().should('have.class', 'required')
-    codeManagementDashboard.getLabels('Email').should('have.text', labelsAndText.emailLabel).children().should('have.class', 'required')
-    codeManagementDashboard.getLabels('Codes').should('have.text', labelsAndText.numberOfCodesLabel)
-    codeManagementDashboard.getRequestCodesButton().should('have.attr', 'type', 'submit').and('have.text', labelsAndText.requestCodesLabel)
+  })
+
+  it('Marks the correct fields as required REQUEST MORE CODES form', function () {
+    codeManagementDashboard.requestMoreCodes()
+
+    codeManagementDashboard.getLabels('Company').should('have.text', requestCodeslabelsAndText.companyLabel).children().should('have.class', 'required')
+    codeManagementDashboard.getLabels('Email').should('have.text', requestCodeslabelsAndText.emailLabel).children().should('have.class', 'required')
+    codeManagementDashboard.getLabels('Codes').should('have.text', requestCodeslabelsAndText.numberOfCodesLabel)
+  })
+  it('Has the correct buttons REQUEST MORE CODES form', () => {
+    codeManagementDashboard.requestMoreCodes()
+
+    codeManagementDashboard.getRequestCodesButton().should('have.attr', 'type', 'submit').and('have.text', requestCodeslabelsAndText.requestCodesLabel)
     codeManagementDashboard.getCancelButton().should('have.attr', 'href', `/${Cypress.env('enterprise_name').toLowerCase()}/admin/coupons`)
-      .and('have.text', labelsAndText.cancelLabel)
-    codeManagementDashboard.getFormField('emailAddress').clear().prev().click()
-    codeManagementDashboard.getInvalidFeedback().should('have.text', labelsAndText.fieldRequiredError)
+      .and('have.text', requestCodeslabelsAndText.cancelLabel)
+  })
+  it.only('Verifies the validation checks on REQUEST MORE CODES form', function () {
+    codeManagementDashboard.requestMoreCodes()
+
+    codeManagementDashboard.getInvalidFeedback().should('have.text', requestCodeslabelsAndText.fieldRequiredError)
     codeManagementDashboard.getFormField('emailAddress').type('test@')
-    codeManagementDashboard.getInvalidFeedback().should('have.text', labelsAndText.validEmailError)
+    // validation runs after the user clicks away
+    codeManagementDashboard.getFormField('enterpriseName')
+    codeManagementDashboard.getInvalidFeedback().should('have.text', requestCodeslabelsAndText.validEmailError)
     codeManagementDashboard.getRequestCodesButton().should('have.attr', 'disabled')
   })
 
