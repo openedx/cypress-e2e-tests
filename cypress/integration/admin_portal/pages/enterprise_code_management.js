@@ -17,7 +17,7 @@ class CodeManagementPage {
   }
 
   getInvalidFeedback() {
-    return cy.get('[name="emailAddress"]~.pgn__form-text-invalid')
+    return cy.get('.pgn__form-group.emailAddress .pgn__form-text-invalid')
   }
 
   getSuccessMessage() {
