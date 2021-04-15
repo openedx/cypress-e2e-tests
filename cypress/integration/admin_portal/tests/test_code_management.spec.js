@@ -38,11 +38,9 @@ describe('coupon management tests', function () {
     coupons.LoginAsAdmin()
     coupons.prepareCouponData(couponType).then((couponData) => {
       coupons.createCoupon(couponData[couponType]).then((response) => {
-        console.log(response)
         this.couponId = response.body.coupon_id
       })
     })
-    console.log(this.couponId)
     // Coupon quanitity from the fixture
     cy.fixture('coupon_creation_data').then((couponData) => {
       this.quantity = couponData.discount_single_use_percentage.quantity
@@ -133,7 +131,8 @@ describe('coupon management tests', function () {
         // Coupon data from coupon report
         const couponMeta = {
           validCouponReportFromDate: HelperFunctions.convertDateToShortFormat(this.dates[1]),
-          validCouponTableFromDate: HelperFunctions.convertDateToShortFormat(couponInfo.eq(1).text()),
+          validCouponTableFromDate: HelperFunctions
+            .convertDateToShortFormat(couponInfo.eq(1).text()),
           validCouponReportToDate: HelperFunctions.convertDateToShortFormat(this.dates[2]),
           validCouponTableToDate: HelperFunctions.convertDateToShortFormat(couponInfo.eq(2).text()),
           remainingAssignments: couponInfo.eq(3).text(),
