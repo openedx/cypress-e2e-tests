@@ -13,7 +13,7 @@ const requestCodeslabelsAndText = {
   validEmailError: 'Must be a valid email address.',
 }
 
-describe('landing page tests', function () {
+describe('request more codes tests', function () {
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
   const coupons = new EnterpriseCoupons()

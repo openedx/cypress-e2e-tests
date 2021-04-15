@@ -3,7 +3,7 @@ import CodeManagementPage from '../pages/enterprise_code_management'
 import EnterpriseCoupons from '../helpers/enterprise_coupons'
 import HelperFunctions from '../helpers/helper_functions'
 
-describe('landing page tests', function () {
+describe('coupon reports tests', function () {
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
   const coupons = new EnterpriseCoupons()

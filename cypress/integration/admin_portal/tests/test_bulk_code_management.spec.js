@@ -15,7 +15,7 @@ const modalWindowLabelsAndText = {
 
 const MODAL_ERROR_ALERT_SELECTOR = '.alert.alert-danger'
 
-describe('landing page tests', function () {
+describe('bulk code management tests', function () {
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
   const coupons = new EnterpriseCoupons()
