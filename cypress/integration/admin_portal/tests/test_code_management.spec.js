@@ -71,7 +71,7 @@ describe('coupon management tests', function () {
     codeManagementDashboard.requestMoreCodes()
 
     codeManagementDashboard.getRequestCodesButton().should('have.attr', 'type', 'submit').and('have.text', requestCodeslabelsAndText.requestCodesLabel)
-    codeManagementDashboard.getCancelButton().should('have.attr', 'href', `/${Cypress.env('enterprise_name').toLowerCase()}/admin/coupons`)
+    codeManagementDashboard.getCancelButton().should('have.attr', 'href', `/${Cypress.env('enterprise_slug')}/admin/coupons`)
       .and('have.text', requestCodeslabelsAndText.cancelLabel)
   })
   it('Verifies the validation checks on REQUEST MORE CODES form', () => {
@@ -95,15 +95,15 @@ describe('coupon management tests', function () {
       codeManagement: '/admin/coupons',
     }
     codeManagementDashboard.requestMoreCodes()
-    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_name').toLowerCase()}${urls.requestCodes}`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_slug')}${urls.requestCodes}`)
     codeManagementDashboard.getCancelButton().click()
-    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_name').toLowerCase()}${urls.codeManagement}`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_slug')}${urls.codeManagement}`)
     codeManagementDashboard.requestMoreCodes()
-    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_name').toLowerCase()}${urls.requestCodes}`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_slug')}${urls.requestCodes}`)
     //  Request for more codes
     codeManagementDashboard.getFormField('numberOfCodes').type('5')
     codeManagementDashboard.getRequestCodesButton().click()
-    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_name').toLowerCase()}${urls.codeManagement}`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${Cypress.env('enterprise_slug')}${urls.codeManagement}`)
 
     codeManagementDashboard.getSuccessMessage().then((successMessage) => {
       const successMessages = {
