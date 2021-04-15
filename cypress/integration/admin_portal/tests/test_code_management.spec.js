@@ -153,25 +153,6 @@ describe('coupon management tests', function () {
       cy.check_labels('select[name="table-view"] option', labels.codeStatusFilter)
       cy.check_labels('select[name="bulk-action"] option', labels.bulkActionFilter)
     })
-    it('checks for the labels and required fields on the modal', () => {
-      codeManagementDashboard.getAssignActionButton().click()
-      codeManagementDashboard.getModalWindow().then(function ($win) {
-        cy.wrap($win).find('.modal-footer .btn:nth-of-type(1)').should('have.text', 'Close').next()
-          .should('have.text', 'Assign Code')
-          .next()
-          .should('have.text', 'Save Template')
-        cy.wrap($win).find('h3').then((headings) => {
-          cy.check_labels(headings, labels.assignCouponHeadings)
-        })
-
-        cy.wrap($win).find('pgn__form-group>[for]').then((fieldLabels) => {
-          cy.check_labels(fieldLabels, labels.assignCouponFieldLabels)
-        })
-        cy.wrap($win).find('pgn__form-group [for] span').each(($el) => {
-          cy.get($el).should('have.class', 'required')
-        })
-      })
-    })
   })
 
   it('checks for the assignment and revoking of the coupons', () => {
