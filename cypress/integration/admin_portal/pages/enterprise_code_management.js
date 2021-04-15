@@ -21,7 +21,7 @@ class CodeManagementPage {
   }
 
   getSuccessMessage() {
-    return cy.get('.alert-dialog .message')
+    return cy.get('div[role="alert"].alert-success .message')
   }
 
   requestMoreCodes() {

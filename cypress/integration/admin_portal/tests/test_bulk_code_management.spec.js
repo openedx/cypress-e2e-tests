@@ -74,17 +74,17 @@ describe('landing page tests', function () {
         .type('{enter}')
         .type('cypress3@edx.org')
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.maxNumbersEmailError)
+      cy.get('div[role="alert"].alert-danger .message').should('have.text', modalWindowLabelsAndText.maxNumbersEmailError)
       cy.get('textarea[name="email-addresses"]').clear()
       cy.get(fileSelector).attachFile(fileName)
       cy.get('.file-name').should('have.text', 'valid_emails.csv')
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.csvMaxEmailError)
+      cy.get('div[role="alert"].alert-danger .message').should('have.text', modalWindowLabelsAndText.csvMaxEmailError)
       cy.get('.remove-file-btn').click()
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.noEmailError)
+      cy.get('div[role="alert"].alert-danger .message').should('have.text', modalWindowLabelsAndText.noEmailError)
       cy.get('.modal-footer .btn:nth-of-type(2)').click()
-      cy.get('.alert-dialog .message').should('have.text', modalWindowLabelsAndText.noEmailError)
+      cy.get('div[role="alert"].alert-danger .message').should('have.text', modalWindowLabelsAndText.noEmailError)
       cy.get('textarea[name="email-addresses"]').type('{selectall}')
         .type('cypress1@edx.org')
         .type('{enter}')
@@ -96,7 +96,7 @@ describe('landing page tests', function () {
     const expectedSuccessMessages = {
       codeAssigned: ['Successfully assigned code(s)', 'To view the newly assigned code(s), filter by', 'unredeemed codes.'],
     }
-    cy.check_labels('.alert-success .message', expectedSuccessMessages.codeAssigned)
+    cy.check_labels('div[role="alert"].alert-success .message', expectedSuccessMessages.codeAssigned)
     // This assertion is skipped for now
     // Asserts the redemption count of coupons after the assignment
     // codeManagementDashboard.getCouponMeta().then((couponMeta) => {
