@@ -60,13 +60,17 @@ describe('landing page tests', function () {
     codeManagementDashboard.getCancelButton().should('have.attr', 'href', `/${Cypress.env('enterprise_name').toLowerCase()}/admin/coupons`)
       .and('have.text', requestCodeslabelsAndText.cancelLabel)
   })
-  it.only('Verifies the validation checks on REQUEST MORE CODES form', function () {
+  it('Verifies the validation checks on REQUEST MORE CODES form', function () {
     codeManagementDashboard.requestMoreCodes()
-
+    codeManagementDashboard.getFormField('emailAddress').type(' ')
+    const emailFormField = codeManagementDashboard.getFormField('emailAddress')
+    emailFormField.clear()
+    // validation runs after the user clicks away
+    codeManagementDashboard.getFormField('enterpriseName').click({ force: true })
     codeManagementDashboard.getInvalidFeedback().should('have.text', requestCodeslabelsAndText.fieldRequiredError)
     codeManagementDashboard.getFormField('emailAddress').type('test@')
     // validation runs after the user clicks away
-    codeManagementDashboard.getFormField('enterpriseName')
+    codeManagementDashboard.getFormField('enterpriseName').click({ force: true })
     codeManagementDashboard.getInvalidFeedback().should('have.text', requestCodeslabelsAndText.validEmailError)
     codeManagementDashboard.getRequestCodesButton().should('have.attr', 'disabled')
   })
