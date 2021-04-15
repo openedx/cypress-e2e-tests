@@ -5,7 +5,7 @@ import EnterpriseDashboard from '../pages/enterprise_dashboard'
 describe('Enterprise Logos and nav links verification', function () {
   const landingPage = new LandingPage()
   const dashboard = new EnterpriseDashboard()
-  const trimmedEnterpriseName = Cypress.env('enterprise_name').toLowerCase().replace(/ /g, '')
+  const enterpriseSlug = Cypress.env('enterprise_slug')
 
   beforeEach(function () {
     cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
@@ -25,15 +25,15 @@ describe('Enterprise Logos and nav links verification', function () {
     // Check for edX logo alt text and logo link in footer
     dashboard.getLogoAltAttributes('footer', 'alt').should('eq', edxLogoName)
     // Check for enterprise logo alt text and logo link in footer
-    dashboard.getLogoAltAttributes('footer', 'alt', `/${trimmedEnterpriseName}`).should('eq', enterpriseLogoName)
-    dashboard.getLogoAltAttributes('footer', 'src', `/${trimmedEnterpriseName}`).should('match', enterpriseLogoLink)
+    dashboard.getLogoAltAttributes('footer', 'alt', `/${enterpriseSlug}`).should('eq', enterpriseLogoName)
+    dashboard.getLogoAltAttributes('footer', 'src', `/${enterpriseSlug}`).should('match', enterpriseLogoLink)
   })
 
   it('checks nav links in footer', function () {
     const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
-      Support: `/${trimmedEnterpriseName}/admin/support`,
+      Support: `/${enterpriseSlug}/admin/support`,
     }
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
