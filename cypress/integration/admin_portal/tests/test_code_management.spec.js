@@ -27,7 +27,7 @@ const labels = {
     'Customize closing'],
 }
 
-describe('coupon management tests', function () {
+describe('code management tests', function () {
   const landingPage = new LandingPage()
   const codeManagementDashboard = new CodeManagementPage()
   const coupons = new EnterpriseCoupons()
