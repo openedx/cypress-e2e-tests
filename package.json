@@ -9,6 +9,8 @@
     "cy:run_admin_portal": "cypress run --env ENVIRONMENT=admin_portal_stage",
     "cy:open_authn_mfe": "cypress open --env ENVIRONMENT=authn_mfe_stage",
     "cy:run_authn_mfe": "cypress run --env ENVIRONMENT=authn_mfe_stage",
+    "cy:open_admin_portal_devstack": "cypress open --env ENVIRONMENT=admin_portal_devstack",
+    "cy:run_admin_portal_devstack": "cypress run --env ENVIRONMENT=admin_portal_devstack",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
