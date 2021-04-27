@@ -4,7 +4,7 @@
     "Boeing": "/boeing/admin/learners",
     "Degreed Company": "/degreed-company/admin/learners",
     "Demo 1": "/demo-1/admin/learners",
-    "SuccessFactors (E2E tests only)": "/successfactors/admin/learners",
+    "SuccessFactors (E2E tests only)": "/successfactors-e2e/admin/learners",
     "MA Corp": "/macorp/admin/learners",
     "MattWLTest": "/mattwltest/admin/learners",
     "Microsoft": "/microsoft/admin/learners",
