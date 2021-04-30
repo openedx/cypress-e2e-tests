@@ -36,7 +36,7 @@ describe('bulk code management tests', function () {
   })
 
   beforeEach(function () {
-    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid')
+    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
     cy.visit('/')
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     landingPage.openCodeManagement()
