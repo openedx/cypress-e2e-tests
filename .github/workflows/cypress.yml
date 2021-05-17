@@ -2,16 +2,17 @@ name: End-to-end tests
 on: [push]
 
 jobs:
-  build_id:
+  context:
+    runs-on: ubuntu-latest
+    outputs:
+      uuid: ${{ steps.uuid.outputs.value }}
     steps:
-      - name: Set build id
-        runs-on: ubuntu-latest
-        id: build_id
-        # add a step output `steps.build_id.outputs.id` as the unique id
-        run: echo "::set-output name=id::$(date +%s)"
+      - name: 'uuid'
+        id: uuid
+        run: echo "::set-output name=value::$GITHUB_SHA-$(date +"%s")"
   admin-portal:
-    needs: build_id
     name: Cypress run admin portal e2e
+    needs: ['context']
     runs-on: ubuntu-latest
     strategy:
       # when one test fails, DO NOT cancel the other
