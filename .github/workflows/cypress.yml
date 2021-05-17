@@ -9,9 +9,9 @@ jobs:
         # add a step output `steps.build_id.outputs.id` as the unique id
         run: echo "::set-output name=id::$(date +%s)"
   admin-portal:
-    needs: build_id
     name: Cypress run admin portal e2e
     runs-on: ubuntu-latest
+    needs: build_id
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
