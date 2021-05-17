@@ -2,7 +2,14 @@ name: End-to-end tests
 on: [push]
 
 jobs:
+  build_id:
+    steps:
+      - name: 'Set build id'
+        id: build_id
+        # add a step output `steps.build_id.outputs.id` as the unique id
+        run: echo "::set-output name=id::$(date +%s)"
   admin-portal:
+    needs: build_id
     name: Cypress run admin portal e2e
     runs-on: ubuntu-latest
     strategy:
