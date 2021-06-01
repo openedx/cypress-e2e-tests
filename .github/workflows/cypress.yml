@@ -32,6 +32,7 @@ jobs:
         with:
           record: true
           parallel: true
+          ci-build-id: '${{ needs.context.outputs.uuid }}'
           config-file: config/admin_portal_stage.json
           group: 'AdminPortal/e2e'
         env:
