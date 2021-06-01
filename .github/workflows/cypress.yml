@@ -2,17 +2,22 @@ name: End-to-end tests
 on: [push]
 
 jobs:
-  context:
-    runs-on: ubuntu-latest
-    outputs:
-      uuid: ${{ steps.uuid.outputs.value }}
+  build_id:
     steps:
-      - name: 'uuid'
-        id: uuid
-        run: echo "::set-output name=value::$GITHUB_SHA-$(date +"%s")"
+      - name: 'Set build id'
+        id: build_id
+        # add a step output `steps.build_id.outputs.id` as the unique id
+        run: echo "::set-output name=id::$(date +%s)"
+        - name: 'Save build id'
+        # store the build id to a folder that we can later cache.
+        run: |
+          mkdir -p .build-id 
+          echo $BUILD_ID > .build-id/id
+        env:
+          BUILD_ID: ${{ steps.build_id.outputs.id }}
   admin-portal:
     name: Cypress run admin portal e2e
-    needs: ['context']
+    needs: build_id
     runs-on: ubuntu-latest
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -45,36 +50,36 @@ jobs:
           CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
-  authn-mfe:
-    name: Cypress run authn MFE e2e
-    runs-on: ubuntu-latest
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving the Dashboard hanging ... test
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        containers: [1, 2]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+  # authn-mfe:
+  #   name: Cypress run authn MFE e2e
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     # when one test fails, DO NOT cancel the other
+  #     # containers, because this will kill Cypress processes
+  #     # leaving the Dashboard hanging ... test
+  #     # https://github.com/cypress-io/github-action/issues/48
+  #     fail-fast: false
+  #     matrix:
+  #       containers: [1, 2]
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v1
 
-      - name: Run authn MFE tests
-        uses: cypress-io/github-action@v2
-        with:
-          record: true
-          parallel: true
-          config-file: config/authn_mfe_stage.json
-          group: 'AuthnMFE/e2e'
-        env:
-          CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
-          CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
-          CYPRESS_ADMIN_USER_EMAIL: ${{ secrets.CYPRESS_ADMIN_USER_EMAIL }}
-          CYPRESS_ADMIN_USER_PASSWORD: ${{ secrets.CYPRESS_ADMIN_USER_PASSWORD }}
-          CYPRESS_GMAIL_ID: ${{ secrets.CYPRESS_GMAIL_ID }}
-          CYPRESS_GMAIL_CLIENT_ID: ${{ secrets.CYPRESS_GMAIL_CLIENT_ID }}
-          CYPRESS_GMAIL_CLIENT_SECRET: ${{ secrets.CYPRESS_GMAIL_CLIENT_SECRET }}
-          CYPRESS_GMAIL_ACCESS_TOKEN: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEN }}
-          CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  #     - name: Run authn MFE tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         record: true
+  #         parallel: true
+  #         config-file: config/authn_mfe_stage.json
+  #         group: 'AuthnMFE/e2e'
+  #       env:
+  #         CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
+  #         CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
+  #         CYPRESS_ADMIN_USER_EMAIL: ${{ secrets.CYPRESS_ADMIN_USER_EMAIL }}
+  #         CYPRESS_ADMIN_USER_PASSWORD: ${{ secrets.CYPRESS_ADMIN_USER_PASSWORD }}
+  #         CYPRESS_GMAIL_ID: ${{ secrets.CYPRESS_GMAIL_ID }}
+  #         CYPRESS_GMAIL_CLIENT_ID: ${{ secrets.CYPRESS_GMAIL_CLIENT_ID }}
+  #         CYPRESS_GMAIL_CLIENT_SECRET: ${{ secrets.CYPRESS_GMAIL_CLIENT_SECRET }}
+  #         CYPRESS_GMAIL_ACCESS_TOKEN: ${{ secrets.CYPRESS_GMAIL_ACCESS_TOKEN }}
+  #         CYPRESS_GMAIL_REFRESH_TOKEN: ${{ secrets.CYPRESS_GMAIL_REFRESH_TOKEN }}
+  #         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
