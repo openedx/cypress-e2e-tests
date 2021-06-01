@@ -2,19 +2,15 @@ name: End-to-end tests
 on: [push]
 
 jobs:
-  build_id:
+  context:
+    runs-on: ubuntu-latest
+    outputs:
+      uuid: ${{ steps.uuid.outputs.value }}
     steps:
-      - name: 'Set build id'
-        id: build_id
-        # add a step output `steps.build_id.outputs.id` as the unique id
-        run: echo "::set-output name=id::$(date +%s)"
-      - name: 'Save build id'
-        # store the build id to a folder that we can later cache.
-        run: |
-          mkdir -p .build-id 
-          echo $BUILD_ID > .build-id/id
-        env:
-          BUILD_ID: ${{ steps.build_id.outputs.id }}
+      - name: 'uuid'
+        id: uuid
+        run: echo "::set-output name=value::$GITHUB_SHA-$(date +"%s")"
+  
   admin-portal:
     name: Cypress run admin portal e2e
     needs: build_id
