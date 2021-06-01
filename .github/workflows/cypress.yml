@@ -13,7 +13,7 @@ jobs:
   
   admin-portal:
     name: Cypress run admin portal e2e
-    needs: build_id
+    needs: ['context']
     runs-on: ubuntu-latest
     strategy:
       # when one test fails, DO NOT cancel the other
