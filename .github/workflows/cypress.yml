@@ -8,7 +8,7 @@ jobs:
         id: build_id
         # add a step output `steps.build_id.outputs.id` as the unique id
         run: echo "::set-output name=id::$(date +%s)"
-        - name: 'Save build id'
+      - name: 'Save build id'
         # store the build id to a folder that we can later cache.
         run: |
           mkdir -p .build-id 
