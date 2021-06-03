@@ -68,7 +68,7 @@ jobs:
           record: true
           parallel: true
           config-file: config/authn_mfe_stage.json
-          group: 'AdminPortal/e2'
+          group: 'AdminPortal/e2e'
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
