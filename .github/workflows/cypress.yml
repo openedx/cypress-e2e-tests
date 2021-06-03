@@ -70,7 +70,7 @@ jobs:
           parallel: true
           ci-build-id: '${{ needs.context.outputs.uuid }}'
           config-file: config/authn_mfe_stage.json
-          group: 'AdminPortal/e2e'
+          group: 'AdminPortal/e2e3'
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
