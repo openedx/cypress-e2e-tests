@@ -49,6 +49,7 @@ jobs:
 
   authn-mfe:
     name: Cypress run authn MFE e2e
+    needs: ['context']
     runs-on: ubuntu-latest
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -67,6 +68,7 @@ jobs:
         with:
           record: true
           parallel: true
+          ci-build-id: '${{ needs.context.outputs.uuid }}'
           config-file: config/authn_mfe_stage.json
           group: 'AdminPortal/e2e'
         env:
