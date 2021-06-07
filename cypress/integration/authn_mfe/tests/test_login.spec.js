@@ -14,14 +14,13 @@ describe('Login page tests', function () {
   it('should show empty field error messages', function () {
     loginPage.clickSubmit()
     loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'Please enter your email.')
-    loginPage.loginFailureError().should('contain.text', 'Please enter your password.')
+    loginPage.loginFailureError().should('contain.text', 'Please fill in the fields below.')
   })
 
   it('should show invalid email or password error message', function () {
     loginPage.loginUser('incorrect@email.com', 'incorrect-password')
     loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'Email or password is incorrect.')
+    loginPage.loginFailureError().should('contain.text', 'The username, email or password you entered is incorrect. Please try again.')
   })
 
   it('user can successfully login and redirected to dashboard', function () {

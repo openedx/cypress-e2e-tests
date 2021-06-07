@@ -1,6 +1,6 @@
 class LoginPage {
   loginUser(userEmail, userPassword) {
-    cy.get('#email').type(userEmail)
+    cy.get('#emailOrUsername').type(userEmail)
     cy.get('#password').type(userPassword)
     this.clickSubmit()
   }
@@ -15,10 +15,6 @@ class LoginPage {
 
   loginFailureError() {
     return cy.get('#login-failure-alert')
-  }
-
-  forgotPasswordSuccessMessage() {
-    return cy.get('#confirmation-alert')
   }
 }
 
