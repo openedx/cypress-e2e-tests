@@ -16,11 +16,7 @@ describe('Register page tests', function () {
   it('should show empty field error messages', function () {
     registerPage.clickSubmit()
     registerPage.registerFailureError().should('contain.text', 'We couldn\'t create your account.')
-    registerPage.registerFailureError().should('contain.text', 'Please enter your full name.')
-    registerPage.registerFailureError().should('contain.text', 'Please enter your public username.')
-    registerPage.registerFailureError().should('contain.text', 'Please enter your email.')
-    registerPage.registerFailureError().should('contain.text', 'Please enter your password.')
-    registerPage.registerFailureError().should('contain.text', 'Select your country or region of residence.')
+    registerPage.registerFailureError().should('contain.text', 'Please check your responses and try again.')
   })
 
   it('user can successfully register and redirected to dashboard', function () {
