@@ -7,7 +7,6 @@ class RegisterPage {
     cy.get('#username').type(randomString)
     cy.get('#email').type(`${randomString}@example.com`)
     cy.get('#password').type(randomPassword)
-    cy.get('#country').select('PK')
     this.clickSubmit()
   }
 
