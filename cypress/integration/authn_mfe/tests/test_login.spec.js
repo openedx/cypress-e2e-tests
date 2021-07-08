@@ -20,7 +20,7 @@ describe('Login page tests', function () {
   it('should show invalid email or password error message', function () {
     loginPage.loginUser('incorrect@email.com', 'incorrect-password')
     loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'The username, email or password you entered is incorrect. Please try again.')
+    loginPage.loginFailureError().should('contain.text', 'The username, email, or password you entered is incorrect. Please try again.')
   })
 
   it('user can successfully login and redirected to dashboard', function () {
