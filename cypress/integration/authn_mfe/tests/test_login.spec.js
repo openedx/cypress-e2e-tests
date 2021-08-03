@@ -27,4 +27,9 @@ describe('Login page tests', function () {
     loginPage.loginUser(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
     loginPage.dashboardMyCoursesHeader().should('have.text', 'My Courses')
   })
+
+  it('user can successfully login with username and redirected to dashboard', function () {
+    loginPage.loginUser(Cypress.env('EDX_USERNAME'), Cypress.env('ADMIN_USER_PASSWORD'))
+    loginPage.dashboardMyCoursesHeader().should('have.text', 'My Courses')
+  })
 })

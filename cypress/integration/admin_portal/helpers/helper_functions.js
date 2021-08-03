@@ -44,7 +44,7 @@ class HelperFunctions {
     const code = emailText.match(codeRegex)
     return code[0]
   }
-
+  
   /**
   * Helper method to parse report data from response
   *

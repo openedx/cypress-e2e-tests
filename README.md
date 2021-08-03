@@ -84,6 +84,8 @@ Following Environment Vars should be set before running the tests
 
 `CYPRESS_LMS_USER_PASSWORD`
 
+`CYPRESS_EDX_USERNAME`
+
 _Note_: The above are credentials for a normal edX user who does not have access to admin portal
 
 `CYPRESS_ADMIN_USER_EMAIL`
@@ -108,9 +110,11 @@ _Note_: You can use the method descibed in the below link to get these auth toke
 
 <https://developers.google.com/identity/protocols/OAuth2WebServer#creatingcred>
 
+<https://developers.google.com/oauthplayground/>
+
 ---
 
-### Run Tests
+### Run Tests for Admin Portal
 
 To run admin portal tests in interactive mode use following command
 
@@ -119,6 +123,18 @@ To run admin portal tests in interactive mode use following command
 To run admin portal tests in normal mode use following command
 
 `npm run cy:run_admin_portal`
+
+---
+
+### Run Tests for Authn MFE
+
+To run admin portal tests in interactive mode use following command
+
+`npm run cy:open_authn_mfe`
+
+To run admin portal tests in normal mode use following command
+
+`npm run cy:run_authn_mfe`
 
 ---
 
