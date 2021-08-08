@@ -60,11 +60,15 @@ describe('Register page tests', function () {
     })
   })
 
-  it('user can successfully register and activate their account', function () {
+  it.only('user can successfully register and activate their account', function () {
     
     const uniqueEmail = HelperFunctions.getUniqueEmailAlias(Cypress.env('GMAIL_ID'))
     registerPage.registerNewUser(randomString, randomString, uniqueEmail, 'edxedxedx1')
+    // cy.get('.d-flex.align-items-center.justify-content-center').children().contains('Skip for now').click
+    cy.contains('Skip for now').click()
+    cy.contains('Continue to edX').click()
     loginPage.dashboardMyCoursesHeader().should('have.text', 'My Courses')
+    
 
     const mailOptions = {
       from: 'no-reply@registration.edx.org',
@@ -76,7 +80,6 @@ describe('Register page tests', function () {
     cy.task('mailReader', mailOptions).then((email) => {
       registerPage.continueToedX()
       console.log(HelperFunctions.extractActivationLinkFromEmail(email))
-      debugger
       cy.visit(HelperFunctions.extractActivationLinkFromEmail(email))
       registerPage.successMessage().should('have.text', 'Success')
     })
