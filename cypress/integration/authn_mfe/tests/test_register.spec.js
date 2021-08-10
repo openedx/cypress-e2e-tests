@@ -21,6 +21,6 @@ describe('Register page tests', function () {
 
   it('user can successfully register and redirected to dashboard', function () {
     registerPage.registerNewUser()
-    loginPage.dashboardMyCoursesHeader().should('have.text', 'My Courses')
+    loginPage.welcomePageHeading().should('have.text', 'A few questions for you will help us get smarter.')
   })
 })

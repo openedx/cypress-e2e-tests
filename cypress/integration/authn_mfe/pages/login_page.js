@@ -13,6 +13,10 @@ class LoginPage {
     return cy.get('.header-courses')
   }
 
+  welcomePageHeading() {
+    return cy.get('.welcome-page-heading')
+  }
+
   loginFailureError() {
     return cy.get('#login-failure-alert')
   }
