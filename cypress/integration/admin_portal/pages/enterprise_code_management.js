@@ -49,11 +49,11 @@ class CodeManagementPage {
   }
 
   getCodeStatusFilter() {
-    return cy.get('select[name="table-view"]').first()
+    return cy.get('#codeStatus').first()
   }
 
   getBulkActionFilter() {
-    return cy.get('select[name="bulk-action"]')
+    return cy.get('#bulkActions')
   }
 
   getBulkActionButton() {
