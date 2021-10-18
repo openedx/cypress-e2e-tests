@@ -7,7 +7,7 @@ describe.skip('Login tests', function () {
 
   before(function () {
     coupons.LoginAsAdmin()
-    // coupons.findValidCatalogCourse()
+    coupons.findValidCatalogCourse()
   })
 
   beforeEach(function () {
@@ -17,6 +17,7 @@ describe.skip('Login tests', function () {
   it.skip('applies coupon on LMS side', function () {
     couponApplication.loginAsStudent()
     couponApplication.enableConsent(coupons.courseKey).then((response) => {
+      
       if (response.body.consent_provided === true) {
         couponApplication.applyCoupon('2E3CNEY5LXTZ7IMV', coupons.courseSku).then((resp) => {
           expect(resp.body).to.contain('Your order is complete. If you need a receipt, you can print this page')

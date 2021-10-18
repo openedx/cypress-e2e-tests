@@ -48,8 +48,8 @@ describe('code management tests', function () {
   })
 
   beforeEach(() => {
-    cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
+    // cy.login_using_api(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
+    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid', 'lms_sessionid')
     cy.visit('/')
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     landingPage.openCodeManagement()
@@ -149,12 +149,12 @@ describe('code management tests', function () {
     it('checks the headers of the table and filter options', () => {
       codeManagementDashboard.getCouponDetailsRow()
       cy.check_labels('small.text-light', labels.couponHeaderLabels)
-      cy.check_labels('select[name="table-view"] option', labels.codeStatusFilter)
-      cy.check_labels('select[name="bulk-action"] option', labels.bulkActionFilter)
+      cy.check_labels('#codeStatus option', labels.codeStatusFilter)
+      cy.check_labels('#bulkActions option', labels.bulkActionFilter)
     })
   })
 
-  it('checks for the assignment and revoking of the coupons', () => {
+  it.only('checks for the assignment and revoking of the coupons', () => {
     cy.server()
     const uniqueEmail = HelperFunctions.getUniqueEmailAlias()
     this.couponCode = null
@@ -193,9 +193,9 @@ describe('code management tests', function () {
         expect($message).to.eql('There are no results.')
       })
     })
-    // commented out because it's not working
+    // commented out because I do not see any email received for assignment of the coupon
     // const mailOptions = {
-    //   from: 'test@dev.edx.org',
+    //   from: 'edx-for-business-no-reply@info.edx.org',
     //   to: uniqueEmail,
     //   subject: 'New edX course assignment',
     //   tryLimit: 80,

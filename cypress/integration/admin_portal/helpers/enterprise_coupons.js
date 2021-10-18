@@ -45,6 +45,7 @@ class EnterpriseCoupons {
       requestBody[coupon].enterprise_customer_catalog = Cypress.env('enterprise_catalog')
       requestBody[coupon].start_datetime = getDates().start_date
       requestBody[coupon].end_datetime = getDates().end_date
+      requestBody[coupon].sales_force_id = 'none'
     })
   }
 

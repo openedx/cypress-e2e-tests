@@ -8,9 +8,9 @@ const modalWindowLabelsAndText = {
   helpEmailText: 'To add more than one user, enter one email address per line.',
   uploadCSVLabel: 'Upload Email Addresses',
   csvHelpText: 'The file must be a CSV containing a single column of email addresses.',
-  maxNumbersEmailError: 'Unable to assign codesYou have 2 codes selected, but you entered 3 emails. Please try again.',
-  csvMaxEmailError: 'Unable to assign codesYou have 2 codes selected, but your file has 3 emails. Please try again.',
-  noEmailError: 'Unable to assign codesNo email addresses provided. Either manually enter email addresses or upload a CSV file.',
+  maxNumbersEmailError: 'WarningUnable to assign codesYou have 2 codes selected, but you entered 3 emails. Please try again.',
+  csvMaxEmailError: 'WarningUnable to assign codesYou have 2 codes selected, but your file has 3 emails. Please try again.',
+  noEmailError: 'WarningUnable to assign codesNo email addresses provided. Either manually enter email addresses or upload a CSV file.',
 }
 
 const MODAL_ERROR_ALERT_SELECTOR = '.alert.alert-danger'
@@ -36,7 +36,7 @@ describe('bulk code management tests', function () {
   })
 
   beforeEach(function () {
-    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid')
+    Cypress.Cookies.preserveOnce('edxloggedin', 'stage-edx-user-info', 'stage-edx-sessionid', 'ecommerce_csrftoken', 'ecommerce_sessionid', 'lms_sessionid')
     cy.visit('/')
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     landingPage.openCodeManagement()
