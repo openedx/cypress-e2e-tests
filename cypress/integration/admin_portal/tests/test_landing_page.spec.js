@@ -47,7 +47,9 @@ describe('landing page tests', function () {
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
       const actualEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
-      expect(actualEnterpriseList).to.include(this.enterpriseData)
+      cy.get('@enterpriseData').then((enterpriseData) => {
+        expect(actualEnterpriseList).to.include(enterpriseData)
+      })
     })
   })
 
