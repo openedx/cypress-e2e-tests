@@ -8,11 +8,11 @@ class ForgotPasswordPage {
     cy.get('.btn-brand').click()
   }
 
-  forgotPasswordFailureError() {
+  getForgotPasswordFailureError() {
     return cy.get('.alert-danger')
   }
 
-  forgotPasswordSuccessMessage() {
+  getForgotPasswordSuccessMessage() {
     return cy.get('.alert-success')
   }
 }

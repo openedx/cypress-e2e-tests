@@ -9,15 +9,15 @@ class LoginPage {
     cy.get('.btn-brand').click()
   }
 
-  dashboardMyCoursesHeader() {
+  getDashboardMyCoursesHeader() {
     return cy.get('.header-courses')
   }
 
-  welcomePageHeading() {
+  getWelcomePageHeading() {
     return cy.get('.welcome-page-heading')
   }
 
-  loginFailureError() {
+  getLoginFailureError() {
     return cy.get('#login-failure-alert')
   }
 }

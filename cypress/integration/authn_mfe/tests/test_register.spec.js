@@ -15,12 +15,12 @@ describe('Register page tests', function () {
 
   it('should show empty field error messages', function () {
     registerPage.clickSubmit()
-    registerPage.registerFailureError().should('contain.text', 'We couldn\'t create your account.')
-    registerPage.registerFailureError().should('contain.text', 'Please check your responses and try again.')
+    registerPage.getRegisterFailureError().should('contain.text', 'We couldn\'t create your account.')
+    registerPage.getRegisterFailureError().should('contain.text', 'Please check your responses and try again.')
   })
 
   it('user can successfully register and redirected to dashboard', function () {
     registerPage.registerNewUser()
-    loginPage.welcomePageHeading().should('have.text', 'A few questions for you will help us get smarter.')
+    loginPage.getWelcomePageHeading().should('have.text', 'A few questions for you will help us get smarter.')
   })
 })
