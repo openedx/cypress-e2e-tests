@@ -33,7 +33,7 @@ describe('landing page tests', function () {
     const expectedFooterNavLinks = {
       'Terms of Service': 'https://www.edx.org/edx-terms-service',
       'Privacy Policy': 'https://www.edx.org/edx-privacy-policy',
-      'Support': 'https://business-support.edx.org/hc/en-us',
+      Support: 'https://business-support.edx.org/hc/en-us',
     }
     // Check for the presence of valid text and links in footer section
     landingPage.getFooterNavItems().then((elems) => {
