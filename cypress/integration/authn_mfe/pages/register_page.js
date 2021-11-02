@@ -14,7 +14,7 @@ class RegisterPage {
     cy.get('.btn-brand').click()
   }
 
-  registerFailureError() {
+  getRegisterFailureError() {
     return cy.get('.alert-danger')
   }
 }

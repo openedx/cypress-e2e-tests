@@ -13,18 +13,18 @@ describe('Login page tests', function () {
 
   it('should show empty field error messages', function () {
     loginPage.clickSubmit()
-    loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'Please fill in the fields below.')
+    loginPage.getLoginFailureError().should('contain.text', 'We couldn\'t sign you in.')
+    loginPage.getLoginFailureError().should('contain.text', 'Please fill in the fields below.')
   })
 
   it('should show invalid email or password error message', function () {
     loginPage.loginUser('incorrect@email.com', 'incorrect-password')
-    loginPage.loginFailureError().should('contain.text', 'We couldn\'t sign you in.')
-    loginPage.loginFailureError().should('contain.text', 'The username, email, or password you entered is incorrect. Please try again.')
+    loginPage.getLoginFailureError().should('contain.text', 'We couldn\'t sign you in.')
+    loginPage.getLoginFailureError().should('contain.text', 'The username, email, or password you entered is incorrect. Please try again.')
   })
 
   it('user can successfully login and redirected to dashboard', function () {
     loginPage.loginUser(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    loginPage.dashboardMyCoursesHeader().should('have.text', 'My Courses')
+    loginPage.getDashboardMyCoursesHeader().should('have.text', 'My Courses')
   })
 })
