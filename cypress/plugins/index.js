@@ -2,7 +2,7 @@
 
 const fs = require('fs-extra')
 const path = require('path')
-const gmail = require("./gmail_reader")
+const gmail = require("./gmailReader")
 
 function getConfigurationByFile (file) {
   const pathToConfigFile = path.resolve('.', 'config', `${file}.json`)
@@ -18,7 +18,7 @@ module.exports = (on, config) => {
     failed: require('cypress-failed-log/src/failed')(),
     mailReader: gmail.readEmail
   })
-  const file = config.env.ENVIRONMENT || 'admin_portal_stage'
+  const file = config.env.ENVIRONMENT || 'adminPortalStage'
 
   return getConfigurationByFile(file)
 

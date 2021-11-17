@@ -35,7 +35,7 @@ class EnterpriseCoupons {
   prepareCouponData(coupon) {
     const randomString = uuidv4().substr(-11)
     const couponTitle = `Test_Coupon_${randomString}`
-    return cy.fixture('coupon_creation_data').then((couponData) => {
+    return cy.fixture('couponCreationData').then((couponData) => {
       const requestBody = couponData
       requestBody[coupon].title = couponTitle
       requestBody[coupon].enterprise_customer.id = Cypress.env('enterprise_id')

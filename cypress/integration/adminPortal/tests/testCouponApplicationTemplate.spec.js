@@ -1,5 +1,5 @@
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import CouponApplication from '../helpers/coupon_application'
+import EnterpriseCoupons from '../helpers/enterpriseCoupons'
+import CouponApplication from '../helpers/couponApplication'
 
 describe.skip('Login tests', function () {
   const coupons = new EnterpriseCoupons()

@@ -1,4 +1,4 @@
-import HelperFunctions from '../helpers/helper_functions'
+import HelperFunctions from '../helpers/helperFunctions'
 
 describe('Email assertion:', () => {
   // Just a template to show how email reading will work

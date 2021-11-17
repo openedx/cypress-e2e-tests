@@ -1,5 +1,5 @@
-import HelperFunctions from '../helpers/helper_functions'
-import LandingPage from '../pages/landing_page'
+import HelperFunctions from '../helpers/helperFunctions'
+import LandingPage from '../pages/landingPage'
 
 describe('landing page tests', function () {
   const landingPage = new LandingPage()

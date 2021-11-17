@@ -1,6 +1,6 @@
-import HelperFunctions from '../helpers/helper_functions'
-import LandingPage from '../pages/landing_page'
-import EnterpriseDashboard from '../pages/enterprise_dashboard'
+import HelperFunctions from '../helpers/helperFunctions'
+import LandingPage from '../pages/landingPage'
+import EnterpriseDashboard from '../pages/enterpriseDashboard'
 
 describe('Enterprise Logos and nav links verification', function () {
   const landingPage = new LandingPage()

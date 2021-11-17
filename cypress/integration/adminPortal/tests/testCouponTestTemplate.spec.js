@@ -1,5 +1,5 @@
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import HelperFunctions from '../helpers/helper_functions'
+import EnterpriseCoupons from '../helpers/enterpriseCoupons'
+import HelperFunctions from '../helpers/helperFunctions'
 
 describe('Coupon Tests Template', function () {
   const coupons = new EnterpriseCoupons()

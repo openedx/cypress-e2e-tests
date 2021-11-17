@@ -1,5 +1,5 @@
-import LoginPage from '../pages/login_page'
-import LandingPage from '../pages/landing_page'
+import LoginPage from '../pages/loginPage'
+import LandingPage from '../pages/landingPage'
 
 describe('Login tests', function () {
   const loginPage = new LoginPage()
