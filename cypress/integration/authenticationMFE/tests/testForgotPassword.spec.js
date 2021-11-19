@@ -1,4 +1,4 @@
-import ForgotPasswordPage from '../pages/forgot_password_page'
+import ForgotPasswordPage from '../pages/forgotPasswordPage'
 
 describe('Forgot password page tests', function () {
   const forgotPasswordPage = new ForgotPasswordPage()

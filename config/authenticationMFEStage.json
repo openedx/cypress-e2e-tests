@@ -1,6 +1,6 @@
 {
   "baseUrl": "https://authn.stage.edx.org",
-  "integrationFolder": "cypress/integration/authn_mfe/tests",
+  "integrationFolder": "cypress/integration/authenticationMFE/tests",
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,
   "pageLoadTimeout": 80000,

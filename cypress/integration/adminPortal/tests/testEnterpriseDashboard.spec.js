@@ -60,7 +60,7 @@ describe('Enterprise cards and table verification', function () {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Go through cards and verify card main text and value against the text
-    cy.fixture('card_info').then((cards) => {
+    cy.fixture('cardInfo').then((cards) => {
       cards.forEach((card) => {
         // Go through cards and verify card text
         dashboard.getCardText(card.number).should('have.text', card.text)
@@ -109,7 +109,7 @@ describe('Enterprise cards and table verification', function () {
     // Open the target enterprise dashboard
     landingPage.goToEnterprise(Cypress.env('enterprise_name'))
     // Select the target table by opening the card detail view and clicking the target question
-    cy.fixture('tables_info').then((tables) => {
+    cy.fixture('tablesInfo').then((tables) => {
       tables.forEach((table) => {
         // Define a route for all tables XHR requests
         cy.route({
