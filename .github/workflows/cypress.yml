@@ -56,7 +56,7 @@ jobs:
         with:
           record: true
           parallel: true
-          config-file: config/authnenticationMFEStage.json
+          config-file: config/authenticationMFEStage.json
           group: 'AuthnMFE/e2e'
         env:
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
