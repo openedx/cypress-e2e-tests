@@ -52,7 +52,7 @@ describe('code management tests', function () {
       })
     })
     // Coupon quanitity from the fixture
-    cy.fixture('coupon_creation_data').then((couponData) => {
+    cy.fixture('couponCreationData').then((couponData) => {
       cy.wrap(couponData.discount_single_use_percentage.quantity).as('quantity')
     })
   })
