@@ -8,7 +8,7 @@
   "chromeWebSecurity": false,
   "projectId": "3se7u6",
   "env": {
-    "ENVIRONMENT": "authn_mfe_stage"
+    "ENVIRONMENT": "authenticationMFEStage"
   },
   "retries": {
     "runMode": 2,
