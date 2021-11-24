@@ -4,7 +4,7 @@
   ],
   "extends": [
     "plugin:cypress/recommended",
-    "eslint-config-edx"
+    "@edx/eslint-config"
   ],
   "parser": "babel-eslint",
   "env": {
