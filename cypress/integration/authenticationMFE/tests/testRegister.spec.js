@@ -1,5 +1,5 @@
-import RegisterPage from '../pages/register_page'
-import LoginPage from '../pages/login_page'
+import RegisterPage from '../pages/registerPage'
+import LoginPage from '../pages/loginPage'
 
 describe('Register page tests', function () {
   const registerPage = new RegisterPage()

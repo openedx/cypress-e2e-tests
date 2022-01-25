@@ -1,6 +1,6 @@
-import LandingPage from '../pages/landing_page'
-import CodeManagementPage from '../pages/enterprise_code_management'
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
+import LandingPage from '../pages/landingPage'
+import CodeManagementPage from '../pages/enterpriseCodeManagement'
+import EnterpriseCoupons from '../helpers/enterpriseCoupons'
 
 const modalWindowLabelsAndText = {
   unassignedCodes: 'Unassigned codes: ',

@@ -1,5 +1,5 @@
-import HelperFunctions from '../helpers/helper_functions'
-import LandingPage from '../pages/landing_page'
+import HelperFunctions from '../helpers/helperFunctions'
+import LandingPage from '../pages/landingPage'
 
 describe('landing page tests', function () {
   const landingPage = new LandingPage()
@@ -43,7 +43,7 @@ describe('landing page tests', function () {
   })
 
   it.skip('checks enterprise list', function () {
-    cy.fixture('enterprise_list.json').as('enterpriseData')
+    cy.fixture('enterpriseList.json').as('enterpriseData')
     // Check the names and urls of enterprises
     landingPage.getEnterpriseList().then((elems) => {
       const actualEnterpriseList = HelperFunctions.getLabelAndUrlsDict(elems)
@@ -55,7 +55,7 @@ describe('landing page tests', function () {
 
   it('checks the search functionality', function () {
     // It searches the enterprises using different search literals and verify the results
-    cy.fixture('search_data').then((searchItems) => {
+    cy.fixture('searchData').then((searchItems) => {
       searchItems.forEach((searchItem) => {
         landingPage.searchEnterprise(searchItem.search_literal)
         landingPage.getEnterpriseList().then((elems) => {

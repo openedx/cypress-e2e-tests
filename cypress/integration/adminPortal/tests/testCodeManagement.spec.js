@@ -1,7 +1,7 @@
-import LandingPage from '../pages/landing_page'
-import CodeManagementPage from '../pages/enterprise_code_management'
-import EnterpriseCoupons from '../helpers/enterprise_coupons'
-import HelperFunctions from '../helpers/helper_functions'
+import LandingPage from '../pages/landingPage'
+import CodeManagementPage from '../pages/enterpriseCodeManagement'
+import EnterpriseCoupons from '../helpers/enterpriseCoupons'
+import HelperFunctions from '../helpers/helperFunctions'
 
 const requestCodeslabelsAndText = {
   companyLabel: 'Company*',
@@ -52,7 +52,7 @@ describe('code management tests', function () {
       })
     })
     // Coupon quanitity from the fixture
-    cy.fixture('coupon_creation_data').then((couponData) => {
+    cy.fixture('couponCreationData').then((couponData) => {
       cy.wrap(couponData.discount_single_use_percentage.quantity).as('quantity')
     })
   })

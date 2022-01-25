@@ -1,6 +1,6 @@
 {
   "baseUrl": "https://authn.stage.edx.org",
-  "integrationFolder": "cypress/integration/authn_mfe/tests",
+  "integrationFolder": "cypress/integration/authenticationMFE/tests",
   "defaultCommandTimeout": 10000,
   "requestTimeout": 10000,
   "pageLoadTimeout": 80000,
@@ -8,7 +8,7 @@
   "chromeWebSecurity": false,
   "projectId": "3se7u6",
   "env": {
-    "ENVIRONMENT": "authn_mfe_stage"
+    "ENVIRONMENT": "authenticationMFEStage"
   },
   "retries": {
     "runMode": 2,

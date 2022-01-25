@@ -1,4 +1,4 @@
-import LoginPage from '../pages/login_page'
+import LoginPage from '../pages/loginPage'
 
 describe('Login page tests', function () {
   const loginPage = new LoginPage()
