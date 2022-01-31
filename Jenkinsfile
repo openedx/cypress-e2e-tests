@@ -26,7 +26,7 @@ pipeline {
         CYPRESS_GMAIL_REFRESH_TOKEN = credentials('CYPRESS_GMAIL_REFRESH_TOKEN')
       }
       steps {
-        sh 'npm run cy:run_admin_portal'
+        sh 'npm run cy:runAuthnMFE'
       }
     }
   }
