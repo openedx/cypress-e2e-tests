@@ -26,9 +26,9 @@ Also as a starting point it would be good to go through these tutorial videos
 
 ## E2E Tests Repo
 
-This repo is meant to contain multiple projects, for now there is one project:
+This repo is meant to contain a sample for e2e tests:
 
-Enterprise Admin Portals (Active)
+Authentication MFE (Active)
 
 With time we will add more projects in the repo
 
@@ -41,23 +41,21 @@ We don't yet have well defined protocols for writing Cypress tests for edX appli
 
 The first project was MIT Journals (which has since been deprecated and removed).
 
-In the second project, Enterprise Admin Portal, the following approach was used:
+In the second project, Authentication MFE, the following approach was used:
 
 * Page Object model is used in spite of what Cypress site says, it increases readability of code and is much easier to manage
 
-* Instead of using arrow functions traditional named functions are used, this is done to to be able to use **this**, which is not working with arrow functions
-
 * Cypress commands and helper functions are still utilized
 
-The tests for Enterprise Admin Portal are present in following path
+The tests for Authentication MFE are present in following path
 
-<https://github.com/edx/cypress-e2e-tests/tree/master/cypress/integration/admin_portal>
+<https://github.com/openedx/cypress-e2e-tests/tree/master/cypress/integration/authenticationMFE>
 
 To manage multiple projects customized config files are used so user is able to run any project without making any change in the code
 
 Config files for projects are placed here
 
-<https://github.com/edx/cypress-e2e-tests/tree/master/config>
+<https://github.com/openedx/cypress-e2e-tests/tree/master/config>
 
 ---
 ---
@@ -114,11 +112,11 @@ _Note_: You can use the method descibed in the below link to get these auth toke
 
 To run admin portal tests in interactive mode use following command
 
-`npm run cy:open_admin_portal`
+`npm run cy:openAuthnMFE`
 
 To run admin portal tests in normal mode use following command
 
-`npm run cy:run_admin_portal`
+`npm run cy:runAuthnMFE`
 
 ---
 

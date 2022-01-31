@@ -2,4 +2,4 @@
 version: '2'
 services:
  cypress:
-    command: bash -c 'npm run cy:run_admin_portal'
+    command: bash -c 'npm run cy:runAuthnMFE'

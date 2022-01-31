@@ -14,4 +14,4 @@ services:
       # for Cypress to communicate with the X11 server pass this socket file
       # in addition to any other mapped volumes
       - /tmp/.X11-unix:/tmp/.X11-unix
-    command: bash -c 'npm run cy:open_admin_portal'
+    command: bash -c 'npm run cy:openAuthnMFE'

@@ -32,8 +32,5 @@ pipeline {
   }
   post {
     // Send an email in case of failure
-    failure {
-      mail to: "kchaudhry@edx.org", subject: "Cypress e2e Tests failure", body: "The Cypress e2e tests pipeline has failed"
     }
-  }
 }
