@@ -17,8 +17,13 @@
     "cypress": "^5.1.0",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
-    "eslint": "^8.0.0",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-cypress": "^2.6.1",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "googleapis": "42.0.0",
     "uuid": "^3.3.2"
   }
