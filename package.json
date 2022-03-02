@@ -12,7 +12,6 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.17.0",
     "@edx/eslint-config": "^2.0.0",
     "cypress": "^5.1.0",
     "cypress-failed-log": "^2.5.0",
@@ -26,5 +25,9 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "googleapis": "42.0.0",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0"
   }
 }
