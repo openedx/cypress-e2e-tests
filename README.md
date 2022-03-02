@@ -167,3 +167,4 @@ or install it directly from <https://www.xquartz.org/>
   * `DISPLAY=$IP:0`
 * Use following command in terminal
   * `docker-compose -f docker-compose.yml -f cy-open.yml up`
+  * test
