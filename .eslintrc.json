@@ -7,6 +7,9 @@
     "@edx/eslint-config"
   ],
   "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "env": {
     "cypress/globals": true
   },
