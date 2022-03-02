@@ -6,7 +6,7 @@
     "plugin:cypress/recommended",
     "@edx/eslint-config"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "cypress/globals": true
   },

@@ -12,8 +12,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.17.0",
     "@edx/eslint-config": "^2.0.0",
-    "babel-eslint": "^10.0.2",
     "cypress": "^5.1.0",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
