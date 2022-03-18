@@ -4,9 +4,12 @@
   ],
   "extends": [
     "plugin:cypress/recommended",
-    "eslint-config-edx"
+    "@edx/eslint-config"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "env": {
     "cypress/globals": true
   },
