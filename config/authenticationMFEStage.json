@@ -7,6 +7,16 @@
   "taskTimeout": 300000,
   "chromeWebSecurity": false,
   "projectId": "3se7u6",
+  "blockHosts": [
+    "**.cdn.**",
+    "cdn.*",
+    "*.optimizely.**",
+    "www.googletagmanager.com",
+    "www.google-analytics.com",
+    "*.qualaroo.**",
+    "s3.amazonaws.com",
+    "*.nr-data.net**"
+  ],
   "env": {
     "ENVIRONMENT": "authenticationMFEStage"
   },
