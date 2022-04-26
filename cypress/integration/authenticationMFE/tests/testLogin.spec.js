@@ -24,7 +24,7 @@ describe('Login page tests', function () {
   })
 
   it('user can successfully login and redirected to dashboard', function () {
-    loginPage.loginUser(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    cy.url().should('contain', 'courses.stage.edx.org')
+    loginPage.loginUser(Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
+    loginPage.getDashboardMyCoursesHeader().should('have.text', 'My Courses')
   })
 })
