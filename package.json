@@ -2,7 +2,7 @@
   "name": "cypress-e2e-tests",
   "version": "1.0.0",
   "description": "Cypress E2E Tests for edX applications",
-  "repository": "https://github.com/edx/cypress-e2e-tests",
+  "repository": "https://github.com/openedx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
     "cy:openAuthnMFE": "cypress open --env ENVIRONMENT=authenticationMFEStage",
