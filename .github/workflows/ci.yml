@@ -1,6 +1,6 @@
 name: node_js CI
 
-on: 
+on:
   push:
     branches:
     - 'master'
