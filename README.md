@@ -1,6 +1,6 @@
 # cypress-e2e-tests
 
-This repo contains e2e tests written in Cypress for different edX applications
+This repo contains e2e tests written in Cypress for different Open edX applications
 
 ---
 ---
@@ -37,7 +37,7 @@ With time we will add more projects in the repo
 
 ## Protocols for Test Design
 
-We don't yet have well defined protocols for writing Cypress tests for edX application, so this work was mostly experimental
+We don't yet have well defined protocols for writing Cypress tests for Open edX application, so this work was mostly experimental
 
 The first project was MIT Journals (which has since been deprecated and removed).
 
