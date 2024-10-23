@@ -12,8 +12,8 @@ metadata:
       icon: "GitHub"
   annotations:
     openedx.org/arch-interest-groups: ""
-    openedx.org/release: "main"
+    openedx.org/release: "master"
 spec:
-  owner: group:openedx-unmaintained
+  owner: group:committers-cypress-e2e-tests
   type: 'service'
   lifecycle: 'production'
