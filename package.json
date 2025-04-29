@@ -5,10 +5,8 @@
   "repository": "https://github.com/openedx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
-    "cy:openAuthnMFE": "cypress open",
-    "cy:record:openAuthnMFE": "cypress open --record",
-    "cy:runAuthnMFE": "cypress run",
-    "cy:record:runAuthnMFE": "cypress run --record",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
