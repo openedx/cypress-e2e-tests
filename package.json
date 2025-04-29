@@ -5,17 +5,20 @@
   "repository": "https://github.com/openedx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
-    "cy:openAuthnMFE": "cypress open --env ENVIRONMENT=authenticationMFEStage",
-    "cy:runAuthnMFE": "cypress run --env ENVIRONMENT=authenticationMFEStage",
+    "cy:openAuthnMFE": "cypress open",
+    "cy:record:openAuthnMFE": "cypress open --record",
+    "cy:runAuthnMFE": "cypress run",
+    "cy:record:runAuthnMFE": "cypress run --record",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^9.5.4",
+    "cypress": "^14.3.2",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
+    "cypress-wait-until": "^3.0.1",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-cypress": "^2.6.1",
