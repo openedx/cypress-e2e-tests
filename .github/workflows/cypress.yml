@@ -16,9 +16,12 @@ jobs:
           record: true
           parallel: true
         env:
-          CYPRESS_BASE_URL: ${{ secrets.CYPRESS_BASE_URL }}
+          CYPRESS_LMS_BASE_URL: ${{ secrets.CYPRESS_LMS_BASE_URL }}
+          CYPRESS_MFE_BASE_URL: ${{ secrets.CYPRESS_MFE_BASE_URL }}
+          CYPRESS_LMS_USER_NAME: ${{ secrets.CYPRESS_LMS_USER_NAME }}
           CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
           CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
+          CYPRESS_ADMIN_USER_NAME: ${{ secrets.CYPRESS_ADMIN_USER_NAME }}
           CYPRESS_ADMIN_USER_EMAIL: ${{ secrets.CYPRESS_ADMIN_USER_EMAIL }}
           CYPRESS_ADMIN_USER_PASSWORD: ${{ secrets.CYPRESS_ADMIN_USER_PASSWORD }}
           CYPRESS_GMAIL_ID: ${{ secrets.CYPRESS_GMAIL_ID }}

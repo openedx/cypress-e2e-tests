@@ -1,6 +1,6 @@
-const { defineConfig } = require('cypress')
+import { defineConfig } from 'cypress'
 
-module.exports = defineConfig({
+export default defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1080,
   defaultCommandTimeout: 10000,
@@ -18,7 +18,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
     specPattern: 'cypress/e2e/auth/tests/**/*.{js,jsx,ts,tsx}',
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.CYPRESS_LMS_BASE_URL,
   },
   blockHosts: [
     "**.cdn.**",

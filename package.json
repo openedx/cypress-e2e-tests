@@ -1,7 +1,7 @@
 {
   "name": "cypress-e2e-tests",
-  "version": "1.0.0",
-  "description": "Cypress E2E Tests for edX applications",
+  "version": "2.0.0",
+  "description": "Cypress E2E Tests for Open edX applications",
   "repository": "https://github.com/openedx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^14.3.2",
+    "cypress": "^14.3.3",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
     "cypress-wait-until": "^3.0.1",
@@ -24,7 +24,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.2",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "googleapis": "42.0.0",
+    "googleapis": "^148.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

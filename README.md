@@ -49,13 +49,9 @@ In the second project, Authentication MFE, the following approach was used:
 
 The tests for Authentication MFE are present in following path
 
-<https://github.com/openedx/cypress-e2e-tests/tree/master/cypress/integration/authenticationMFE>
+<https://github.com/openedx/cypress-e2e-tests/tree/master/cypress/e2e/auth>
 
-To manage multiple projects customized config files are used so user is able to run any project without making any change in the code
-
-Config files for projects are placed here
-
-<https://github.com/openedx/cypress-e2e-tests/tree/master/config>
+The code is intended to be generalized and multiple projects can be run via setting env variables and without any code modifications.
 
 ---
 ---
@@ -72,17 +68,56 @@ For rest of the installations move to project folder in command prompt and type
 
 which will install Cypress and other supporting tools
 
+### Nix
+
+You can use Nix to get a development env almost without any manual installation
+
+#### DevBox
+```
+devbox shell
+```
+or
+```
+devbox run cy:run
+```
+
+Devbox already includes the default env variables to run agains a community sandbox:
+```
+cat devbox.json
+...
+  "env": {
+    "LMS_BASE_URL": "https://teak.demo.edly.io/",
+    "CYPRESS_LMS_USER_NAME": "admin",
+    "CYPRESS_LMS_USER_PASS": "admin"
+  },
+...
+```
+
+
+#### Flake
+```
+nix develop
+```
+
 ---
 
 ### Environment Variables
 
 Following Environment Vars should be set before running the tests
 
+`LMS_BASE_URL`
+
+_Note_: The above is a base LMS URL - it's an entry point for all tests
+
+`CYPRESS_LMS_USER_NAME`
+
 `CYPRESS_LMS_USER_EMAIL`
 
 `CYPRESS_LMS_USER_PASSWORD`
 
-_Note_: The above are credentials for a normal edX user who does not have access to admin portal
+_Note_: The above are credentials for a normal Open edX user who does not have access to admin portal
+
+`CYPRESS_ADMIN_USER_NAME`
 
 `CYPRESS_ADMIN_USER_EMAIL`
 
@@ -112,11 +147,11 @@ _Note_: You can use the method descibed in the below link to get these auth toke
 
 To run admin portal tests in interactive mode use following command
 
-`npm run cy:openAuthnMFE`
+`npm run cy:open`
 
 To run admin portal tests in normal mode use following command
 
-`npm run cy:runAuthnMFE`
+`npm run cy:run`
 
 ---
 

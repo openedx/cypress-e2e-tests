@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "packages": [
+    "nodejs@22"
+  ],
+  "env": {
+    "CYPRESS_LMS_BASE_URL": "https://teak.demo.edly.io",
+    "CYPRESS_BASE_MFE_URL": "https://apps.teak.demo.edly.io",
+    "CYPRESS_LMS_USER_NAME": "admin",
+    "CYPRESS_LMS_USER_PASSWORD": "admin"
+  },
+  "shell": {
+    "init_hook": [
+      "npm install"
+    ],
+    "scripts": {
+      "cy:run": [
+        "npm run cy:run"
+      ],
+      "cy:open":[
+        "npm run cy:open"
+      ]
+    }
+  }
+}

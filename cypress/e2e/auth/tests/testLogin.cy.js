@@ -24,7 +24,7 @@ describe('Login page tests', () => {
   })
 
   it('user can successfully login and redirected to dashboard', () => {
-    loginPage.loginUser(Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    cy.location('hostname').should('eq', 'home.stage.edx.org')
+    loginPage.loginUser(Cypress.env('LMS_USER_NAME'), Cypress.env('LMS_USER_PASSWORD'))
+    cy.url().should('contain', 'learner-dashboard')
   })
 })
