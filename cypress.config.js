@@ -16,18 +16,18 @@ export default defineConfig({
     openMode: 2,
   },
   e2e: {
-    setupNodeEvents(on, config) {},
-    specPattern: 'cypress/e2e/auth/tests/**/*.{js,jsx,ts,tsx}',
+    setupNodeEvents() {},
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     baseUrl: process.env.CYPRESS_LMS_BASE_URL,
   },
   blockHosts: [
-    "**.cdn.**",
-    "cdn.*",
-    "*.optimizely.**",
-    "www.googletagmanager.com",
-    "www.google-analytics.com",
-    "*.qualaroo.**",
-    "s3.amazonaws.com",
-    "*.nr-data.net**"
+    '**.cdn.**',
+    'cdn.*',
+    '*.optimizely.**',
+    'www.googletagmanager.com',
+    'www.google-analytics.com',
+    '*.qualaroo.**',
+    's3.amazonaws.com',
+    '*.nr-data.net**',
   ],
 })
