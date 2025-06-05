@@ -2,13 +2,17 @@ import LoginPage from '../../../pages/lms/auth/loginPage'
 
 const loginPage = new LoginPage()
 
-describe('Login page tests', () => {
+describe('[TC_LEARNER_9] Login page tests', () => {
   before(() => {
     cy.clearCookies()
   })
 
   beforeEach(() => {
     cy.visit('/login')
+  })
+
+  it('sign in form structure', () => {
+    loginPage.checkLoginFormStructure()
   })
 
   it('should show empty field error messages', () => {
