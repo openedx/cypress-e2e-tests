@@ -1,31 +1,55 @@
 class LoginPage {
+  emailOrNameField = '#emailOrUsername'
+  passwordField = '#password'
+  signInButton = '#sign-in'
+  forgotPasswordButton = '#forgot-password'
+  loginFailureError = '#login-failure-alert'
+  forgotPasswordLink = 'a[href="reset"]'
+
   loginUser(userEmail, userPassword) {
-    cy.get('#emailOrUsername').type(userEmail)
-    cy.get('#password').type(userPassword)
+    if (userEmail) {
+      cy.get(this.emailOrNameField).type(userEmail, { force: true })
+    }
+    if (userPassword) {
+      cy.get(this.passwordField).type(userPassword, { force: true })
+    }
     this.clickSubmit()
   }
 
   checkLoginFormStructure() {
-    cy.get('#emailOrUsername').should('be.visible')
-    cy.get('#password').should('be.visible')
-    cy.get('.btn-brand').should('be.visible')
-    cy.get('#forgot-password').should('be.visible')
+    cy.get(this.emailOrNameField).should('be.visible')
+    cy.get(this.passwordField).should('be.visible')
+    cy.get(this.signInButton).should('be.visible')
+    cy.get(this.forgotPasswordButton).should('be.visible')
   }
 
   clickSubmit() {
-    cy.get('.btn-brand').click()
+    cy.get(this.signInButton).click()
   }
 
-  getDashboardMyCoursesHeader() {
-    return cy.get('.header-courses')
-  }
-
-  getWelcomePageHeading() {
-    return cy.get('.welcome-page-heading')
+  clearLoginFields() {
+    cy.get(this.emailOrNameField).clear()
+    cy.get(this.passwordField).clear()
   }
 
   getLoginFailureError() {
-    return cy.get('#login-failure-alert')
+    return cy.get(this.loginFailureError)
+  }
+
+  getFeedbackForField(fieldName) {
+    return cy.get(`[feedback-for="${fieldName}"]`)
+  }
+
+  getPassReset() {
+    return cy.get(this.forgotPasswordLink)
+  }
+
+  clickPassReset() {
+    cy.get(this.forgotPasswordLink).click()
+  }
+
+  clickForgotPassword() {
+    cy.get(this.forgotPasswordButton).click()
   }
 }
 
