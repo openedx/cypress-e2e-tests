@@ -1,9 +1,14 @@
 class ForgotPasswordPage {
   emailField = '#email'
+
   recoverPasswordButton = '#submit-forget-password'
+
   techSupportLink = 'span > .pgn__hyperlink'
+
   signIn = '#controlled-tab-tab-\\/login'
+
   validationErrors = '#validation-errors'
+
   allEmailErrors = 'div[id^="email-"]'
 
   checkForgotPasswordFormStructure() {

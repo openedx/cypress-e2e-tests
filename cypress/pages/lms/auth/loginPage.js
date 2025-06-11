@@ -1,9 +1,14 @@
 class LoginPage {
   emailOrNameField = '#emailOrUsername'
+
   passwordField = '#password'
+
   signInButton = '#sign-in'
+
   forgotPasswordButton = '#forgot-password'
+
   loginFailureError = '#login-failure-alert'
+
   forgotPasswordLink = 'a[href="reset"]'
 
   loginUser(userEmail, userPassword) {

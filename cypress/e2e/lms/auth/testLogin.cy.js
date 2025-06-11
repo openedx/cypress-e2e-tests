@@ -15,7 +15,7 @@ describe('[TC_LEARNER_9] Login page tests', () => {
     safeErrMsg: 'To be on the safe side, you can',
   }
   const userInfo = {
-    incorrectEmail: 'user_' + randomString + '@example.com',
+    incorrectEmail: `user_${randomString}@example.com`,
     incorrectPassword: randomString,
     existingEmail: Cypress.env('LMS_USER_NAME'),
     existingPassword: Cypress.env('LMS_USER_PASSWORD'),

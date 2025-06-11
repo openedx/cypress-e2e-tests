@@ -15,7 +15,7 @@ describe('[TC_LEARNER_10] Forgot password page tests', () => {
     resetPasswordSuccess3: 'If you need further assistance, contact technical support.',
     retryErrMsgMain: 'An error occurred.',
     retryErrMsg: 'Your previous request is in progress, please try again in a few moments.',
-    helpTextMsg: `The email address you used to register with ${Cypress.env('PLATFORM_NAME')}`
+    helpTextMsg: `The email address you used to register with ${Cypress.env('PLATFORM_NAME')}`,
   }
   const userInfo = {
     minEmail: '1',
