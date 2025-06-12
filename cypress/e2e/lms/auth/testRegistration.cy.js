@@ -1,7 +1,7 @@
 import RegisterPage from '../../../pages/lms/auth/registerPage'
 import randomString from '../../../support/utils'
 
-describe('[TC_LEARNER_8] Registration page tests', () => {
+describe('[TC_LEARNER_8] Registration page tests', function () {
   const registerPage = new RegisterPage()
   const randomUsername = randomString(10)
 
@@ -55,7 +55,7 @@ describe('[TC_LEARNER_8] Registration page tests', () => {
     cy.visit(`${baseURL}/authn/register`)
   })
 
-  it('should show correct register form structure', () => {
+  it('should show correct register form structure', function () {
     registerPage.checkRegisterFormStructure()
   })
 
@@ -70,11 +70,14 @@ describe('[TC_LEARNER_8] Registration page tests', () => {
     registerPage.getFieldError('password').should('contain.text', errMsg.passwordErrMsg)
   })
 
-  it.skip('new user registers for an account', () => {
+  it('new user registers for an account', function () {
+    if (!Cypress.env('ENABLE_REGISTER_NEW_USER')) {
+      this.skip()
+    }
     registerPage.prepareUserRegistration(
       userInfo.fullName,
       userInfo.email,
-      userInfo.username,
+      userInfo.publicUsernameText,
       userInfo.password,
     )
     registerPage.clickRegisterButton()

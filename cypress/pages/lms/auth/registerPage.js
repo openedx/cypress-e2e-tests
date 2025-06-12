@@ -43,7 +43,6 @@ class RegisterPage {
     return cy.wait('@createUser')
   }
 
-
   getErrorMessageTitle() {
     return cy.get(this.validationErrors)
   }

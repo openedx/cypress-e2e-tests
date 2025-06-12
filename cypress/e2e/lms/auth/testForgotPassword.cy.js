@@ -1,7 +1,7 @@
 import ForgotPasswordPage from '../../../pages/lms/auth/forgotPasswordPage'
 import LoginPage from '../../../pages/lms/auth/loginPage'
 
-describe('[TC_LEARNER_10] Forgot password page tests', () => {
+describe('[TC_LEARNER_10] Forgot password page tests', function () {
   const forgotPasswordPage = new ForgotPasswordPage()
   const loginPage = new LoginPage()
 
@@ -31,7 +31,7 @@ describe('[TC_LEARNER_10] Forgot password page tests', () => {
     loginPage.clickForgotPassword()
   })
 
-  it('should show correct reset password form structure', () => {
+  it('should show correct reset password form structure', function () {
     cy.contains('Reset password')
     cy.contains('Please enter your email address below and we will send you an email with instructions on how to reset your password.')
     forgotPasswordPage.checkForgotPasswordFormStructure()

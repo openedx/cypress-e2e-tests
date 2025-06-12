@@ -1,8 +1,8 @@
 import LoginPage from '../../../pages/lms/auth/loginPage'
+import randomString from '../../../support/utils'
 
-describe('[TC_LEARNER_9] Login page tests', () => {
+describe('[TC_LEARNER_9] Login page tests', function () {
   const loginPage = new LoginPage()
-  const randomString = `${Math.random().toString(36).substring(2, 10)}`
 
   const errMsg = {
     mainErrMsg: 'We couldn\'t sign you in.',
@@ -15,8 +15,8 @@ describe('[TC_LEARNER_9] Login page tests', () => {
     safeErrMsg: 'To be on the safe side, you can',
   }
   const userInfo = {
-    incorrectEmail: `user_${randomString}@example.com`,
-    incorrectPassword: randomString,
+    incorrectEmail: `${randomString(7)}@example.com`,
+    incorrectPassword: randomString(7),
     existingEmail: Cypress.env('LMS_USER_NAME'),
     existingPassword: Cypress.env('LMS_USER_PASSWORD'),
     userForBlock: Cypress.env('EXISTING_USER_FOR_BLOCK'),
@@ -26,19 +26,19 @@ describe('[TC_LEARNER_9] Login page tests', () => {
     adminUserPassword: Cypress.env('ADMIN_USER_PASSWORD'),
   }
 
-  before(() => {
+  before(function () {
     cy.clearCookies()
   })
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.visit('/login')
   })
 
-  it('should show correct sign in form structure', () => {
+  it('should show correct sign in form structure', function () {
     loginPage.checkLoginFormStructure()
   })
 
-  it('should show empty field error messages', () => {
+  it('should show empty field error messages', function () {
     loginPage.clickSubmit()
     loginPage.getLoginFailureError().should('contain.text', errMsg.mainErrMsg)
     loginPage.getLoginFailureError().should('contain.text', errMsg.mainErrDescription)
@@ -95,7 +95,7 @@ describe('[TC_LEARNER_9] Login page tests', () => {
     loginPage.clickPassReset()
   })
 
-  it('user can successfully login and redirected to dashboard', () => {
+  it('user can successfully login and redirected to dashboard', function () {
     loginPage.loginUser(userInfo.adminUserName, userInfo.adminUserPassword)
     cy.url().should('contain', 'learner-dashboard')
   })
