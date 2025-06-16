@@ -64,10 +64,27 @@ describe('Learner Dashboard', function () {
       dashboardPage.courseUnenroll()
     })
   })
+})
 
-  describe('[TC_LEARNER_17] Manage email preferences from Learner Dashboard', function () {
-    it.skip('user can manage email preferences for a course from Learner Dashboard', function () {
-    })
+describe('[TC_LEARNER_17] Manage email preferences from Learner Dashboard', function () {
+  const dashboardPage = new DashboardPage()
+
+  before(function () {
+    cy.clearCookies()
+  })
+
+  beforeEach(function () {
+    const baseURL = Cypress.env('BASE_MFE_URL')
+    cy.visit(`${baseURL}/authn/login`)
+    cy.signin('staff', Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
+    cy.visit(`${baseURL}/learner-dashboard/`)
+  })
+
+  it('should display course email settings button and test', function () {
+    if (!Cypress.env('ENABLE_BULK_EMAIL_FLAG')) {
+      this.skip()
+    }
+    dashboardPage.getEmailSettings()
   })
 })
 

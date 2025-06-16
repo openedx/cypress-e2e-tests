@@ -17,6 +17,10 @@ class DashboardPage {
 
   unenrollToggle = '[data-testid="unenrollModalToggle"]'
 
+  emailToggle = '[data-testid="emailSettingsModalToggle"]'
+
+  receiveCourseEmailToggle = '.pgn__form-switch-input'
+
   courseCard = '[data-testid="CourseCard"]'
 
   courseItem = '.courses-listing-item'
@@ -149,6 +153,23 @@ class DashboardPage {
     cy.contains('Never mind').should('be.visible').click()
   }
 
+  getEmailSettings() {
+    cy.get(this.courseActionsDropdown).click()
+
+    cy.get(this.emailToggle)
+      .should('be.visible')
+      .and('contain', 'Email settings')
+      .and('have.attr', 'role', 'button')
+
+    cy.contains('Email settings').click()
+    cy.contains('Receive course emails?').should('be.visible')
+
+    cy.contains('Course emails are on').should('be.visible')
+    cy.get(this.receiveCourseEmailToggle).click()
+    cy.contains('Course emails are off').should('be.visible')
+    cy.contains('Never mind').should('be.visible').click()
+  }
+
   getSearchBarForm () {
     return cy.get(this.viewAsSearchForm)
   }
@@ -170,7 +191,6 @@ class DashboardPage {
       .should('contain', 'Submit')
       .should('not.be.disabled')
       .should('have.class', 'btn-brand')
-
   }
 
   getSubmitAsExistLearner() {
