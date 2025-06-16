@@ -78,6 +78,32 @@ class DashboardPage {
     cy.get(this.dropdownItem).contains('Sign Out').should('be.visible')
   }
 
+  goToProfilePageFromDropdown() {
+    cy.get(this.headerDropdownMenu).click()
+    cy.get(this.dropdownItem).contains('Profile').click()
+    cy.url().should('include', '/profile/u/')
+  }
+
+  goToDashboardPageFromDropdown() {
+    cy.get(this.headerDropdownMenu).click()
+    cy.get(this.dropdownItem).contains('Dashboard').click()
+    cy.url().should('include', '/learner-dashboard')
+  }
+
+  goToAccountPageFromDropdown() {
+    cy.get(this.headerDropdownMenu).click()
+    cy.get(this.dropdownItem).contains('Account').click()
+    cy.url().should('include', '/account')
+  }
+
+  signoutUser() {
+    cy.get(this.headerDropdownMenu).click()
+    cy.get(this.dropdownItem).contains('Sign Out').click()
+    cy.get(this.headerDropdownMenu).should('not.exist')
+    cy.contains('Register for free').should('be.visible')
+    cy.contains('Sign in').should('be.visible')
+  }
+
   checkLightDarkTheme() {
     cy.get(this.lightDarkThemeSlider).click()
     cy.get('body').should('have.class', 'indigo-dark-theme')

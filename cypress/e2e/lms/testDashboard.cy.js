@@ -66,6 +66,7 @@ describe('Learner Dashboard for Staff', function () {
 
     it('should redirect to Discover courses page and back to Dashboard', function () {
       dashboardPage.goToDiscoverPage()
+      dashboardPage.goToDashboardPage()
     })
 
     // Need to check Help link
