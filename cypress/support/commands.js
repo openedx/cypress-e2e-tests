@@ -2,7 +2,7 @@ Cypress.on('uncaught:exception', () => false)
 // returning false here prevents Cypress from
 // failing the test
 
-Cypress.Commands.add('login', (sessionName, userEmail, userPassword, { cacheSession = true } = {}) => {
+Cypress.Commands.add('signin', (sessionName, userEmail, userPassword, { cacheSession = true } = {}) => {
   const loginUrl = Cypress.env('loginUrl', '/login')
   const login = () => {
     cy.request({
