@@ -51,6 +51,8 @@ class DashboardPage {
 
   alertCardMessage = '.alert-message-content'
 
+  viewCourseButton = '[data-test-id="CourseCardActions"] a.btn'
+
   // --- Footer locators ---
   footerBlock = 'footer'
 
@@ -191,6 +193,8 @@ class DashboardPage {
       .should('contain', 'Submit')
       .should('not.be.disabled')
       .should('have.class', 'btn-brand')
+    
+    cy.get(this.viewAsSearchForm).clear()
   }
 
   getSubmitAsExistLearner() {
@@ -255,6 +259,24 @@ class DashboardPage {
     cy.get(this.alertCardMessage)
       .should('exist')
       .and('be.visible')
+  }
+
+  getViewCourseButtons() {
+    return cy.get(this.viewCourseButton)
+  }
+
+  checkViewCourseButtons(expectedButtons = []) {
+    this.getViewCourseButtons().then($buttons => {
+      const labels = [...$buttons].map(btn => btn.innerText.trim())
+      expectedButtons.forEach(label => {
+        expect(labels.some(label => expectedButtons.includes(label))).to.be.true
+      })
+    })
+  }
+
+  checkCourseLearningPage() {
+    this.getViewCourseButtons().first().click()
+    cy.url().should('include', '/learning/course')
   }
 }
 
