@@ -32,3 +32,25 @@ Cypress.Commands.add('signin', (sessionName, userEmail, userPassword, { cacheSes
     login()
   }
 })
+
+Cypress.Commands.add('changeEnrollment', (courseId, enrollmentAction) => {
+  const changeEnrollUrl = Cypress.env('enroll_url', '/change_enrollment')
+  cy.getCookie('csrftoken').its('value').then(($token) => {
+    cy.request({
+      method: 'POST',
+      url: changeEnrollUrl,
+      form: true,
+      body: {
+        course_id: courseId,
+        enrollment_action: enrollmentAction,
+      },
+      headers: {
+        Referer: Cypress.config().baseUrl + changeEnrollUrl,
+        'X-CSRFToken': $token,
+      },
+    }).then(
+      (response) => response.body.status,
+    )
+  })
+})
+

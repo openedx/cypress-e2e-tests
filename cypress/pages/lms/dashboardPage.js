@@ -136,14 +136,17 @@ class DashboardPage {
     cy.url().should('include', '/courses')
   }
 
-  getCourseAndEnroll(courseName) {
-    cy.contains('Explore courses').click()
-
+  selectCourse(courseName) {
     cy.get(this.courseItem)
       .contains(this.courseTitle, courseName)
       .parents(this.courseItem)
       .find(this.learnMoreButton)
       .click()
+  }
+
+  getCourseAndEnroll(courseName) {
+    cy.contains('Explore courses').click()
+    this.selectCourse(courseName)
 
     cy.get('.register')
       .contains('Enroll Now')
