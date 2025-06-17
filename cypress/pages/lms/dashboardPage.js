@@ -78,6 +78,10 @@ class DashboardPage {
     cy.get(this.dropdownItem).contains('Sign Out').should('be.visible')
   }
 
+  getHelpLink() {
+    return cy.get(this.headerBlock).contains('a', 'Help')
+  }
+
   goToProfilePageFromDropdown() {
     cy.get(this.headerDropdownMenu).click()
     cy.get(this.dropdownItem).contains('Profile').click()

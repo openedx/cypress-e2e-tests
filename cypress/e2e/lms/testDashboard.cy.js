@@ -69,8 +69,12 @@ describe('Learner Dashboard for Staff', function () {
       dashboardPage.goToDashboardPage()
     })
 
-    // Need to check Help link
-    it.skip('Help link should redirect to the docs site', function () {
+    it('Help link should redirect to the docs site', function () {
+      if (!Cypress.env('ENABLE_SUPPORT_URL')) {
+        this.skip()
+      }
+      dashboardPage.getHelpLink().click()
+      cy.url().should('include', 'edx.readthedocs.io/projects/open-edx-learner-guide')
     })
 
     it('Theme toggle switch should change the theme on light/dark', function () {
