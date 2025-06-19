@@ -1,7 +1,7 @@
 import DashboardPage from '../../pages/lms/dashboardPage'
 import DEMO_COURSE_DATA from '../../support/constants'
 
-describe('Learner Dashboard for new user', function () {
+describe('Learner Dashboard for learner', function () {
   const dashboardPage = new DashboardPage()
 
   before(function () {
@@ -11,12 +11,12 @@ describe('Learner Dashboard for new user', function () {
   beforeEach(function () {
     const baseURL = Cypress.env('BASE_MFE_URL')
     cy.visit(`${baseURL}/authn/login`)
-    cy.signin('new user', Cypress.env('LMS_NEW_USER_EMAIL'), Cypress.env('LMS_NEW_USER_PASSWORD'))
+    cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
     cy.visit(`${baseURL}/learner-dashboard/`)
   })
 
   // 'Explore courses' button is available for Users without enrolled courses
-  describe('[TC_LEARNER_16] Enroll/Unenroll from course from Learner Dashboard', function () {
+  describe('[TC_LEARNER_16] Enroll/Unenroll from course from Learner Dashboard', { tags: '@regression' }, function () {
     it('user enrolls in a course from Learner Dashboard', function () {
       dashboardPage.getCourseAndEnroll(DEMO_COURSE_DATA.courseName)
     })
@@ -29,23 +29,8 @@ describe('Learner Dashboard for new user', function () {
       dashboardPage.courseUnenroll()
     })
   })
-})
 
-describe('Learner Dashboard for Staff', function () {
-  const dashboardPage = new DashboardPage()
-
-  before(function () {
-    cy.clearCookies()
-  })
-
-  beforeEach(function () {
-    const baseURL = Cypress.env('BASE_MFE_URL')
-    cy.visit(`${baseURL}/authn/login`)
-    cy.signin('staff', Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    cy.visit(`${baseURL}/learner-dashboard/`)
-  })
-
-  describe('[TC_LEARNER_6F] Header slot on the learner dashboard', function () {
+  describe('[TC_LEARNER_6F] Header slot on the learner dashboard', { tags: '@regression' }, function () {
     it('should contain Page Header block', function () {
       dashboardPage.getPageHeader().should('exist')
     })
@@ -81,20 +66,31 @@ describe('Learner Dashboard for Staff', function () {
       dashboardPage.checkLightDarkTheme()
     })
   })
+})
+
+describe('Learner Dashboard for Staff', function () {
+  const dashboardPage = new DashboardPage()
+
+  before(function () {
+    cy.clearCookies()
+  })
+
+  beforeEach(function () {
+    const baseURL = Cypress.env('BASE_MFE_URL')
+    cy.visit(`${baseURL}/authn/login`)
+    cy.signin('staff', Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
+    cy.visit(`${baseURL}/learner-dashboard/`)
+  })
 
   // User should be enrolled for at least one course
-  describe('[TC_LEARNER_15] View course button', function () {
+  describe('[TC_LEARNER_15] View course button', { tags: '@regression' }, function () {
     it('view course button', function () {
       dashboardPage.checkViewCourseButtons(['Begin Course', 'View Course', 'Resume'])
-    })
-
-    it('should redirect user to course outline page', function () {
-      dashboardPage.checkCourseLearningPage()
     })
   })
 
   // Ensure bulk email flag is enabled for test this and use ENABLE_BULK_EMAIL_FLAG
-  describe('[TC_LEARNER_17] Manage email preferences from Learner Dashboard', function () {
+  describe('[TC_LEARNER_17] Manage email preferences from Learner Dashboard', { tags: '@regression' }, function () {
     it('should display course email settings button and test', function () {
       if (!Cypress.env('ENABLE_BULK_EMAIL_FLAG')) {
         this.skip()
@@ -104,39 +100,51 @@ describe('Learner Dashboard for Staff', function () {
   })
 
   // Check base elements on the Dashboard page
-  describe('[TC_LEARNER_14] General check of My Courses block', function () {
+  describe('[TC_LEARNER_14] General check of My Courses block', { tags: '@smoke' }, function () {
     it('should dispaly course title', () => {
-      dashboardPage.getCourseTitle()
+      dashboardPage.checkCourseTitle()
     })
 
     it('should display course image', () => {
-      dashboardPage.getCourseImage()
+      dashboardPage.checkCourseImage()
     })
 
     it('should display course details', () => {
-      dashboardPage.getCourseDetails()
+      dashboardPage.checkCourseDetails()
     })
 
     it('should display alert message content on course card', () => {
-      dashboardPage.getAllertMessageContent()
+      dashboardPage.checkAllertMessageContent()
     })
 
     it('should render the filter controls container', () => {
       dashboardPage.getRefineButton()
     })
 
-    it('should filter by in Progress and not show course card', () => {
-      dashboardPage.getFilterByInProgress()
+    it('should filter courses displayed by Course Status', () => {
+      dashboardPage.checkFilterByCourseStatus()
     })
 
     it('should clear all filters', () => {
-      dashboardPage.getClearAllFilters()
+      dashboardPage.clearAllFilters()
+    })
+
+    it('should sort courses displayed by Enrollment date or Title', () => {
+      dashboardPage.checkSortCourses()
+    })
+
+    it('view course buttons', function () {
+      dashboardPage.checkViewCourseButtons(['Begin Course', 'View Course', 'Resume'])
+    })
+
+    it('should redirect user to course outline page', function () {
+      dashboardPage.checkCourseLearningPage()
     })
   })
 })
 
 // Search bar is displayed on the learner dashboard only for staff users
-describe('[TC_LEARNER_50] Search bar displaying', function () {
+describe('[TC_LEARNER_50] Search bar displaying', { tags: '@regression' }, function () {
   const dashboardPage = new DashboardPage()
   const baseURL = Cypress.env('BASE_MFE_URL')
 

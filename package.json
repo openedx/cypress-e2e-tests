@@ -7,12 +7,15 @@
     "cy:verify": "cypress verify",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "cy:run:smoke": "cypress run --env grepTags=@smoke",
+    "cy:run:regression": "cypress run --env grepTags=@regression",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
     "@edx/eslint-config": "^2.0.0",
+    "@cypress/grep": "^4.1.0",
     "cypress": "^14.3.3",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",

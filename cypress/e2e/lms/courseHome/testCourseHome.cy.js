@@ -1,49 +1,8 @@
-import DashboardPage from '../../../pages/lms/dashboardPage'
+import CourseHomePage from '../../../pages/lms/courseHome/courseHomePage'
+import DEMO_COURSE_DATA from '../../../support/constants'
 
 describe('[TC_LEARNER_6D] Header slot on the Courses Home page for logged in user', function () {
-  const dashboardPage = new DashboardPage()
-
-  before(function () {
-    cy.clearCookies()
-  })
-
-  beforeEach(function () {
-    const baseURL = Cypress.env('BASE_MFE_URL')
-    cy.visit(`${baseURL}/authn/login`)
-    cy.signin('staff', Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    cy.visit(`${baseURL}/learner-dashboard/`)
-  })
-
-  it('should contain Page Header block', function () {
-    dashboardPage.getPageHeader().should('exist')
-    dashboardPage.checkHeaderLinks()
-  })
-
-  it('should redirect to Discover courses page and back to Dashboard', function () {
-    dashboardPage.goToDiscoverPage()
-    dashboardPage.goToDashboardPage()
-  })
-
-  it('should contain account dropdown options ', function () {
-    dashboardPage.checkHeaderDropdownMenu()
-  })
-
-  it('should redirect to Profile page from dropdown menu', function () {
-    dashboardPage.goToProfilePageFromDropdown()
-  })
-
-  it('should redirect to Dashboard page from dropdown menu', function () {
-    dashboardPage.goToProfilePageFromDropdown()
-    dashboardPage.goToDashboardPageFromDropdown()
-  })
-
-  it('should redirect to Account page from dropdown menu', function () {
-    dashboardPage.goToAccountPageFromDropdown()
-    dashboardPage.goToDashboardPageFromDropdown()
-  })  
-
-  it('should redirect to the LMS logged out landing page from dropdown menu', function () {
-    dashboardPage.signoutUser()
+  it.skip('should contain Page Header block', function () {
   })
 })
 
@@ -64,8 +23,31 @@ describe('[TC_LEARNER_32] Tabs visible', function () {
   })
 })
 
-describe('[TC_LEARNER_33] Course outline on already enrolled course', function () {
-  it.skip('user can view course outline for a course they have enrolled in', function () {
+describe('[TC_LEARNER_33] Course outline on already enrolled course', { tags: '@smoke' }, function () {
+  const courseHomePage = new CourseHomePage()
+  const baseMFEURL = Cypress.env('BASE_MFE_URL')
+
+  before(function () {
+    cy.clearAllCookies()
+  })
+
+  beforeEach(function () {
+    cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
+    cy.changeEnrollment(DEMO_COURSE_DATA.courseId, 'enroll')
+    cy.visit(`${baseMFEURL}/learner-dashboard/`)
+  })
+
+  afterEach(function () {
+    cy.changeEnrollment(DEMO_COURSE_DATA.courseId, 'unenroll')
+  })
+
+  it('user can view course outline for a course', function () {
+    courseHomePage.getCourseTitle(DEMO_COURSE_DATA.courseName).click()
+    cy.url().should('include', `/learning/course/${DEMO_COURSE_DATA.courseId}/home`)
+    courseHomePage.getCourseOutline().should('be.visible')
+    courseHomePage.checkSections()
+    courseHomePage.checkExpandAll()
+    courseHomePage.checkCollapseAll()
   })
 })
 

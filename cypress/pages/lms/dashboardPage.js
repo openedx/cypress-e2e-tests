@@ -122,9 +122,9 @@ class DashboardPage {
 
   goToProgramsPage() {
     cy.get(this.headerLink).contains('Programs')
-        .should('be.visible')
-        .and('have.attr', 'href')
-        .and('include', '/programs')
+      .should('be.visible')
+      .and('have.attr', 'href')
+      .and('include', '/programs')
 
     cy.get(this.headerLink).contains('Programs').click()
     cy.url().should('include', '/programs')
@@ -132,9 +132,9 @@ class DashboardPage {
 
   goToDiscoverPage() {
     cy.get(this.headerLink).contains('Discover New')
-        .should('be.visible')
-        .and('have.attr', 'href')
-        .and('include', '/courses')
+      .should('be.visible')
+      .and('have.attr', 'href')
+      .and('include', '/courses')
 
     cy.get(this.headerLink).contains('Discover New').click()
     cy.url().should('include', '/courses')
@@ -205,7 +205,7 @@ class DashboardPage {
     cy.contains('Never mind').should('be.visible').click()
   }
 
-  getSearchBarForm () {
+  getSearchBarForm() {
     return cy.get(this.viewAsSearchForm)
   }
 
@@ -226,12 +226,11 @@ class DashboardPage {
       .should('contain', 'Submit')
       .should('not.be.disabled')
       .should('have.class', 'btn-brand')
-    
+
     cy.get(this.viewAsSearchForm).clear()
   }
 
   getSubmitAsExistLearner() {
-    // eslint-disable-next-line cypress/unsafe-to-chain-command
     cy.get(this.viewAsSearchForm)
       .should('be.visible')
       .type(Cypress.env('LMS_USER_EMAIL'))
@@ -254,10 +253,10 @@ class DashboardPage {
           .should('contain', 'Refine')
       })
   }
-  
-  getFilterByInProgress() {
+
+  checkFilterByCourseStatus() {
     cy.get(this.filterButton).click()
-    const testFilters = ['In-Progress']
+    const testFilters = ['In-Progress', 'Not Started', 'Done', 'Not Enrolled', 'Upgraded']
 
     testFilters.forEach(filter => {
       cy.contains(this.filterFormLabel, filter)
@@ -265,7 +264,22 @@ class DashboardPage {
     })
   }
 
-  getClearAllFilters() {
+  checkSortCourses() {
+    cy.get(this.courseCard).then($cards => {
+      const initialCount = $cards.length
+
+      cy.get(this.filterButton).click()
+      const testSort = ['Last enrolled', 'Title (A-Z)']
+
+      testSort.forEach(sort => {
+        cy.contains(this.filterFormLabel, sort).click()
+      })
+
+      cy.get(this.courseCard).should('have.length', initialCount)
+    })
+  }
+
+  clearAllFilters() {
     cy.get(this.filterButton).click()
     const testFilters = ['In-Progress']
 
@@ -276,19 +290,19 @@ class DashboardPage {
     cy.contains('Clear all').click()
   }
 
-  getCourseTitle() {
+  checkCourseTitle() {
     cy.get(this.courseCardTitle).should('exist')
   }
 
-  getCourseImage() {
+  checkCourseImage() {
     cy.get(this.courseCardImage).should('exist')
   }
 
-  getCourseDetails() {
+  checkCourseDetails() {
     cy.get(this.courseCardDetails).should('exist')
   }
 
-  getAllertMessageContent() {
+  checkAllertMessageContent() {
     cy.get(this.alertCardMessage)
       .should('exist')
       .and('be.visible')
@@ -301,9 +315,7 @@ class DashboardPage {
   checkViewCourseButtons(expectedButtons = []) {
     this.getViewCourseButtons().then($buttons => {
       const labels = [...$buttons].map(btn => btn.innerText.trim())
-      expectedButtons.forEach(label => {
-        expect(labels.some(label => expectedButtons.includes(label))).to.be.true
-      })
+      expect(labels.every(label => expectedButtons.includes(label))).to.be.true
     })
   }
 

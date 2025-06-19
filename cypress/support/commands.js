@@ -53,4 +53,3 @@ Cypress.Commands.add('changeEnrollment', (courseId, enrollmentAction) => {
     )
   })
 })
-
