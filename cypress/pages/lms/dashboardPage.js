@@ -315,6 +315,7 @@ class DashboardPage {
   checkViewCourseButtons(expectedButtons = []) {
     this.getViewCourseButtons().then($buttons => {
       const labels = [...$buttons].map(btn => btn.innerText.trim())
+      // eslint-disable-next-line no-unused-expressions
       expect(labels.every(label => expectedButtons.includes(label))).to.be.true
     })
   }

@@ -28,10 +28,11 @@ describe('[TC_LEARNER_33] Course outline on already enrolled course', { tags: '@
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
 
   before(function () {
-    cy.clearAllCookies()
+    cy.clearCookies()
   })
 
   beforeEach(function () {
+    cy.visit(`${baseMFEURL}/authn/login`)
     cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
     cy.changeEnrollment(DEMO_COURSE_DATA.courseId, 'enroll')
     cy.visit(`${baseMFEURL}/learner-dashboard/`)
