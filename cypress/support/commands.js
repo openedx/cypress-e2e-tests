@@ -33,6 +33,25 @@ Cypress.Commands.add('signin', (sessionName, userEmail, userPassword, { cacheSes
   }
 })
 
+Cypress.Commands.add('loginAdmin', (sessionName = 'staff', { cacheSession = true } = {}) => {
+  cy.signin(sessionName, Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'), cacheSession)
+})
+
+Cypress.Commands.add('loginAdminLmsCms', (sessionName = 'staffCMS', { cacheSession = true } = {}) => {
+  const login = () => {
+    cy.session('staffCMS', () => {
+      cy.loginAdmin()
+      cy.visit({ url: Cypress.env('BASE_CMS_URL'), method: 'GET' }).then(() => {
+      })
+    })
+  }
+  if (cacheSession) {
+    cy.session(sessionName, login)
+  } else {
+    login()
+  }
+})
+
 Cypress.Commands.add('changeEnrollment', (courseId, enrollmentAction) => {
   const changeEnrollUrl = Cypress.env('enroll_url', '/change_enrollment')
   cy.getCookie('csrftoken').its('value').then(($token) => {
