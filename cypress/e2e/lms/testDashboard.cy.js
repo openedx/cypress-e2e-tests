@@ -3,26 +3,27 @@ import DEMO_COURSE_DATA from '../../support/constants'
 
 describe('Learner Dashboard for learner', function () {
   const dashboardPage = new DashboardPage()
+  const baseURL = Cypress.env('BASE_MFE_URL')
 
   before(function () {
     cy.clearCookies()
   })
 
   beforeEach(function () {
-    const baseURL = Cypress.env('BASE_MFE_URL')
     cy.visit(`${baseURL}/authn/login`)
     cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
     cy.visit(`${baseURL}/learner-dashboard/`)
   })
 
   // 'Explore courses' button is available for Users without enrolled courses
-  describe('[TC_LEARNER_16] Enroll/Unenroll from course from Learner Dashboard', { tags: '@regression' }, function () {
-    it('user enrolls in a course from Learner Dashboard', function () {
-      dashboardPage.getCourseAndEnroll(DEMO_COURSE_DATA.courseName)
+  describe('[TC_LEARNER_16] Unenroll from course from Learner Dashboard', { tags: '@regression' }, function () {
+    it('user should be enrolled on at least one course', function () {
+      cy.changeEnrollment(DEMO_COURSE_DATA.courseId, 'enroll')
     })
 
     it('user enrolled in a course can cancel unenroll request', function () {
       dashboardPage.getDisplayUnenrollButtonAndCancel()
+      cy.url().should('include', `${baseURL}/learner-dashboard/`)
     })
 
     it('user enrolled in a course can unenroll from course from Learner Dashboard', function () {
