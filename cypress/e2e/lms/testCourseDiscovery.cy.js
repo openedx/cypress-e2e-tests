@@ -1,5 +1,5 @@
 import CourseDiscoveryPage from '../../pages/lms/courseDiscoveryPage'
-import DEMO_COURSE_DATA from '../../support/constants'
+import { DEMO_COURSE_DATA } from '../../support/constants'
 
 describe('[TC_LEARNER_5A] Course discovery page for logged out user', function () {
   it.skip('logged out user can navigate to and view the Course catalog page', function () {

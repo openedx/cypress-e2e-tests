@@ -1,6 +1,6 @@
 import AboutCoursePage from '../../pages/lms/courseAboutPage'
 import DashboardPage from '../../pages/lms/dashboardPage'
-import DEMO_COURSE_DATA from '../../support/constants'
+import { DEMO_COURSE_DATA } from '../../support/constants'
 
 describe('[TC_LEARNER_25] Course about page: enroll in a course', { tags: '@smoke' }, function () {
   const dashboardPage = new DashboardPage()

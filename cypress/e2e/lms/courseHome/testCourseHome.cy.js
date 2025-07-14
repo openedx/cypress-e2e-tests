@@ -1,5 +1,5 @@
 import CourseHomePage from '../../../pages/lms/courseHome/courseHomePage'
-import DEMO_COURSE_DATA from '../../../support/constants'
+import { DEMO_COURSE_DATA } from '../../../support/constants'
 
 describe('[TC_LEARNER_6D] Header slot on the Courses Home page for logged in user', function () {
   it.skip('should contain Page Header block', function () {

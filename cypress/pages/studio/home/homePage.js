@@ -57,10 +57,12 @@ class HomePage {
     this.getCreateCourseButton().should('not.be.disabled')
     this.getCreateCourseButton().click({ force: true })
     cy.wait('@createCourse')
+    const courseId = `course-v1:${courseOrg}+${courseNumber}+${courseRun}`
     cy.url().should(
       'include',
-      `/authoring/course/course-v1:${courseOrg}+${courseNumber}+${courseRun}`,
+      `/authoring/course/${courseId}`,
     )
+    return courseId
   }
 }
 

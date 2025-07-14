@@ -1,5 +1,5 @@
 import DashboardPage from '../../pages/lms/dashboardPage'
-import DEMO_COURSE_DATA from '../../support/constants'
+import { DEMO_COURSE_DATA } from '../../support/constants'
 
 describe('Learner Dashboard for learner', function () {
   const dashboardPage = new DashboardPage()
