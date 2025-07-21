@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^9.5.4",
+    "cypress": "^14.5.2",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
     "eslint": "^8.10.0",
