@@ -14,11 +14,12 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@edx/eslint-config": "^2.0.0",
     "@cypress/grep": "^4.1.0",
+    "@edx/eslint-config": "^2.0.0",
     "cypress": "^14.3.3",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
+    "cypress-mochawesome-reporter": "^4.0.0",
     "cypress-wait-until": "^3.0.1",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -28,6 +29,9 @@
     "eslint-plugin-react": "^7.29.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "googleapis": "^148.0.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

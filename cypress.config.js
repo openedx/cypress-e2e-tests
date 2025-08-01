@@ -15,6 +15,13 @@ export default defineConfig({
     runMode: 2,
     openMode: 2,
   },
+  // reporter: 'mochawesome',
+  // reporterOptions: {
+  //   reportDir: 'cypress/reports',
+  //   overwrite: false,
+  //   html: true,
+  //   json: true,
+  // },
   e2e: {
     setupNodeEvents() {},
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',

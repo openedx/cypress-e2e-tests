@@ -1,5 +1,5 @@
 class CourseAboutPage {
-  courseName = '.info-profile h1'
+  courseName = '.heading-group h1'
 
   enrollNowButton = '.register'
 
@@ -37,8 +37,20 @@ class CourseAboutPage {
     return cy.get(this.iconFacebook)
   }
 
+  checkFacebookShareLink() {
+    cy.get(this.iconFacebook)
+      .should('have.attr', 'href')
+      .and('include', 'facebook.com')
+  }
+
   getIconTwitter() {
     return cy.get(this.iconTwitter)
+  }
+
+  checkTwitterShareLink() {
+    cy.get(this.iconTwitter)
+      .should('have.attr', 'href')
+      .and('include', 'twitter.com')
   }
 
   getIconMail() {

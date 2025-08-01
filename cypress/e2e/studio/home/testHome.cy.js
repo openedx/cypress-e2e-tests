@@ -1,5 +1,6 @@
 import HomePage from '../../../pages/studio/home/homePage'
 import randomString from '../../../support/utils'
+import { NEW_COURSE_DATA } from '../../../support/constants'
 
 describe('[TC_AUTHOR_1A] User is able to create a new course with a new organization', { tags: '@smoke' }, function () {
   const homePage = new HomePage()
@@ -30,11 +31,26 @@ describe('[TC_AUTHOR_1A] User is able to create a new course with a new organiza
   })
 
   it('User is able to create a new course with a new organization', function () {
+    if (!Cypress.env('ENABLE_CREATE_NEW_COURSE')) {
+      this.skip()
+    }
     homePage.createNewCourse(
       newCourseInfo.courseName,
       newCourseInfo.courseOrg,
       newCourseInfo.courseNumber,
       newCourseInfo.courseRun,
+    )
+  })
+
+  it('Create new course for unit tests', function () {
+    if (!Cypress.env('ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS')) {
+      this.skip()
+    }
+    homePage.createNewCourse(
+      NEW_COURSE_DATA.courseName,
+      NEW_COURSE_DATA.courseOrg,
+      NEW_COURSE_DATA.courseCode,
+      NEW_COURSE_DATA.courseRun,
     )
   })
 })

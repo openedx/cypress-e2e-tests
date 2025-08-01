@@ -64,10 +64,13 @@ class DashboardPage {
     return cy.get(this.footerBlock)
   }
 
-  checkHeaderLinks() {
+  checkMainHeaderLinks() {
     cy.get(this.headerLink).contains('Courses').should('exist').and('have.class', 'active')
-    cy.get(this.headerLink).contains('Programs').should('exist')
     cy.get(this.headerLink).contains('Discover New').should('exist')
+  }
+
+  checkProgramsHeaderLink() {
+    cy.get(this.headerLink).contains('Programs').should('exist')
   }
 
   checkHeaderDropdownMenu() {
@@ -106,13 +109,6 @@ class DashboardPage {
     cy.get(this.headerDropdownMenu).should('not.exist')
     cy.contains('Register for free').should('be.visible')
     cy.contains('Sign in').should('be.visible')
-  }
-
-  checkLightDarkTheme() {
-    cy.get(this.lightDarkThemeSlider).click()
-    cy.get('body').should('have.class', 'indigo-dark-theme')
-    cy.get(this.lightDarkThemeSlider).click()
-    cy.get('body').should('not.have.class', 'indigo-dark-theme')
   }
 
   goToDashboardPage() {

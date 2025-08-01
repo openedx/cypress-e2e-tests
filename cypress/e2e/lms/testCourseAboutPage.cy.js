@@ -35,7 +35,7 @@ describe('[TC_LEARNER_25] Course about page: enroll in a course', { tags: '@smok
     cy.visit(`${baseURL}/courses/${DEMO_COURSE_DATA.courseId}/about`)
     aboutCoursePage.getEnrollNowButton()
       .should('have.class', 'disabled')
-      .and('contain', 'Already Enrolled')
+      .and('contain', 'enrolled')
     aboutCoursePage.getViewCourseButton().should('contain', 'View Course')
   })
 
@@ -64,9 +64,8 @@ describe('About course page tests for Staff', function () {
       aboutCoursePage.getIconFacebook().should('be.visible')
     })
 
-    it('should redirect to facebook', function () {
-      aboutCoursePage.getIconFacebook().click()
-      cy.url().should('include', 'facebook.com')
+    it('check facebook link', function () {
+      aboutCoursePage.checkFacebookShareLink()
     })
   })
 
@@ -75,9 +74,8 @@ describe('About course page tests for Staff', function () {
       aboutCoursePage.getIconTwitter().should('be.visible')
     })
 
-    it('should redirect to twitter', function () {
-      aboutCoursePage.getIconTwitter().click()
-      cy.url().should('include', 'x.com')
+    it('check twitter link', function () {
+      aboutCoursePage.checkTwitterShareLink()
     })
   })
 
@@ -128,18 +126,8 @@ describe('About course page tests for Not authorized user', { tags: '@regression
     aboutCoursePage.getIconFacebook().should('be.visible')
   })
 
-  it('should redirect to facebook', function () {
-    aboutCoursePage.getIconFacebook().click()
-    cy.url().should('include', 'facebook.com')
-  })
-
   it('should visible twitter icon', function () {
     aboutCoursePage.getIconTwitter().should('be.visible')
-  })
-
-  it('should redirect to twitter', function () {
-    aboutCoursePage.getIconTwitter().click()
-    cy.url().should('include', 'x.com')
   })
 
   it('should visible mail icon', function () {

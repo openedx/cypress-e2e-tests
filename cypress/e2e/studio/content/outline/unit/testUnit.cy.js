@@ -18,9 +18,9 @@ describe('Unit Page Tests', function () {
 
   describe('[TC_AUTHOR_40] View live button', { tags: '@smoke' }, function () {
     it('should add section, subsection and unit', function () {
-      let courseData = {}
+      const courseData = {}
       courseData.textForUnit = `Random text for unit ${randomString(10)}`
-
+      
       unitPage.addSection()
         .then(() => cy.get('@sectionLocator'))
         .then((sectionLocator) => {
@@ -95,9 +95,9 @@ describe('Unit Page Tests', function () {
     })
   })
 
-  describe('[TC_AUTHOR_42] Add new unit button', function () {
+  describe('[TC_AUTHOR_42] Add new unit button', { tags: '@smoke' }, function () {
     it('Add new unit button working', function () {
-      unitPage.expandSubection()
+      //unitPage.expandSubection()
       unitPage.addUnit()
         .then(() => cy.get('@unitLocator'))
         .then((unitLocator) => {
@@ -112,7 +112,7 @@ describe('Unit Page Tests', function () {
     })
   })
 
-  describe('[TC_AUTHOR_43] Hide from learners checkbox', function () {
+  describe('[TC_AUTHOR_43] Hide from learners checkbox', { tags: '@smoke' }, function () {
     it('Hide from learners checkbox working', function () {
       unitPage.expandSubection()
       unitPage.hideFromLearners()
@@ -120,7 +120,7 @@ describe('Unit Page Tests', function () {
     })
   })
 
-  describe('[TC_AUTHOR_44] Publish button', function () {
+  describe('[TC_AUTHOR_44] Publish button', { tags: '@smoke' }, function () {
     it('Publish button working', function () {
       unitPage.publishSection().then(() => {
         unitPage.openUnit(NEW_COURSE_DATA.courseId)
@@ -140,7 +140,7 @@ describe('Unit Page Tests', function () {
     })
 
     // need to change using API request
-    it('Delete section after all unit tests', function () {
+    it('Delete section after all unit tests', { tags: '@smoke' }, function () {
       unitPage.deleteSection()
     })
   })

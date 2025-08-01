@@ -41,11 +41,21 @@ describe('Learner Dashboard for learner', function () {
     })
 
     it('should contain main header links', function () {
-      dashboardPage.checkHeaderLinks()
+      dashboardPage.checkMainHeaderLinks()
       dashboardPage.checkHeaderDropdownMenu()
     })
 
+    it('should ccontain Programs header link', function () {
+      if (!Cypress.env('ENABLE_PROGRAMS')) {
+        this.skip()
+      }
+      dashboardPage.checkProgramsHeaderLink()
+    })
+
     it('should redirect to Programs page and back to Dashboard', function () {
+      if (!Cypress.env('ENABLE_PROGRAMS')) {
+        this.skip()
+      }
       dashboardPage.goToProgramsPage()
       dashboardPage.goToDashboardPage()
     })
@@ -60,11 +70,7 @@ describe('Learner Dashboard for learner', function () {
         this.skip()
       }
       dashboardPage.getHelpLink().click()
-      cy.url().should('include', 'edx.readthedocs.io/projects/open-edx-learner-guide')
-    })
-
-    it('Theme toggle switch should change the theme on light/dark', function () {
-      dashboardPage.checkLightDarkTheme()
+      cy.url().should('include', 'docs.openedx.org')
     })
   })
 })

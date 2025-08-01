@@ -30,7 +30,7 @@ class UnitPage {
   unitVisibilityCheckbox = '[data-testid="unit-visibility-checkbox"]'
 
   modalContent = '.pgn__modal-body-content'
-  
+
   modalFooter = '.pgn__modal-footer'
 
   viewLiveButton = 'button.btn-outline-primary'
@@ -52,6 +52,7 @@ class UnitPage {
     return cy.wait('@newSection').then((interception) => {
       const responseBody = interception.response.body
       this.sectionLocator = responseBody.locator
+      cy.log('Section Locator:', this.sectionLocator)
       cy.wrap(responseBody.locator).as('sectionLocator')
     })
   }
@@ -63,25 +64,27 @@ class UnitPage {
     return cy.wait('@newSubsection').then((interception) => {
       const responseBody = interception.response.body
       this.subsectionLocator = responseBody.locator
+      cy.log('Subsection Locator:', this.subsectionLocator)
       cy.wrap(responseBody.locator).as('subsectionLocator')
     })
   }
 
   addUnit() {
     cy.intercept('POST', '/xblock/').as('newUnit')
-    cy.get(this.subsectionCard).click()
+    // cy.get(this.subsectionCard).click()
     cy.get(this.newUnit).contains('button', 'New unit').click()
     return cy.wait('@newUnit').then((interception) => {
       const responseBody = interception.response.body
       this.unitLocator = responseBody.locator
+      cy.log('Unit Locator:', this.unitLocator)
       cy.wrap(responseBody.locator).as('unitLocator')
     })
   }
 
   openUnit(courseLocator) {
     return cy.fixture('new_course_data').then((data) => {
-      const unitLocator = data.unitLocator
-      const subsectionLocator = data.subsectionLocator
+      const { unitLocator } = data
+      const { subsectionLocator } = data
       const url = `${Cypress.env('BASE_MFE_URL')}/authoring/course/${courseLocator}/container/${unitLocator}/${subsectionLocator}`
       return cy.visit(url)
     })
@@ -138,7 +141,7 @@ class UnitPage {
   publishSection() {
     cy.intercept('/xblock/*').as('publishSection')
     cy.get(this.sectionActionsDropdown).click()
-    
+
     cy.get(this.publishSectionToggle)
       .should('be.visible')
       .and('contain', 'Publish')
@@ -198,7 +201,7 @@ class UnitPage {
 
     cy.contains('Delete').click()
     cy.contains(this.modalTitle, 'Delete this unit?').should('be.visible')
-    
+
     cy.get('div[role="dialog"][aria-label="Delete this unit?"]')
       .find('button')
       .contains('Delete')

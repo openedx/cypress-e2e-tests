@@ -1,4 +1,4 @@
-// Need to add Demo course for tests 
+// Need to add Demo course for tests
 export const DEMO_COURSE_DATA = {
   courseId: 'course-v1:OpenedX+DemoX+DemoCourse',
   courseName: 'Open edX Demo Course',
@@ -12,4 +12,5 @@ export const NEW_COURSE_DATA = {
   courseName: 'New Course for Unit tests zy1dts4',
   courseOrg: 'rg',
   courseCode: 'smnwfhj',
+  courseRun: '2025_T1',
 }
