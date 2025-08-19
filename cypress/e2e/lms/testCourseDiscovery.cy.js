@@ -14,7 +14,6 @@ describe('[TC_LEARNER_5B] Course discovery page for logged in user', function ()
 describe('Course Catalog page tests', function () {
   const courseDiscoveryPage = new CourseDiscoveryPage()
 
-  const baseURL = Cypress.env('BASE_URL')
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
 
   before(function () {
@@ -24,7 +23,7 @@ describe('Course Catalog page tests', function () {
   beforeEach(function () {
     cy.visit(`${baseMFEURL}/authn/login`)
     cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
-    cy.visit(`${baseURL}/courses/`)
+    cy.visit('/courses/')
   })
 
   describe('[TC_LEARNER_5C] Explore courses search bar', { tags: '@smoke' }, function () {

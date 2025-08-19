@@ -5,7 +5,6 @@ import { DEMO_COURSE_DATA } from '../../support/constants'
 describe('[TC_LEARNER_25] Course about page: enroll in a course', { tags: '@smoke' }, function () {
   const dashboardPage = new DashboardPage()
   const aboutCoursePage = new AboutCoursePage()
-  const baseURL = Cypress.env('BASE_URL')
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
 
   before(function () {
@@ -25,14 +24,14 @@ describe('[TC_LEARNER_25] Course about page: enroll in a course', { tags: '@smok
   })
 
   it('should redirect user to dashboard page by clicking on the "Enroll Now" button', function () {
-    cy.visit(`${baseURL}/courses/${DEMO_COURSE_DATA.courseId}/about`)
+    cy.visit(`/courses/${DEMO_COURSE_DATA.courseId}/about`)
     aboutCoursePage.getEnrollNowButton().click()
     cy.url().should('include', '/learner-dashboard')
     aboutCoursePage.getCourseTitle().contains(DEMO_COURSE_DATA.courseName)
   })
 
   it('should display Enroll Now button as disabled after user enrolls in a course', function () {
-    cy.visit(`${baseURL}/courses/${DEMO_COURSE_DATA.courseId}/about`)
+    cy.visit(`/courses/${DEMO_COURSE_DATA.courseId}/about`)
     aboutCoursePage.getEnrollNowButton()
       .should('have.class', 'disabled')
       .and('contain', 'enrolled')
@@ -53,10 +52,9 @@ describe('About course page tests for Staff', function () {
 
   beforeEach(function () {
     const baseMFEURL = Cypress.env('BASE_MFE_URL')
-    const baseURL = Cypress.env('BASE_URL')
     cy.visit(`${baseMFEURL}/authn/login`)
     cy.signin('staff', Cypress.env('ADMIN_USER_EMAIL'), Cypress.env('ADMIN_USER_PASSWORD'))
-    cy.visit(`${baseURL}/courses/${DEMO_COURSE_DATA.courseId}/about`)
+    cy.visit(`/courses/${DEMO_COURSE_DATA.courseId}/about`)
   })
 
   describe('[TC_LEARNER_26] Course about page: share course by Facebook', { tags: '@regression' }, function () {
