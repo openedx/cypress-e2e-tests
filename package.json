@@ -16,7 +16,7 @@
   "dependencies": {
     "@cypress/grep": "^4.1.0",
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^14.3.3",
+    "cypress": "^15.0.0",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
     "cypress-mochawesome-reporter": "^4.0.0",

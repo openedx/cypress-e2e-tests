@@ -216,7 +216,7 @@ describe('Registration page tests', function () {
     it('should contain error message for Password max length field', function () {
       registerPage.prepareUserRegistration(
         userInfo.fullName,
-        userInfo.email,
+        `${randomString(6)}@example.com`,
         userInfo.username,
         `${userInfo.passwordMax}_1`,
       )
@@ -227,7 +227,7 @@ describe('Registration page tests', function () {
     it('should contain error message for Password min length field', function () {
       registerPage.prepareUserRegistration(
         userInfo.fullName,
-        userInfo.email,
+        `${randomString(6)}@example.com`,
         userInfo.username,
         userInfo.minPassword,
       )
@@ -238,7 +238,7 @@ describe('Registration page tests', function () {
     it('should contain error message for Password is too similar with username', function () {
       registerPage.prepareUserRegistration(
         userInfo.fullName,
-        userInfo.email,
+        `${randomString(6)}@example.com`,
         userInfo.username,
         `${userInfo.username}_1`,
       )
@@ -249,7 +249,7 @@ describe('Registration page tests', function () {
     it('should contain error messages for empty fields: Password', function () {
       registerPage.prepareUserRegistration(
         userInfo.fullName,
-        userInfo.email,
+        `${randomString(6)}@example.com`,
         userInfo.username,
         '{ESC}',
       )
