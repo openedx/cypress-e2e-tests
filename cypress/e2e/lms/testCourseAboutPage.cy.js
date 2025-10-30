@@ -108,8 +108,7 @@ describe('About course page tests for Not authorized user', { tags: '@regression
   const aboutCoursePage = new AboutCoursePage()
 
   beforeEach(function () {
-    const baseURL = Cypress.env('BASE_URL')
-    cy.visit(`${baseURL}/courses/${DEMO_COURSE_DATA.courseId}/about`)
+    cy.visit(`/courses/${DEMO_COURSE_DATA.courseId}/about`)
   })
 
   it('should display course name', function () {

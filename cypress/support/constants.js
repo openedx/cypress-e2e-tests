@@ -8,9 +8,9 @@ export const DEMO_COURSE_DATA = {
 }
 // Need to add new course data for unit tests
 export const NEW_COURSE_DATA = {
-  courseId: 'course-v1:rg+smnwfhj+2025_T1',
-  courseName: 'New Course for Unit tests zy1dts4',
-  courseOrg: 'rg',
-  courseCode: 'smnwfhj',
+  courseId: 'course-v1:RG+auto123+2025_T1',
+  courseName: 'New Course for Auto Tests',
+  courseOrg: 'RG',
+  courseCode: 'auto123',
   courseRun: '2025_T1',
 }

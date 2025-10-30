@@ -16,7 +16,6 @@
   "dependencies": {
     "@cypress/grep": "^4.1.0",
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^15.0.0",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
     "cypress-mochawesome-reporter": "^4.0.0",
@@ -36,6 +35,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
-    "@babel/eslint-parser": "^7.17.0"
+    "@babel/eslint-parser": "^7.17.0",
+    "cypress": "^15.5.0"
   }
 }

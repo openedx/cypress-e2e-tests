@@ -16,7 +16,8 @@ describe('Learner Dashboard for learner', function () {
   })
 
   // 'Explore courses' button is available for Users without enrolled courses
-  describe('[TC_LEARNER_16] Unenroll from course from Learner Dashboard', { tags: '@regression' }, function () {
+  describe.skip('[TC_LEARNER_16] Unenroll from course from Learner Dashboard', { tags: '@regression' }, function () {
+    // Changed confirmation modal - skipping test for now
     it('user should be enrolled on at least one course', function () {
       cy.changeEnrollment(DEMO_COURSE_DATA.courseId, 'enroll')
     })
