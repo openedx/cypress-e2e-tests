@@ -1,169 +1,132 @@
 # cypress-e2e-tests
 
-This repo contains e2e tests written in Cypress for different Open edX applications
+This repository contains end-to-end (E2E) tests written in Cypress for various Open edX applications.
 
----
 ---
 
 ## Introduction to Cypress
 
-Cypress is a relatively new automated tests tool which is gaining popularity at a very rapid pace
+Cypress is a modern automated testing tool that is rapidly gaining popularity.
 
-Here is the home page for Cypress if someone wants to look it up
+- [Cypress Home Page](https://www.cypress.io/)
+- [Cypress Documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell)
+- [Cypress Tutorial Videos](https://docs.cypress.io/examples/examples/tutorials.html#Best-Practices)
 
-<https://www.cypress.io/>
-
-Cypress has very strong documentation so a new comer could find most of the information from their own site
-
-<https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell>
-
-Also as a starting point it would be good to go through these tutorial videos
-
-<https://docs.cypress.io/examples/examples/tutorials.html#Best-Practices>
+Cypress has excellent documentation, so newcomers can find most information directly on their website.
 
 ---
----
 
-## E2E Tests Repo
+## E2E Tests Repository
 
-This repo is meant to contain a sample for e2e tests:
+Automated tests are focused on verifying critical functionality (marked with the `@smoke` tag). Additional tests can be added for various open edX functionalities, such as validation message checks (marked with the `@regression` tag).
 
-Authentication MFE (Active)
+### Implemented E2E:
 
-With time we will add more projects in the repo
+- LMS: Authentication: Registration
+- LMS: Course About Page
+- LMS: Course Discovery
+- LMS: Course Home
+- LMS: Dashboard
+- Studio: Content: Outline: Unit
+- Studio: Home
 
----
+### E2E to be implemented:
+
+- LMS: Course Home: Progress
+- LMS: Course Home: Tools
+- LMS: Instructor: Data Download
+- LMS: Instructor: Membership
+- Studio: Content: Outline: Unit: Component
+- Studio: Settings: Advanced
+- Studio: Settings: Certificates
+- Studio: Settings: Schedule & Details
+- Studio: In-Context Metrics
+
 ---
 
 ## Protocols for Test Design
 
-We don't yet have well defined protocols for writing Cypress tests for Open edX application, so this work was mostly experimental
+There are not yet well-defined protocols for writing Cypress tests for Open edX applications, so this work is mostly experimental.
 
-The first project was MIT Journals (which has since been deprecated and removed).
+**Suggestion:** The test case structure should follow the guidelines of the community test documentation.
 
-In the second project, Authentication MFE, the following approach was used:
-
-* Page Object model is used in spite of what Cypress site says, it increases readability of code and is much easier to manage
-
-* Cypress commands and helper functions are still utilized
-
-The tests for Authentication MFE are present in following path
-
-<https://github.com/openedx/cypress-e2e-tests/tree/master/cypress/integration/authenticationMFE>
-
-To manage multiple projects customized config files are used so user is able to run any project without making any change in the code
-
-Config files for projects are placed here
-
-<https://github.com/openedx/cypress-e2e-tests/tree/master/config>
+The code is generalized, allowing multiple projects to be run by setting environment variables, without modifying the code.
 
 ---
+
+## Test Launch
+
+### Installation
+
+You must have Node.js installed before using Cypress.
+
+To install Cypress and supporting tools, navigate to the project folder in your terminal and run:
+
+```
+npm install
+```
+
 ---
 
 ## Test Setup
 
-### Installations
-
-You need to have Node.js installed before using Cypress.
-
-For rest of the installations move to project folder in command prompt and type
-
-`npm install`
-
-which will install Cypress and other supporting tools
-
----
-
 ### Environment Variables
 
-Following Environment Vars should be set before running the tests
+Set the following environment variables before running the tests:
 
-`CYPRESS_LMS_USER_EMAIL`
+#### Project variables
 
-`CYPRESS_LMS_USER_PASSWORD`
+- `PLATFORM_NAME`
+- `BASE_URL`
+- `BASE_MFE_URL`
+- `BASE_CMS_URL`
 
-_Note_: The above are credentials for a normal edX user who does not have access to admin portal
+#### Required user accounts
 
-`CYPRESS_ADMIN_USER_EMAIL`
+- `ADMIN_USER_NAME` - Staff username
+- `ADMIN_USER_EMAIL` - Staff email
+- `ADMIN_USER_PASSWORD` - Staff password
 
-`CYPRESS_ADMIN_USER_PASSWORD`
+<!-- New regular user (without any enrolled courses) -->
+- `LMS_USER_NAME` - Learner username
+- `LMS_USER_EMAIL` - Learner email
+- `LMS_USER_PASSWORD` - Learner password
+- `EXISTING_USER_FOR_BLOCK` - Username for verifying the allowed number of login attempts
 
-_Note_: The above are credentials for an admin portal valid user
+#### Configurable environment variables
 
-Following environment vars would be required for using google api to read gmail inbox
-
-`CYPRESS_GMAIL_ID`
-
-`CYPRESS_GMAIL_CLIENT_ID`
-
-`CYPRESS_GMAIL_CLIENT_SECRET`
-
-`CYPRESS_GMAIL_ACCESS_TOKEN`
-
-`CYPRESS_GMAIL_REFRESH_TOKEN`
-
-_Note_: You can use the method descibed in the below link to get these auth tokens for any personal gmail account
-
-<https://developers.google.com/identity/protocols/OAuth2WebServer#creatingcred>
-
----
-
-### Run Tests
-
-To run admin portal tests in interactive mode use following command
-
-`npm run cy:openAuthnMFE`
-
-To run admin portal tests in normal mode use following command
-
-`npm run cy:runAuthnMFE`
+- `ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS` - Used for course creation; set to `false` after the first run
+- `ENABLE_REGISTER_NEW_USER` - Set to `true` to test the registration flow
+- `ENABLE_BULK_EMAIL_FLAG` - Set to `true` to verify course email settings on dashboard (ensure bulk email flag is enabled in admin)
+- `ENABLE_SUPPORT_URL` - Set to `true` to verify the help link on dashboard
+- `ENABLE_PROGRAMS` - Set to `true` to verify Programs
+- `ENABLE_CREATE_NEW_COURSE` - Set to `true` to verify creating a new course with a new organization
 
 ---
 
-### Using ES LInt
+### Running Tests
 
-ESLint is also setup in the repo, you can use it by typing following command in terminal
+- Verify Cypress installation:  
+  `npm run cy:verify`
 
-`npm run lint`
+- Open Cypress Test Runner (interactive mode):  
+  `npm run cy:open`
+
+- Run all tests headless (CLI):  
+  `npm run cy:run`
+
+- Run only smoke tests (uses grepTags plugin):  
+  `npm run cy:run:smoke`
+
+- Run only regression tests:  
+  `npm run cy:run:regression`
 
 ---
 
-## Docker Setup
+### Using ESLint
 
-Docker setup is also available for those who want to run the tests without doing any installations
+ESLint is also set up in the repo. You can run it using the following command in your terminal:
 
-To run the tests in Docker
-
-* Provide the values for environment variables in the env_vars.env
-* Use following command in terminal
-        `docker-compose -f docker-compose.yml -f cy-run.yml up`
-
----
-
-## Running Tests in Interactive Mode using Docker
-
-You can also execute tests in interactive mode directly from Docker, for that you would need to do
-some extra steps
-
-As a pre-requisite you need to install XQuartz using following command
-
-`brew cask install xquartz`
-
-or install it directly from <https://www.xquartz.org/>
-
-### To configure XQuartz
-
-* Open XQuartz using following command in terminal
-  * `open -a XQuartz`
-* In the XQuartz preferences, go to the “Security” tab and make sure you’ve got “Allow connections from network clients” ticked
-
-### To run the tests
-
-* Provide the values for environment variables in the env_vars.env
-* Grab the IP of the host machine and add it to the allowed X11 hosts by running these commands
-  * `IP=$(ipconfig getifaddr en0)`
-  * `/usr/X11/bin/xhost + $IP`
-* Pass the environment variable DISPLAY to show Cypress GUI on the host system
-  * `DISPLAY=$IP:0`
-* Use following command in terminal
-  * `docker-compose -f docker-compose.yml -f cy-open.yml up`
+```
+npm run lint
+```

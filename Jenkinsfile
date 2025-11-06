@@ -15,6 +15,7 @@ pipeline {
     }
     stage('run e2e tests') {
       environment {
+        LMS_BASE_URL = 'https://authn.edx.org'
         CYPRESS_ADMIN_USER_EMAIL = credentials('ADMIN_EMAIL')
         CYPRESS_ADMIN_USER_PASSWORD = credentials('ADMIN_PASSWORD')
         CYPRESS_LMS_USER_EMAIL = credentials('LMS_EMAIL')
@@ -26,7 +27,7 @@ pipeline {
         CYPRESS_GMAIL_REFRESH_TOKEN = credentials('CYPRESS_GMAIL_REFRESH_TOKEN')
       }
       steps {
-        sh 'npm run cy:runAuthnMFE'
+        sh 'npm run cy:run'
       }
     }
   }

@@ -8,3 +8,4 @@ coverage
 cypress/videos
 cypress/screenshots
 cypress/logs
+cypress.env.json

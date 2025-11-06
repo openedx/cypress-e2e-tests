@@ -1,21 +1,25 @@
 {
   "name": "cypress-e2e-tests",
-  "version": "1.0.0",
-  "description": "Cypress E2E Tests for edX applications",
+  "version": "2.0.0",
+  "description": "Cypress E2E Tests for Open edX applications",
   "repository": "https://github.com/openedx/cypress-e2e-tests",
   "scripts": {
     "cy:verify": "cypress verify",
-    "cy:openAuthnMFE": "cypress open --env ENVIRONMENT=authenticationMFEStage",
-    "cy:runAuthnMFE": "cypress run --env ENVIRONMENT=authenticationMFEStage",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:smoke": "cypress run --env grepTags=@smoke",
+    "cy:run:regression": "cypress run --env grepTags=@regression",
     "lint": "eslint --ext .js --ext .jsx .",
     "lint:fix": "eslint --ext .js --ext .jsx . --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@cypress/grep": "^4.1.0",
     "@edx/eslint-config": "^2.0.0",
-    "cypress": "^9.5.4",
     "cypress-failed-log": "^2.5.0",
     "cypress-file-upload": "^4.1.1",
+    "cypress-mochawesome-reporter": "^4.0.0",
+    "cypress-wait-until": "^3.0.1",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-cypress": "^2.6.1",
@@ -23,11 +27,15 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.2",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "googleapis": "42.0.0",
+    "googleapis": "^148.0.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
-    "@babel/eslint-parser": "^7.17.0"
+    "@babel/eslint-parser": "^7.17.0",
+    "cypress": "^15.5.0"
   }
 }
