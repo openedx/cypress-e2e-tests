@@ -35,8 +35,8 @@ describe('Course Catalog page tests', function () {
     })
 
     it('check the search for Course Catalog Page (positive)', function () {
-      courseDiscoveryPage.searchCourse("Dive into the Open edX® platform!") // Title of the first module on Demo course
-      // Verify that the search results contain the expected course 
+      courseDiscoveryPage.searchCourse('Dive into the Open edX® platform!') // Title of the first module on Demo course
+      // Verify that the search results contain the expected course
       courseDiscoveryPage.verifyCourseAfterSearch(
         DEMO_COURSE_DATA.courseName,
         DEMO_COURSE_DATA.courseOrg,

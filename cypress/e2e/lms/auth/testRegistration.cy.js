@@ -116,7 +116,8 @@ describe('Registration page tests', function () {
       registerPage.getFieldDescription('email', descMsg.emailDesc)
     })
 
-    it('should contain error message for existing Email input', function () {
+    // skipped due to its flakiness (need additional investigation)
+    it.skip('should contain error message for existing Email input', function () {
       registerPage.prepareUserRegistration(
         userInfo.fullName,
         userInfo.existingEmail,

@@ -20,7 +20,6 @@ describe('Unit Page Tests', function () {
     it('should add section, subsection and unit', function () {
       const courseData = {}
       courseData.textForUnit = `Random text for unit ${randomString(10)}`
-      
       unitPage.addSection()
         .then(() => cy.get('@sectionLocator'))
         .then((sectionLocator) => {
@@ -36,7 +35,8 @@ describe('Unit Page Tests', function () {
         .then((unitLocator) => {
           courseData.unitLocator = unitLocator
           cy.writeFile('cypress/fixtures/new_course_data.json', courseData)
-        }).then(() => {
+        })
+        .then(() => {
           unitPage.addTextBlock(courseData.textForUnit)
         })
     })
@@ -50,7 +50,7 @@ describe('Unit Page Tests', function () {
       cy.fixture('new_course_data').then((data) => {
         cy.get('@windowOpen').should(
           'be.calledWithMatch',
-          `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`
+          `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`,
         )
         cy.visit(`${Cypress.env('BASE_MFE_URL')}/learning/course/${NEW_COURSE_DATA.courseId}/${data.subsectionLocator}`)
         cy.contains('There is no content here.').should('be.visible')
@@ -59,7 +59,6 @@ describe('Unit Page Tests', function () {
 
     it('View live button working for published course', function () {
       unitPage.publishSection().then(() => {
-
         unitPage.openUnit(NEW_COURSE_DATA.courseId)
         cy.window().then((win) => {
           cy.stub(win, 'open').as('windowOpen')
@@ -68,7 +67,7 @@ describe('Unit Page Tests', function () {
         cy.fixture('new_course_data').then((data) => {
           cy.get('@windowOpen').should(
             'be.calledWithMatch',
-            `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`
+            `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`,
           )
           cy.visit(`${Cypress.env('BASE_MFE_URL')}/learning/course/${NEW_COURSE_DATA.courseId}/${data.subsectionLocator}`)
           unitPage.checkIframeContent(data.textForUnit)
@@ -87,7 +86,7 @@ describe('Unit Page Tests', function () {
       cy.fixture('new_course_data').then((data) => {
         cy.get('@windowOpen').should(
           'be.calledWithMatch',
-          `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`
+          `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`,
         )
         cy.visit(`${Cypress.env('BASE_MFE_URL')}/learning/course/${NEW_COURSE_DATA.courseId}/${data.subsectionLocator}`)
         unitPage.checkIframeContent(data.textForUnit)
@@ -97,7 +96,7 @@ describe('Unit Page Tests', function () {
 
   describe('[TC_AUTHOR_42] Add new unit button', { tags: '@smoke' }, function () {
     it('Add new unit button working', function () {
-      //unitPage.expandSubection()
+      // unitPage.expandSubection()
       unitPage.addUnit()
         .then(() => cy.get('@unitLocator'))
         .then((unitLocator) => {
@@ -133,7 +132,7 @@ describe('Unit Page Tests', function () {
         cy.fixture('new_course_data').then((data) => {
           cy.get('@windowOpen').should(
             'be.calledWithMatch',
-            `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`
+            `/courses/${NEW_COURSE_DATA.courseId}/jump_to/${data.unitLocator}`,
           )
           cy.visit(`${Cypress.env('BASE_MFE_URL')}/learning/course/${NEW_COURSE_DATA.courseId}/${data.subsectionLocator}`)
           unitPage.checkIframeContent(data.textForUnit)

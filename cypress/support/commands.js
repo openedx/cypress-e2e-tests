@@ -72,3 +72,40 @@ Cypress.Commands.add('changeEnrollment', (courseId, enrollmentAction) => {
     )
   })
 })
+
+Cypress.Commands.add('createEmptyCourse', (courseData) => {
+  const createCourseUrl = Cypress.env('course_url', '/course')
+  cy.getCookie('csrftoken').its('value').then(($token) => {
+    cy.request({
+      method: 'POST',
+      url: createCourseUrl,
+      body: courseData,
+      headers: {
+        'X-CSRFToken': $token,
+        Referer: Cypress.config().baseUrl,
+        'Content-Type': 'application/json',
+      },
+    }).then(
+      (response) => response.body.status,
+    )
+  })
+})
+
+Cypress.Commands.add('deleteXBlock', (blockLocator) => {
+  cy.log(`Deleting XBlock with locator: ${blockLocator}`)
+  // const deleteUrl = `${Cypress.env('BASE_CMS_URL')}/xblock/${blockLocator}`
+  const deleteXBlockUrl = Cypress.env('delete_xblock_url', '/xblock')
+  const deleteUrl = `${deleteXBlockUrl}/${blockLocator}`
+  cy.getCookie('csrftoken').its('value').then(($token) => {
+    cy.request({
+      method: 'DELETE',
+      url: deleteUrl,
+      headers: {
+        'X-CSRFToken': $token,
+        Referer: Cypress.config().baseUrl,
+      },
+    }).then(
+      (response) => response.status,
+    )
+  })
+})

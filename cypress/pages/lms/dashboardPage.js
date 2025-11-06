@@ -163,7 +163,7 @@ class DashboardPage {
 
     cy.intercept('POST', '/change_enrollment').as('unenroll')
     cy.contains('Unenroll').click()
-    //cy.contains('Unenroll from course?').should('be.visible')
+    // cy.contains('Unenroll from course?').should('be.visible')
     cy.contains('button', 'Unenroll').click()
     cy.contains('Skip survey').should('be.visible').click()
     cy.contains('You are unenrolled').should('be.visible')
