@@ -77,7 +77,6 @@ Set the following environment variables before running the tests:
 #### Project variables
 
 - `PLATFORM_NAME`
-- `BASE_URL`
 - `BASE_MFE_URL`
 - `BASE_CMS_URL`
 

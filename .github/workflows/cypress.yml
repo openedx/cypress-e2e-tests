@@ -17,29 +17,28 @@ jobs:
           parallel: true
         env:
           # base URLs
-          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
-          CYPRESS_BASE_MFE_URL: ${{ secrets.BASE_MFE_URL }}
-          CYPRESS_BASE_CMS_URL: ${{ secrets.BASE_CMS_URL }}
+          CYPRESS_BASE_MFE_URL: ${{ secrets.CYPRESS_BASE_MFE_URL }}
+          CYPRESS_BASE_CMS_URL: ${{ secrets.CYPRESS_BASE_CMS_URL }}
           CYPRESS_LMS_BASE_URL: ${{ secrets.CYPRESS_LMS_BASE_URL }} # used in cypress.config.js
 
           # users (secrets)
-          CYPRESS_ADMIN_USER_NAME: ${{ secrets.ADMIN_USER_NAME }}
-          CYPRESS_ADMIN_USER_EMAIL: ${{ secrets.ADMIN_USER_EMAIL }}
-          CYPRESS_ADMIN_USER_PASSWORD: ${{ secrets.ADMIN_USER_PASSWORD }}
-          CYPRESS_LMS_USER_NAME: ${{ secrets.LMS_USER_NAME }}
-          CYPRESS_LMS_USER_EMAIL: ${{ secrets.LMS_USER_EMAIL }}
-          CYPRESS_LMS_USER_PASSWORD: ${{ secrets.LMS_USER_PASSWORD }}
-          CYPRESS_EXISTING_USER_FOR_BLOCK: ${{ secrets.EXISTING_USER_FOR_BLOCK }}
+          CYPRESS_ADMIN_USER_NAME: ${{ secrets.CYPRESS_ADMIN_USER_NAME }}
+          CYPRESS_ADMIN_USER_EMAIL: ${{ secrets.CYPRESS_ADMIN_USER_EMAIL }}
+          CYPRESS_ADMIN_USER_PASSWORD: ${{ secrets.CYPRESS_ADMIN_USER_PASSWORD }}
+          CYPRESS_LMS_USER_NAME: ${{ secrets.CYPRESS_LMS_USER_NAME }}
+          CYPRESS_LMS_USER_EMAIL: ${{ secrets.CYPRESS_LMS_USER_EMAIL }}
+          CYPRESS_LMS_USER_PASSWORD: ${{ secrets.CYPRESS_LMS_USER_PASSWORD }}
+          CYPRESS_EXISTING_USER_FOR_BLOCK: ${{ secrets.CYPRESS_EXISTING_USER_FOR_BLOCK }}
 
           # flags (set as "true" / "false" in secrets or repo variables)
-          CYPRESS_ENABLE_REGISTER_NEW_USER: ${{ secrets.ENABLE_REGISTER_NEW_USER }}
-          CYPRESS_ENABLE_BULK_EMAIL_FLAG: ${{ secrets.ENABLE_BULK_EMAIL_FLAG }}
-          CYPRESS_ENABLE_SUPPORT_URL: ${{ secrets.ENABLE_SUPPORT_URL }}
-          CYPRESS_ENABLE_PROGRAMS: ${{ secrets.ENABLE_PROGRAMS }}
-          CYPRESS_ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS: ${{ secrets.ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS }}
-          CYPRESS_ENABLE_CREATE_NEW_COURSE: ${{ secrets.ENABLE_CREATE_NEW_COURSE }}
+          CYPRESS_ENABLE_REGISTER_NEW_USER: ${{ secrets.CYPRESS_ENABLE_REGISTER_NEW_USER }}
+          CYPRESS_ENABLE_BULK_EMAIL_FLAG: ${{ secrets.CYPRESS_ENABLE_BULK_EMAIL_FLAG }}
+          CYPRESS_ENABLE_SUPPORT_URL: ${{ secrets.CYPRESS_ENABLE_SUPPORT_URL }}
+          CYPRESS_ENABLE_PROGRAMS: ${{ secrets.CYPRESS_ENABLE_PROGRAMS }}
+          CYPRESS_ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS: ${{ secrets.CYPRESS_ENABLE_CREATE_NEW_COURSE_FOR_UNIT_TESTS }}
+          CYPRESS_ENABLE_CREATE_NEW_COURSE: ${{ secrets.CYPRESS_ENABLE_CREATE_NEW_COURSE }}
 
           # cypress cloud / record keys (if used)
-          CYPRESS_PLATFORM_NAME: ${{ secrets.PLATFORM_NAME }}
+          CYPRESS_PLATFORM_NAME: ${{ secrets.CYPRESS_PLATFORM_NAME }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
