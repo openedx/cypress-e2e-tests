@@ -17,6 +17,8 @@ class CourseAboutPage {
 
   classesStart = '.start-date'
 
+  classesEnd = '.final-date'
+
   getEnrollNowButton() {
     return cy.get(this.enrollNowButton)
   }
@@ -61,6 +63,10 @@ class CourseAboutPage {
     return cy.get(this.classesStart)
   }
 
+  getClassesEnd() {
+    return cy.get(this.classesEnd)
+  }
+
   checkClassesStartDateFormat() {
     cy.get(this.classesStart)
       .invoke('text')
@@ -69,6 +75,26 @@ class CourseAboutPage {
 
   checkCourseName(courseTitle) {
     cy.get(this.courseName).should('contain.text', courseTitle)
+  }
+
+  verifyStartDate(expectedDateTime) {
+    return this.getClassesStart()
+      .should('be.visible')
+      .invoke('attr', 'data-datetime')
+      .then((dateTimeOnAboutPage) => {
+        expect(new Date(dateTimeOnAboutPage).toDateString())
+          .to.eq(new Date(expectedDateTime).toDateString())
+      })
+  }
+
+  verifyEndDate(expectedDateTime) {
+    return this.getClassesEnd()
+      .should('be.visible')
+      .invoke('attr', 'data-datetime')
+      .then((dateTimeOnAboutPage) => {
+        expect(new Date(dateTimeOnAboutPage).toDateString())
+          .to.eq(new Date(expectedDateTime).toDateString())
+      })
   }
 }
 
