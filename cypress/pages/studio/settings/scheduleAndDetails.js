@@ -1,3 +1,5 @@
+import { getCsrfToken, getRequestHeaders } from '../../../support/apiHelpers'
+
 class ScheduleAndDetails {
   url = `${Cypress.env('BASE_CMS_URL')}/settings/details/`
 
@@ -7,36 +9,12 @@ class ScheduleAndDetails {
 
   datesTabLink = '#dates-tab-link'
 
-  // Method to get domain from BASE_CMS_URL
-  static getDomain() {
-    const studioUrl = new URL(Cypress.env('BASE_CMS_URL'))
-    return studioUrl.hostname
-  }
-
-  // Method to get CSRF token from cookies
-  static getCsrfToken() {
-    return cy.getAllCookies() // gets all cookies from browser
-      .then(allCookiesArray => 
-        allCookiesArray.find(cookieObj => 
-          cookieObj.domain === this.getDomain() // filter by domain
-          && cookieObj.name === 'csrftoken' // filter by cookie name
-        ).value
-      )
-  }
-  
-  // Method to generate headers for requests
-  headers = (refer, token) => ({
-    Referer: refer,
-    'X-CSRFToken': token,
-    Accept: 'application/json, text/plain, */*',
-  })
-
   // Method to get current schedule and details settings
   getSettings(url, token) {
     return cy.request({
       method: 'GET',
-      url: url,
-      headers: this.headers(url, token),
+      url,
+      headers: getRequestHeaders(url, token),
     })
   }
 
@@ -45,25 +23,23 @@ class ScheduleAndDetails {
     return cy.request({
       method: 'POST',
       url,
-      headers: this.headers(url, token),
+      headers: getRequestHeaders(url, token),
       body: bodyData,
     })
   }
 
   // Method to change specific settings if they differ from current settings
   changeSetting(url, sectionName, sectionData) {
-    return ScheduleAndDetails.getCsrfToken()
-      .then(token => {
-        this.getSettings(url, token)
-          .then(response => response.body)
-          .then(bodyData => {
-            if (bodyData[sectionName] !== sectionData) {
-              bodyData[sectionName] = sectionData
-              return this.setSettings(url, token, bodyData)
-            }
-            return false
-          })
-      })
+    return getCsrfToken().then(token => this.getSettings(url, token)
+      .then(response => response.body)
+      .then(bodyData => {
+        if (bodyData[sectionName] !== sectionData) {
+          // eslint-disable-next-line no-param-reassign
+          bodyData[sectionName] = sectionData
+          return this.setSettings(url, token, bodyData)
+        }
+        return false
+      }))
   }
 
   // Method to set start date
