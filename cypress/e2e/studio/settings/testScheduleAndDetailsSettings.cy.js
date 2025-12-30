@@ -1,5 +1,6 @@
 import ScheduleAndDetails from '../../../pages/studio/settings/scheduleAndDetails'
 import AboutCoursePage from '../../../pages/lms/courseAboutPage'
+import { getCsrfToken } from '../../../support/apiHelpers'
 import { NEW_COURSE_DATA } from '../../../support/constants'
 
 describe('Schedule and Details Tests', function () {
@@ -8,7 +9,7 @@ describe('Schedule and Details Tests', function () {
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
   const { courseId } = NEW_COURSE_DATA
   const settingsUrl = `${scheduleAndDetails.url}${courseId}`
-  
+
   before(function () {
     cy.clearCookies()
   })
@@ -31,7 +32,7 @@ describe('Schedule and Details Tests', function () {
       scheduleAndDetails.setInstructorPaced(courseId)
 
       // Verify the pacing is set to instructor paced
-      ScheduleAndDetails.getCsrfToken().then((token) => {
+      getCsrfToken().then((token) => {
         scheduleAndDetails.getSettings(settingsUrl, token).then((response) => {
           expect(response.status).to.eq(200)
           expect(response.body.self_paced).to.eq(false)
@@ -47,7 +48,7 @@ describe('Schedule and Details Tests', function () {
       scheduleAndDetails.setSelfPaced(courseId)
 
       // Verify the pacing is set to self paced
-      ScheduleAndDetails.getCsrfToken().then((token) => {
+      getCsrfToken().then((token) => {
         scheduleAndDetails.getSettings(settingsUrl, token).then((response) => {
           expect(response.status).to.eq(200)
           expect(response.body.self_paced).to.eq(true)
@@ -128,7 +129,7 @@ describe('Schedule and Details Tests', function () {
       scheduleAndDetails.verifyDateonDatesTab('Course ends', endDateTime)
     })
   })
-  
+
   describe('[TC_AUTHOR_109] Set start time and end time', function () {
     it.skip('Set start time and end time', function () {
     })
