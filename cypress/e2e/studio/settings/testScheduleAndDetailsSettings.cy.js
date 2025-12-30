@@ -91,7 +91,7 @@ describe('Schedule and Details Tests', function () {
       scheduleAndDetails.setStartDate(courseId, futureStartDateTime)
       cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
 
-      // Verify that the message about course not yet started is displayed
+      // Verify the alert message on about page that course not yet started is displayed
       scheduleAndDetails.verifyCourseDatesinFuture(futureStartDateTime)
     })
 
@@ -104,7 +104,6 @@ describe('Schedule and Details Tests', function () {
       // Verify that the course content is accessible
       cy.contains('Begin your course today').should('be.visible')
       scheduleAndDetails.navigateToDatesTab()
-
       // Verify course start date in the past on Dates tab in LMS
       scheduleAndDetails.verifyDateonDatesTab('Course starts', pastStartDateTime)
     })
@@ -124,14 +123,84 @@ describe('Schedule and Details Tests', function () {
 
       // Verify course start date
       scheduleAndDetails.verifyDateonDatesTab('Course starts', startDateTime)
-
       // Verify course end date
       scheduleAndDetails.verifyDateonDatesTab('Course ends', endDateTime)
     })
   })
 
-  describe('[TC_AUTHOR_109] Set start time and end time', function () {
-    it.skip('Set start time and end time', function () {
+  describe('[TC_AUTHOR_109] Set start time and end time', { tags: '@regression' }, function () {
+    it('Set start date today with future time and verify that student cannot yet see courseware', function () {
+      const todayDateTime = new Date()  
+      const hoursOffset = 2
+
+      const futureHours = todayDateTime.getHours() + hoursOffset
+      todayDateTime.setHours(futureHours)
+      const futureStartTime = todayDateTime.toISOString()
+      const endDateTime = getDateWithOffset(30)
+
+      scheduleAndDetails.setStartDate(courseId, futureStartTime)
+        .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime)) 
+        .then(() => {
+          cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
+
+          // Verify the alert message on about page that course not yet started is displayed
+          scheduleAndDetails.verifyAlertMessageContent(hoursOffset)
+        })
+    })
+
+    it('Set start date today with past time and verify that student can see courseware', function () {
+      const todayDateTime = new Date()  
+      const hoursOffset = -2
+
+      const pastHours = todayDateTime.getHours() + hoursOffset
+      todayDateTime.setHours(pastHours)
+      const pastStartTime = todayDateTime.toISOString()
+      const endDateTime = getDateWithOffset(30)
+
+      scheduleAndDetails.setStartDate(courseId, pastStartTime)
+        .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime))
+        .then(() => {
+          cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
+
+          // Verify that the course content is accessible
+          cy.contains('Begin your course today').should('be.visible')
+        })
+    })
+
+    it('Set end date today with past time and verify the course is now archived', function () {
+      const todayDateTime = new Date()  
+      const hoursOffset = -2
+
+      const pastHours = todayDateTime.getHours() + hoursOffset
+      todayDateTime.setHours(pastHours)
+      const pastEndTime = todayDateTime.toISOString()
+      const startDateTime = getDateWithOffset(-10)
+
+      scheduleAndDetails.setStartDate(courseId, startDateTime)
+        .then(() => scheduleAndDetails.setEndDate(courseId, pastEndTime))
+        .then(() => {
+          cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
+
+          // Verify that the course content is accessible
+          cy.contains('Begin your course today').should('be.visible')
+          cy.contains('This course is archived, which means you can review course content but it is no longer active.').should('be.visible')
+        })
+    })
+
+    it('Verify course start date in Studio Course Outline', function () {
+      const startDateTime = getDateWithOffset(0)
+      const endDateTime = getDateWithOffset(30)
+      cy.log('Start DateTime:', startDateTime)
+      cy.log('End DateTime:', endDateTime)
+
+      scheduleAndDetails.setStartDate(courseId, startDateTime)
+        .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime))
+        .then(() => {
+          // Navigate to Course Outline page
+          cy.visit(`${baseMFEURL}/authoring/course/${courseId}`)
+          // Verify course start date in Studio Course Outline
+          scheduleAndDetails.verifyStartDateInCourseOutline(startDateTime)
+        })
     })
   })
 

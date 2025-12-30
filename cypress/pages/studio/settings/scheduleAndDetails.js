@@ -9,6 +9,8 @@ class ScheduleAndDetails {
 
   datesTabLink = '#dates-tab-link'
 
+  outlineStatusBar = '[data-testid="outline-status-bar"]'
+
   // Method to get current schedule and details settings
   getSettings(url, token) {
     return cy.request({
@@ -82,14 +84,35 @@ class ScheduleAndDetails {
     return new Date(isoDate).getDate()
   }
 
+  // Helper: Get time from ISO date
+  getTime(isoDate) {
+    return new Date(isoDate).toLocaleTimeString('en-US', { 
+      hour: 'numeric',
+      minute: '2-digit',
+      hourCycle: 'h12'
+    })
+  }
+
+  // Method to assert that an element contains date (and optionally time)
+  assertContainsDate(dateTime, includeTime = false) {
+    cy.get('@element')
+      .and('contain', this.getMonth(dateTime))
+      .and('contain', this.getDay(dateTime))
+      .and('contain', this.getYear(dateTime))
+    
+    if (includeTime) {
+      cy.get('@element').and('contain', this.getTime(dateTime))
+    }
+  }
+
   // Method to verify date on Dates tab in Learner view
   verifyDateonDatesTab(label, dateTime) {
     cy.contains(this.datesItem, label)
       .parent()
       .should('be.visible')
-      .and('contain', this.getMonth(dateTime))
-      .and('contain', this.getDay(dateTime))
-      .and('contain', this.getYear(dateTime))
+      .as('element')
+
+    this.assertContainsDate(dateTime)
   }
 
   // Method to verify "course not yet started" message
@@ -97,9 +120,29 @@ class ScheduleAndDetails {
     cy.get(this.alertMessageContent)
       .should('be.visible')
       .and('contain', 'Course starts in')
-      .and('contain', this.getMonth(dateTime))
-      .and('contain', this.getDay(dateTime))
-      .and('contain', this.getYear(dateTime))
+      .as('element')
+
+    this.assertContainsDate(dateTime)
+  }
+
+  // Method to verify alert message content with hours count
+  verifyAlertMessageContent(hoursCount) {
+    cy.get(this.alertMessageContent)
+      .should('be.visible')
+      .and('contain', `Course starts in ${hoursCount} hours`)
+  } 
+
+  // Method to verify start date in Studio Course Outline
+  verifyStartDateInCourseOutline(dateTime) {
+    cy.get(this.outlineStatusBar)
+      .contains('Start date')
+      .parent()
+      .find('a.small')
+      .should('be.visible')
+      .invoke('text')
+      .as('element')
+
+    this.assertContainsDate(dateTime, true)
   }
 
   // Method to navigate to Dates tab in Learner view
