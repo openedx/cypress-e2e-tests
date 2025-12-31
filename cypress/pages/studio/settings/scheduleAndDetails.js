@@ -44,6 +44,13 @@ class ScheduleAndDetails {
       }))
   }
 
+  // Helper: Get an offset date from today
+  getDateWithOffset(daysAhead = 10) {
+    const date = new Date()
+    date.setDate(date.getDate() + daysAhead)
+    return date.toISOString()
+  }
+
   // Method to set start date
   setStartDate(courseId, fieldData) {
     return this.changeSetting(`${this.url}${courseId}`, 'start_date', fieldData)
@@ -86,11 +93,20 @@ class ScheduleAndDetails {
 
   // Helper: Get time from ISO date
   getTime(isoDate) {
-    return new Date(isoDate).toLocaleTimeString('en-US', { 
+    return new Date(isoDate).toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
-      hourCycle: 'h12'
+      hourCycle: 'h12',
     })
+  }
+
+  // Format date as "Dec 31, 2025"
+  getFormattedDate(isoDate) {
+    const date = new Date(isoDate)
+    const month = date.toLocaleDateString('en-US', { month: 'short' })
+    const day = date.getDate()
+    const year = date.getFullYear()
+    return `${month} ${day}, ${year}`
   }
 
   // Method to assert that an element contains date (and optionally time)
@@ -99,7 +115,7 @@ class ScheduleAndDetails {
       .and('contain', this.getMonth(dateTime))
       .and('contain', this.getDay(dateTime))
       .and('contain', this.getYear(dateTime))
-    
+
     if (includeTime) {
       cy.get('@element').and('contain', this.getTime(dateTime))
     }
@@ -130,7 +146,7 @@ class ScheduleAndDetails {
     cy.get(this.alertMessageContent)
       .should('be.visible')
       .and('contain', `Course starts in ${hoursCount} hours`)
-  } 
+  }
 
   // Method to verify start date in Studio Course Outline
   verifyStartDateInCourseOutline(dateTime) {

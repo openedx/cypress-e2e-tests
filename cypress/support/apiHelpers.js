@@ -18,5 +18,5 @@ export const getCsrfToken = () => cy.getAllCookies() // gets all cookies from br
 export const getRequestHeaders = (refer, token) => ({
   Referer: refer,
   'X-CSRFToken': token,
-  Accept: 'application/json, text/plain, */*',
+  Accept: 'application/json, text/javascript, */*; q=0.01',
 })

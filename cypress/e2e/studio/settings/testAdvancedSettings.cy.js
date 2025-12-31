@@ -1,4 +1,6 @@
 import AdvancedSettings from '../../../pages/studio/settings/advancedSettings'
+import ScheduleAndDetails from '../../../pages/studio/settings/scheduleAndDetails'
+import CourseDiscoveryPage from '../../../pages/lms/courseDiscoveryPage'
 import { NEW_COURSE_DATA } from '../../../support/constants'// '../../../../../support/constants'
 
 describe('[TC_AUTHOR_131] Course display name', function () {
@@ -11,15 +13,20 @@ describe('[TC_AUTHOR_132] Course maximum student enrollment', function () {
   })
 })
 
-describe('[TC_AUTHOR_133] Test course visibility in catalog', function () {
+describe('[TC_AUTHOR_133] Test course visibility in catalog', { tags: '@smoke' }, function () {
+  const advancedSettings = new AdvancedSettings()
+  const scheduleAndDetails = new ScheduleAndDetails()
+  const courseDiscoveryPage = new CourseDiscoveryPage()
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
+  const { courseId } = NEW_COURSE_DATA
+
   before(function () {
     cy.clearCookies()
   })
 
   beforeEach(function () {
     cy.loginAdminLmsCms()
-    cy.visit(`${baseMFEURL}/authoring/course/${NEW_COURSE_DATA.courseId}`)
+    cy.visit(`${baseMFEURL}/authoring/course/${courseId}`)
   })
 
   it.skip('Test course visibility = `none` behavior', function () {
@@ -28,7 +35,28 @@ describe('[TC_AUTHOR_133] Test course visibility in catalog', function () {
   it.skip('Test course visibility = `about` behavior', function () {
   })
 
-  it.skip('Test course visibility = `both` behavior', function () {
+  it('Test course visibility = `both` behavior', function () {
+    const startDateTime = scheduleAndDetails.getDateWithOffset(0)
+    const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+
+    scheduleAndDetails.setStartDate(courseId, startDateTime)
+    scheduleAndDetails.setEndDate(courseId, endDateTime)
+
+    advancedSettings.courseVisibility(courseId, 'both')
+
+    cy.signin('test user', Cypress.env('LMS_USER_EMAIL'), Cypress.env('LMS_USER_PASSWORD'))
+    cy.visit('/courses/')
+    const formattedDate = scheduleAndDetails.getFormattedDate(startDateTime)
+    courseDiscoveryPage.searchCourse(NEW_COURSE_DATA.courseName).then(() => {
+      courseDiscoveryPage.verifyCourseAfterSearch(
+        NEW_COURSE_DATA.courseName,
+        NEW_COURSE_DATA.courseOrg,
+        NEW_COURSE_DATA.courseCode,
+        formattedDate,
+      )
+      courseDiscoveryPage.selectCourse(NEW_COURSE_DATA.courseName)
+      cy.url().should('include', `/courses/${courseId}/about`)
+    })
   })
 })
 
