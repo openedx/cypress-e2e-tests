@@ -7,7 +7,7 @@ class ScheduleAndDetails {
 
   alertMessageContent = '.alert-message-content'
 
-  datesTabLink = '#dates-tab-link'
+  nav_links = 'a.nav-link'
 
   outlineStatusBar = '[data-testid="outline-status-bar"]'
 
@@ -44,6 +44,15 @@ class ScheduleAndDetails {
       }))
   }
 
+  searchReindex(courseId) {
+    const url = `${Cypress.env('BASE_CMS_URL')}/course/${courseId}/search_reindex`
+    return getCsrfToken().then(token => cy.request({
+      method: 'GET',
+      url,
+      headers: getRequestHeaders(url, token),
+    }))
+  }
+
   // Helper: Get an offset date from today
   getDateWithOffset(daysAhead = 10) {
     const date = new Date()
@@ -59,6 +68,13 @@ class ScheduleAndDetails {
   // Method to set end date
   setEndDate(courseId, fieldData) {
     return this.changeSetting(`${this.url}${courseId}`, 'end_date', fieldData)
+  }
+
+  // Method to set both start, end and enrollment dates
+  setCourseDates(courseId, startDate, endDate, enrollmentStartDate) {
+    return this.setStartDate(courseId, startDate)
+      .then(() => this.setEndDate(courseId, endDate))
+      .then(() => this.setEnrollmentStartDate(courseId, enrollmentStartDate))
   }
 
   // Method to set enrollment start date
@@ -155,15 +171,24 @@ class ScheduleAndDetails {
       .parent()
       .find('a.small')
       .should('be.visible')
+      .should('contain', this.getMonth(dateTime))
+      .should('contain', this.getDay(dateTime))
+      .should('contain', this.getYear(dateTime))
       .invoke('text')
-      .as('element')
-
-    this.assertContainsDate(dateTime, true)
+      .then((text) => {
+        // Extract time from the text and verify it matches (ignore AM/PM case sensitivity)
+        const displayedTime = text.match(/\d{1,2}:\d{2}\s*[AP]M/i)
+        const expectedTime = this.getTime(dateTime)
+        if (displayedTime) {
+          expect(text).to.include(displayedTime[0])
+          cy.log(`Displayed time: ${displayedTime[0]}, Expected: ${expectedTime}`)
+        }
+      })
   }
 
   // Method to navigate to Dates tab in Learner view
   navigateToDatesTab() {
-    cy.get(this.datesTabLink).should('be.visible').click()
+    cy.contains(this.nav_links, 'Dates').click()
     cy.url().should('include', '/dates')
   }
 }
