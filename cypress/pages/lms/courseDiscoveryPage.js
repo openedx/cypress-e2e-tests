@@ -39,6 +39,10 @@ class CourseDiscoveryPage {
     return cy.get(this.courseCard)
   }
 
+  getCourseNotExists(courseName) {
+    cy.contains(this.courseTitle, courseName).should('not.exist')
+  }
+
   searchCourse(searchString) {
     cy.intercept('POST', '/search/course_discovery/').as(
       'getSearch',
