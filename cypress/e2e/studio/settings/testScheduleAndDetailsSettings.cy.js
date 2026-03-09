@@ -1,6 +1,6 @@
 import ScheduleAndDetails from '../../../pages/studio/settings/scheduleAndDetails'
 import AboutCoursePage from '../../../pages/lms/courseAboutPage'
-import { getCsrfToken } from '../../../support/apiHelpers'
+import { getDateWithOffset } from '../../../support/utilityHelpers'
 import { NEW_COURSE_DATA } from '../../../support/constants'
 
 describe('Schedule and Details Tests', function () {
@@ -8,7 +8,6 @@ describe('Schedule and Details Tests', function () {
   const aboutCoursePage = new AboutCoursePage()
   const baseMFEURL = Cypress.env('BASE_MFE_URL')
   const { courseId } = NEW_COURSE_DATA
-  const settingsUrl = `${scheduleAndDetails.url}${courseId}`
 
   before(function () {
     cy.clearCookies()
@@ -21,40 +20,28 @@ describe('Schedule and Details Tests', function () {
 
   describe('[TC_AUTHOR_106] Set pacing to instructor paced', { tags: '@regression' }, function () {
     it('Set pacing to instructor paced', function () {
-      scheduleAndDetails.setStartDate(courseId, scheduleAndDetails.getDateWithOffset())
+      scheduleAndDetails.setStartDate(courseId, getDateWithOffset())
       scheduleAndDetails.setInstructorPaced(courseId)
 
       // Verify the pacing is set to instructor paced
-      getCsrfToken().then((token) => {
-        scheduleAndDetails.getSettings(settingsUrl, token).then((response) => {
-          expect(response.status).to.eq(200)
-          expect(response.body.self_paced).to.eq(false)
-          cy.log('Course pacing set to instructor-paced successfully')
-        })
-      })
+      scheduleAndDetails.verifyPacing(courseId, false)
     })
   })
 
-  describe('[TC_AUTHOR_107] Set pacing to self paced', { tags: '@regression' }, function () {
+  describe('[TC_AUTHOR_107] Set pacing to self paced', { tags: '@smoke' }, function () {
     it('Set pacing to self paced', function () {
-      scheduleAndDetails.setStartDate(courseId, scheduleAndDetails.getDateWithOffset())
+      scheduleAndDetails.setStartDate(courseId, getDateWithOffset())
       scheduleAndDetails.setSelfPaced(courseId)
 
       // Verify the pacing is set to self paced
-      getCsrfToken().then((token) => {
-        scheduleAndDetails.getSettings(settingsUrl, token).then((response) => {
-          expect(response.status).to.eq(200)
-          expect(response.body.self_paced).to.eq(true)
-          cy.log('Course pacing set to self-paced successfully')
-        })
-      })
+      scheduleAndDetails.verifyPacing(courseId, true)
     })
   })
 
-  describe('[TC_AUTHOR_108] Set start date and end date', { tags: '@regression' }, function () {
+  describe('[TC_AUTHOR_108] Set start date and end date', { tags: '@smoke' }, function () {
     it('Correct start & end dates appear on the course About page', function () {
-      const startDateTime = scheduleAndDetails.getDateWithOffset(0)
-      const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+      const startDateTime = getDateWithOffset(0)
+      const endDateTime = getDateWithOffset(30)
 
       scheduleAndDetails.setStartDate(courseId, startDateTime)
       scheduleAndDetails.setEndDate(courseId, endDateTime)
@@ -65,8 +52,8 @@ describe('Schedule and Details Tests', function () {
     })
 
     it('Correct start & end dates appear in the Learner view in the courseware on the Dates tab', function () {
-      const startDateTime = scheduleAndDetails.getDateWithOffset(0)
-      const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+      const startDateTime = getDateWithOffset(0)
+      const endDateTime = getDateWithOffset(30)
 
       scheduleAndDetails.setStartDate(courseId, startDateTime)
       scheduleAndDetails.setEndDate(courseId, endDateTime)
@@ -79,17 +66,17 @@ describe('Schedule and Details Tests', function () {
     })
 
     it('Set the start date in the future and verify a student cannot yet see courseware', function () {
-      const futureStartDateTime = scheduleAndDetails.getDateWithOffset(10) // 10 days in the future
+      const futureStartDateTime = getDateWithOffset(10) // 10 days in the future
 
       scheduleAndDetails.setStartDate(courseId, futureStartDateTime)
       cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
 
       // Verify the alert message on about page that course not yet started is displayed
-      scheduleAndDetails.verifyCourseDatesinFuture(futureStartDateTime)
+      scheduleAndDetails.verifyCourseDatesInFuture(futureStartDateTime)
     })
 
     it('Set the start date in the past and verify a student can see courseware', function () {
-      const pastStartDateTime = scheduleAndDetails.getDateWithOffset(-10) // 10 days in the past
+      const pastStartDateTime = getDateWithOffset(-10) // 10 days in the past
 
       scheduleAndDetails.setStartDate(courseId, pastStartDateTime)
       cy.visit(`${baseMFEURL}/learning/course/${courseId}/home`)
@@ -102,8 +89,8 @@ describe('Schedule and Details Tests', function () {
     })
 
     it('Set the end date in the past and verify the course is now archived', function () {
-      const startDateTime = scheduleAndDetails.getDateWithOffset(-10) // 1 day in the past
-      const endDateTime = scheduleAndDetails.getDateWithOffset(-1) // 1 day in the past
+      const startDateTime = getDateWithOffset(-10) // 1 day in the past
+      const endDateTime = getDateWithOffset(-1) // 1 day in the past
 
       scheduleAndDetails.setStartDate(courseId, startDateTime)
       scheduleAndDetails.setEndDate(courseId, endDateTime)
@@ -129,7 +116,7 @@ describe('Schedule and Details Tests', function () {
       const futureHours = todayDateTime.getHours() + hoursOffset
       todayDateTime.setHours(futureHours)
       const futureStartTime = todayDateTime.toISOString()
-      const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+      const endDateTime = getDateWithOffset(30)
 
       scheduleAndDetails.setStartDate(courseId, futureStartTime)
         .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime))
@@ -148,7 +135,7 @@ describe('Schedule and Details Tests', function () {
       const pastHours = todayDateTime.getHours() + hoursOffset
       todayDateTime.setHours(pastHours)
       const pastStartTime = todayDateTime.toISOString()
-      const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+      const endDateTime = getDateWithOffset(30)
 
       scheduleAndDetails.setStartDate(courseId, pastStartTime)
         .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime))
@@ -167,7 +154,7 @@ describe('Schedule and Details Tests', function () {
       const pastHours = todayDateTime.getHours() + hoursOffset
       todayDateTime.setHours(pastHours)
       const pastEndTime = todayDateTime.toISOString()
-      const startDateTime = scheduleAndDetails.getDateWithOffset(-10)
+      const startDateTime = getDateWithOffset(-10)
 
       scheduleAndDetails.setStartDate(courseId, startDateTime)
         .then(() => scheduleAndDetails.setEndDate(courseId, pastEndTime))
@@ -181,8 +168,8 @@ describe('Schedule and Details Tests', function () {
     })
 
     it('Verify course start date in Studio Course Outline', function () {
-      const startDateTime = scheduleAndDetails.getDateWithOffset(0)
-      const endDateTime = scheduleAndDetails.getDateWithOffset(30)
+      const startDateTime = getDateWithOffset(0)
+      const endDateTime = getDateWithOffset(30)
 
       scheduleAndDetails.setStartDate(courseId, startDateTime)
         .then(() => scheduleAndDetails.setEndDate(courseId, endDateTime))

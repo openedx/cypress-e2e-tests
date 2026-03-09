@@ -1,6 +1,7 @@
-import { getCsrfToken, getRequestHeaders } from '../../../support/apiHelpers'
+import { getCsrfToken } from '../../../support/apiHelpers'
+import Settings from './settings'
 
-class ScheduleAndDetails {
+class ScheduleAndDetails extends Settings {
   url = `${Cypress.env('BASE_CMS_URL')}/settings/details/`
 
   datesItem = '[data-testid="dates-item"]'
@@ -11,53 +12,14 @@ class ScheduleAndDetails {
 
   outlineStatusBar = '[data-testid="outline-status-bar"]'
 
-  // Method to get current schedule and details settings
-  getSettings(url, token) {
-    return cy.request({
-      method: 'GET',
-      url,
-      headers: getRequestHeaders(url, token),
-    })
-  }
-
-  // Method to set/update schedule and details settings
-  setSettings(url, token, bodyData) {
-    return cy.request({
-      method: 'POST',
-      url,
-      headers: getRequestHeaders(url, token),
-      body: bodyData,
-    })
-  }
-
   // Method to change specific settings if they differ from current settings
   changeSetting(url, sectionName, sectionData) {
     return getCsrfToken().then(token => this.getSettings(url, token)
       .then(response => response.body)
       .then(bodyData => {
-        if (bodyData[sectionName] !== sectionData) {
-          // eslint-disable-next-line no-param-reassign
-          bodyData[sectionName] = sectionData
-          return this.setSettings(url, token, bodyData)
-        }
-        return false
+        const updated = { ...bodyData, [sectionName]: sectionData }
+        return this.setSettings(url, token, updated)
       }))
-  }
-
-  searchReindex(courseId) {
-    const url = `${Cypress.env('BASE_CMS_URL')}/course/${courseId}/search_reindex`
-    return getCsrfToken().then(token => cy.request({
-      method: 'GET',
-      url,
-      headers: getRequestHeaders(url, token),
-    }))
-  }
-
-  // Helper: Get an offset date from today
-  getDateWithOffset(daysAhead = 10) {
-    const date = new Date()
-    date.setDate(date.getDate() + daysAhead)
-    return date.toISOString()
   }
 
   // Method to set start date
@@ -92,6 +54,15 @@ class ScheduleAndDetails {
     return this.changeSetting(`${this.url}${courseId}`, 'self_paced', true)
   }
 
+  verifyPacing(courseId, expectedSelfPaced) {
+    return getCsrfToken().then((token) => {
+      this.getSettings(`${this.url}${courseId}`, token).then((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body.self_paced).to.eq(expectedSelfPaced)
+      })
+    })
+  }
+
   // Helper: Get year from ISO date
   getYear(isoDate) {
     return new Date(isoDate).getFullYear()
@@ -114,15 +85,6 @@ class ScheduleAndDetails {
       minute: '2-digit',
       hourCycle: 'h12',
     })
-  }
-
-  // Format date as "Dec 31, 2025"
-  getFormattedDate(isoDate) {
-    const date = new Date(isoDate)
-    const month = date.toLocaleDateString('en-US', { month: 'short' })
-    const day = date.getDate()
-    const year = date.getFullYear()
-    return `${month} ${day}, ${year}`
   }
 
   // Method to assert that an element contains date (and optionally time)
@@ -148,7 +110,7 @@ class ScheduleAndDetails {
   }
 
   // Method to verify "course not yet started" message
-  verifyCourseDatesinFuture(dateTime) {
+  verifyCourseDatesInFuture(dateTime) {
     cy.get(this.alertMessageContent)
       .should('be.visible')
       .and('contain', 'Course starts in')
