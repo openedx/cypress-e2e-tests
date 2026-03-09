@@ -1,39 +1,20 @@
-import { getCsrfToken, getRequestHeaders } from '../../../support/apiHelpers'
+import Settings from './settings'
+import { getCsrfToken } from '../../../support/apiHelpers'
 
-class AdvancedSettings {
+class AdvancedSettings extends Settings {
   url = `${Cypress.env('BASE_CMS_URL')}/settings/advanced/`
 
-  // Method to get current advanced settings
-  getSettings(url, token) {
-    return cy.request({
-      method: 'GET',
-      url,
-      headers: getRequestHeaders(url, token),
-    })
-  }
-
-  // Method to set/update advanced settings
-  setSettings(url, token, bodyData) {
-    return cy.request({
-      method: 'POST',
-      url,
-      headers: getRequestHeaders(url, token),
-      body: bodyData,
-    })
-  }
-
-  // Method to change specific advanced settings
+  // Method to change specific advanced settings if they differ from current settings
   changeAdvancedSetting(url, sectionName, sectionData) {
     return getCsrfToken().then(token => this.getSettings(url, token)
       .then(response => response.body)
       .then(bodyData => {
-        // eslint-disable-next-line no-param-reassign
-        bodyData[sectionName].value = sectionData
-        return this.setSettings(url, token, bodyData)
+        const updated = { ...bodyData, [sectionName]: { ...bodyData[sectionName], value: sectionData } }
+        return this.setSettings(url, token, updated)
       }))
   }
 
-  courseVisibility(courseId, value) {
+  setCourseVisibility(courseId, value) {
     return this.changeAdvancedSetting(`${this.url}${courseId}`, 'catalog_visibility', value)
   }
 }

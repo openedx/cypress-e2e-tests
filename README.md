@@ -100,6 +100,7 @@ Set the following environment variables before running the tests:
 - `ENABLE_SUPPORT_URL` - Set to `true` to verify the help link on dashboard
 - `ENABLE_PROGRAMS` - Set to `true` to verify Programs
 - `ENABLE_CREATE_NEW_COURSE` - Set to `true` to verify creating a new course with a new organization
+- `DEFAULT_DELAY_MS` - Additional wait time in milliseconds to accommodate slow environments and reduce test flakiness. Default: 2000ms.
 
 ---
 
