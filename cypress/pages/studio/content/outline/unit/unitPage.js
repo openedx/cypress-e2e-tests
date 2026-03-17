@@ -183,7 +183,8 @@ class UnitPage {
     cy.contains('Configure').click()
     cy.get('[data-testid="configure-modal"]').should('be.visible')
     cy.contains(this.modalTitle, 'Unit settings').should('be.visible')
-    cy.get(this.unitVisibilityCheckbox).check().should('be.checked')
+    cy.get(this.unitVisibilityCheckbox).check()
+    cy.get(this.unitVisibilityCheckbox).should('be.checked')
     cy.get('[data-testid="configure-save-button"]').click()
   }
 

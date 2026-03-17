@@ -14,6 +14,7 @@
     "cypress/globals": true
   },
   "rules": {
+    "import/no-unresolved": ["error", { "ignore": ["@cypress/grep"] }],
     "semi": ["error", "never"],
     "jsx-a11y/anchor-is-valid": [ "error", {
       "components": [ "Link" ],

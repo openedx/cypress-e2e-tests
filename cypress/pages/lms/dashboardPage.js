@@ -227,10 +227,9 @@ class DashboardPage {
   }
 
   getSubmitAsExistLearner() {
-    cy.get(this.viewAsSearchForm)
-      .should('be.visible')
-      .type(Cypress.env('LMS_USER_EMAIL'))
-      .should('have.value', Cypress.env('LMS_USER_EMAIL'))
+    cy.get(this.viewAsSearchForm).should('be.visible')
+    cy.get(this.viewAsSearchForm).type(Cypress.env('LMS_USER_EMAIL'))
+    cy.get(this.viewAsSearchForm).should('have.value', Cypress.env('LMS_USER_EMAIL'))
 
     cy.get(this.viewAsSubmitButton)
       .should('not.be.disabled')
