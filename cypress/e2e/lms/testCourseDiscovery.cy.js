@@ -30,7 +30,8 @@ describe('Course Catalog page tests', function () {
     it('should check prepopulating search bar behaviour', function () {
       courseDiscoveryPage.getSearchBar().should('be.visible')
       courseDiscoveryPage.checkPlaceholder()
-      courseDiscoveryPage.getSearchBar().click().type('a')
+      courseDiscoveryPage.getSearchBar().click()
+      courseDiscoveryPage.getSearchBar().type('a')
       courseDiscoveryPage.getSearchBar().should('have.value', 'a')
     })
 
