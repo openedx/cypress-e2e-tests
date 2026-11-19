@@ -14,7 +14,7 @@
     "precommit": "npm run lint"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@cypress/grep": "^6.0.0",
     "@edx/eslint-config": "^4.4.0",
